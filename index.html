@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Freight rate check (live)</title>
+<title>Freight rate check</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,8 @@ body{min-height:100vh}
 <body>
 <script type="application/json" id="data-places">[{"code":"INNSA","name":"Nhava Sheva (JNPT)","country":"India","region":"India","kind":"port","city":"mumbai","iso2":"IN","api_city":null},{"code":"INMUN","name":"Mundra","country":"India","region":"India","kind":"port","city":"ahmedabad","iso2":"IN","api_city":null},{"code":"INHZR","name":"Hazira","country":"India","region":"India","kind":"port","city":"surat","iso2":"IN","api_city":null},{"code":"INTKD","name":"Tughlakabad ICD, Delhi","country":"India","region":"India","kind":"port","city":"delhi","iso2":"IN","api_city":null},{"code":"INMAA","name":"Chennai","country":"India","region":"India","kind":"port","city":"chennai","iso2":"IN","api_city":null},{"code":"INCOK","name":"Cochin","country":"India","region":"India","kind":"port","city":"kochi","iso2":"IN","api_city":null},{"code":"DEL","name":"Delhi","country":"India","region":"India","kind":"airport","city":"delhi","iso2":"IN","api_city":"Delhi"},{"code":"BOM","name":"Mumbai","country":"India","region":"India","kind":"airport","city":"mumbai","iso2":"IN","api_city":"Mumbai"},{"code":"MAA","name":"Chennai","country":"India","region":"India","kind":"airport","city":"chennai","iso2":"IN","api_city":"Chennai"},{"code":"BLR","name":"Bengaluru","country":"India","region":"India","kind":"airport","city":"bengaluru","iso2":"IN","api_city":"Bengaluru"},{"code":"AMD","name":"Ahmedabad","country":"India","region":"India","kind":"airport","city":"ahmedabad","iso2":"IN","api_city":"Ahmedabad"},{"code":"COK","name":"Kochi","country":"India","region":"India","kind":"airport","city":"kochi","iso2":"IN","api_city":"Kochi"},{"code":"AEJEA","name":"Jebel Ali","country":"UAE","region":"Middle East","kind":"port","city":"dubai","iso2":"AE","api_city":null},{"code":"OMSLL","name":"Salalah","country":"Oman","region":"Middle East","kind":"port","city":"salalah","iso2":"OM","api_city":null},{"code":"OMSOH","name":"Sohar","country":"Oman","region":"Middle East","kind":"port","city":"sohar","iso2":"OM","api_city":null},{"code":"SADMM","name":"Dammam","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"dammam","iso2":"SA","api_city":null},{"code":"SAJED","name":"Jeddah","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"jeddah","iso2":"SA","api_city":null},{"code":"SARUH","name":"Riyadh (dry port)","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"riyadh","iso2":"SA","api_city":null},{"code":"QAHMD","name":"Hamad, Doha","country":"Qatar","region":"Middle East","kind":"port","city":"doha","iso2":"QA","api_city":null},{"code":"KWSWK","name":"Shuwaikh, Kuwait","country":"Kuwait","region":"Middle East","kind":"port","city":"kuwait","iso2":"KW","api_city":null},{"code":"DXB","name":"Dubai","country":"UAE","region":"Middle East","kind":"airport","city":"dubai","iso2":"AE","api_city":"Dubai"},{"code":"AUH","name":"Abu Dhabi","country":"UAE","region":"Middle East","kind":"airport","city":"abudhabi","iso2":"AE","api_city":"Abu Dhabi"},{"code":"DOH","name":"Doha","country":"Qatar","region":"Middle East","kind":"airport","city":"doha","iso2":"QA","api_city":"Doha"},{"code":"RUH","name":"Riyadh","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"riyadh","iso2":"SA","api_city":"Riyadh"},{"code":"JED","name":"Jeddah","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"jeddah","iso2":"SA","api_city":"Jeddah"},{"code":"DMM","name":"Dammam","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"dammam","iso2":"SA","api_city":"Dammam"},{"code":"KWI","name":"Kuwait City","country":"Kuwait","region":"Middle East","kind":"airport","city":"kuwait","iso2":"KW","api_city":"Kuwait City"},{"code":"MCT","name":"Muscat","country":"Oman","region":"Middle East","kind":"airport","city":"muscat","iso2":"OM","api_city":"Muscat"},{"code":"SGSIN","name":"Singapore","country":"Singapore","region":"Southeast Asia","kind":"port","city":"singapore","iso2":"SG","api_city":null},{"code":"MYPKG","name":"Port Klang","country":"Malaysia","region":"Southeast Asia","kind":"port","city":"kualalumpur","iso2":"MY","api_city":null},{"code":"MYTPP","name":"Tanjung Pelepas","country":"Malaysia","region":"Southeast Asia","kind":"port","city":"johor","iso2":"MY","api_city":null},{"code":"THLCH","name":"Laem Chabang","country":"Thailand","region":"Southeast Asia","kind":"port","city":"bangkok","iso2":"TH","api_city":null},{"code":"VNSGN","name":"Ho Chi Minh City","country":"Vietnam","region":"Southeast Asia","kind":"port","city":"hochiminh","iso2":"VN","api_city":null},{"code":"VNHPH","name":"Hai Phong","country":"Vietnam","region":"Southeast Asia","kind":"port","city":"hanoi","iso2":"VN","api_city":null},{"code":"IDJKT","name":"Jakarta","country":"Indonesia","region":"Southeast Asia","kind":"port","city":"jakarta","iso2":"ID","api_city":null},{"code":"PHMNL","name":"Manila","country":"Philippines","region":"Southeast Asia","kind":"port","city":"manila","iso2":"PH","api_city":null},{"code":"SIN","name":"Singapore","country":"Singapore","region":"Southeast Asia","kind":"airport","city":"singapore","iso2":"SG","api_city":"Singapore"},{"code":"KUL","name":"Kuala Lumpur","country":"Malaysia","region":"Southeast Asia","kind":"airport","city":"kualalumpur","iso2":"MY","api_city":"Kuala Lumpur"},{"code":"BKK","name":"Bangkok","country":"Thailand","region":"Southeast Asia","kind":"airport","city":"bangkok","iso2":"TH","api_city":"Bangkok"},{"code":"SGN","name":"Ho Chi Minh City","country":"Vietnam","region":"Southeast Asia","kind":"airport","city":"hochiminh","iso2":"VN","api_city":"Ho Chi Minh City"},{"code":"HAN","name":"Hanoi","country":"Vietnam","region":"Southeast Asia","kind":"airport","city":"hanoi","iso2":"VN","api_city":"Hanoi"},{"code":"CGK","name":"Jakarta","country":"Indonesia","region":"Southeast Asia","kind":"airport","city":"jakarta","iso2":"ID","api_city":"Jakarta"},{"code":"MNL","name":"Manila","country":"Philippines","region":"Southeast Asia","kind":"airport","city":"manila","iso2":"PH","api_city":"Manila"},{"code":"CNSHA","name":"Shanghai","country":"China","region":"China","kind":"port","city":"shanghai","iso2":"CN","api_city":null},{"code":"CNNGB","name":"Ningbo","country":"China","region":"China","kind":"port","city":"ningbo","iso2":"CN","api_city":null},{"code":"CNSHK","name":"Shekou, Shenzhen","country":"China","region":"China","kind":"port","city":"shenzhen","iso2":"CN","api_city":null},{"code":"CNTAO","name":"Qingdao","country":"China","region":"China","kind":"port","city":"qingdao","iso2":"CN","api_city":null},{"code":"CNXMN","name":"Xiamen","country":"China","region":"China","kind":"port","city":"xiamen","iso2":"CN","api_city":null},{"code":"PVG","name":"Shanghai Pudong","country":"China","region":"China","kind":"airport","city":"shanghai","iso2":"CN","api_city":"Shanghai"},{"code":"CAN","name":"Guangzhou","country":"China","region":"China","kind":"airport","city":"guangzhou","iso2":"CN","api_city":"Guangzhou"},{"code":"SZX","name":"Shenzhen","country":"China","region":"China","kind":"airport","city":"shenzhen","iso2":"CN","api_city":"Shenzhen"},{"code":"PEK","name":"Beijing","country":"China","region":"China","kind":"airport","city":"beijing","iso2":"CN","api_city":"Beijing"},{"code":"NLRTM","name":"Rotterdam","country":"Netherlands","region":"Europe","kind":"port","city":"rotterdam","iso2":"NL","api_city":null},{"code":"DEHAM","name":"Hamburg","country":"Germany","region":"Europe","kind":"port","city":"hamburg","iso2":"DE","api_city":null},{"code":"GBFXT","name":"Felixstowe","country":"United Kingdom","region":"Europe","kind":"port","city":"felixstowe","iso2":"GB","api_city":null},{"code":"BEANR","name":"Antwerp","country":"Belgium","region":"Europe","kind":"port","city":"antwerp","iso2":"BE","api_city":null},{"code":"LHR","name":"London Heathrow","country":"United Kingdom","region":"Europe","kind":"airport","city":"london","iso2":"GB","api_city":"London"},{"code":"FRA","name":"Frankfurt","country":"Germany","region":"Europe","kind":"airport","city":"frankfurt","iso2":"DE","api_city":"Frankfurt"},{"code":"AMS","name":"Amsterdam","country":"Netherlands","region":"Europe","kind":"airport","city":"amsterdam","iso2":"NL","api_city":"Amsterdam"},{"code":"CDG","name":"Paris","country":"France","region":"Europe","kind":"airport","city":"paris","iso2":"FR","api_city":"Paris"},{"code":"USNYC","name":"New York / Newark","country":"United States","region":"North America","kind":"port","city":"newyork","iso2":"US","api_city":null},{"code":"USORF","name":"Norfolk","country":"United States","region":"North America","kind":"port","city":"norfolk","iso2":"US","api_city":null},{"code":"USCHS","name":"Charleston","country":"United States","region":"North America","kind":"port","city":"charleston","iso2":"US","api_city":null},{"code":"USSAV","name":"Savannah","country":"United States","region":"North America","kind":"port","city":"savannah","iso2":"US","api_city":null},{"code":"USHOU","name":"Houston","country":"United States","region":"North America","kind":"port","city":"houston","iso2":"US","api_city":null},{"code":"USOAK","name":"Oakland","country":"United States","region":"North America","kind":"port","city":"sanfrancisco","iso2":"US","api_city":null},{"code":"USLAX","name":"Los Angeles / Long Beach","country":"United States","region":"North America","kind":"port","city":"losangeles","iso2":"US","api_city":null},{"code":"JFK","name":"New York JFK","country":"United States","region":"North America","kind":"airport","city":"newyork","iso2":"US","api_city":"New York"},{"code":"ORD","name":"Chicago O'Hare","country":"United States","region":"North America","kind":"airport","city":"chicago","iso2":"US","api_city":"Chicago"},{"code":"IAH","name":"Houston","country":"United States","region":"North America","kind":"airport","city":"houston","iso2":"US","api_city":"Houston"},{"code":"LAX","name":"Los Angeles","country":"United States","region":"North America","kind":"airport","city":"losangeles","iso2":"US","api_city":"Los Angeles"},{"code":"SFO","name":"San Francisco","country":"United States","region":"North America","kind":"airport","city":"sanfrancisco","iso2":"US","api_city":"San Francisco"},{"code":"DFW","name":"Dallas / Fort Worth","country":"United States","region":"North America","kind":"airport","city":"dallas","iso2":"US","api_city":"Dallas"},{"code":"MACAS","name":"Casablanca","country":"Morocco","region":"Africa","kind":"port","city":"casablanca","iso2":"MA","api_city":null},{"code":"KEMBA","name":"Mombasa","country":"Kenya","region":"Africa","kind":"port","city":"mombasa","iso2":"KE","api_city":null},{"code":"ZADUR","name":"Durban","country":"South Africa","region":"Africa","kind":"port","city":"durban","iso2":"ZA","api_city":null},{"code":"TZDAR","name":"Dar es Salaam","country":"Tanzania","region":"Africa","kind":"port","city":"daressalaam","iso2":"TZ","api_city":null},{"code":"CMN","name":"Casablanca","country":"Morocco","region":"Africa","kind":"airport","city":"casablanca","iso2":"MA","api_city":"Casablanca"},{"code":"NBO","name":"Nairobi","country":"Kenya","region":"Africa","kind":"airport","city":"nairobi","iso2":"KE","api_city":"Nairobi"},{"code":"JNB","name":"Johannesburg","country":"South Africa","region":"Africa","kind":"airport","city":"johannesburg","iso2":"ZA","api_city":"Johannesburg"},{"code":"LOS","name":"Lagos","country":"Nigeria","region":"Africa","kind":"airport","city":"lagos","iso2":"NG","api_city":"Lagos"}]</script>
 <script type="application/json" id="data-notes">[{"platform":"Intoglo","model":"Specialist forwarder","booking":"Monthly port plan on fixed lanes","modes":"Ocean FCL only. India to USA from Nhava Sheva and Mundra","quote_access":"Ask the sales team. They check whether your lane is active this month, then quote the confirmed sailing.","includes":"All-in rate for the monthly sailing. The document flags that drayage and customs inclusion is unclear.","includes_short":"Unclear","watch_out":"The lane must be active this month. Cargo has to reach the CFS 3 days before the booking cut-off or it rolls to next month.","contact":"Sales team callback. Support in India and US time zones."},{"platform":"Xhipment","model":"Digital forwarder","booking":"On-demand: request for quote, then quote, then book","modes":"FCL, LCL (own weekly service), air, trucking, drayage, customs, warehousing","quote_access":"Send a request for quote on the platform: mode, Incoterm, container, stuffing, customs flags, cargo ready date.","includes":"All-in pricing shown on the quotations dashboard, with an expiry date.","includes_short":"All-in","watch_out":"The request form is heavier than competitors' for first-time users. LCL booking confirmation can stay pending for a while.","contact":"Named account manager with a WhatsApp direct line. Meetings can be self-scheduled on the platform."},{"platform":"FreightMango","model":"Marketplace","booking":"On-demand, 30-second booking","modes":"FCL, LCL, air, road. 20 ft and 40 ft, with high cube on active lanes","quote_access":"Self-serve. Enter origin, destination and date to compare 5+ carriers in one view.","includes":"All-in rates shown for each carrier.","includes_short":"All-in","watch_out":"Rates stay valid only 24 to 48 hours. Surcharges can show up late, and carrier confirmation can delay the 30-second booking.","contact":"No human touchpoint before booking. Thin operations team after booking."},{"platform":"Agraga","model":"Full-stack platform","booking":"On-demand, with finance built into the booking","modes":"Ocean FCL and LCL, air, rail, road, warehousing. India and about 40 geographies","quote_access":"Register and complete KYC first. Common lanes (India to USA, India to UAE) show real-time rates.","includes":"Freight, plus optional services you toggle on: insurance, customs, stuffing.","includes_short":"Freight + options","watch_out":"On niche or reverse lanes (for example China to India) there is no real-time rate. The customer is asked to submit an enquiry and wait for a call back.","contact":"Sales consultant assigned after registration. Specialists for customs, finance, insurance, warehousing and trade advisory."},{"platform":"Flexport","model":"Licensed forwarder and technology platform","booking":"Demo, then account setup, then on-demand","modes":"Ocean, air, trucking, fulfilment, customs brokerage. USA-centric, global","quote_access":"Book a demo. Pricing is not public, so there is no rate to check without an account.","includes":"Not published.","includes_short":"Not published","watch_out":"Onboarding for multi-lane accounts can take weeks. Fulfilment minimum fees have been rising for small shippers.","contact":"Account executive, positioned as a supply chain advisor, after the demo."},{"platform":"SeaRates","model":"Tools and marketplace","booking":"On-demand, with API booking","modes":"Ocean FCL and LCL, air, road, rail, bulk, dangerous goods. Fully global","quote_access":"Use the online tools, many of which need no login. Pick a carrier quote in the marketplace.","includes":"Carrier quotes. What is covered varies by carrier integration.","includes_short":"Varies by carrier","watch_out":"Rate accuracy varies, and some carrier integrations are less real-time than others.","contact":"Self-serve. API and ERP for forwarders and larger shippers. Support responsiveness is a noted gap."},{"platform":"Freightos","model":"Vendor-neutral marketplace","booking":"Instant quote, then online booking","modes":"Ocean FCL and LCL, air, trucking. Fully global, 79 carriers","quote_access":"Get an instant quote online with no sales call. It is shown next to the FBX index for context.","includes":"Quoted price. Users report that hidden fees are not always in the first quote.","includes_short":"Fees may be extra","watch_out":"Post-booking disputes can be slow, with different people answering each email. Check the final fee list before comparing.","contact":"The forwarder you pick runs the shipment. Freightos does not operate freight."}]</script>
-<div class="rc" id="rc">
+<script type="application/json" id="data-pnotes">[{"code":"OMSLL","note":"Salalah is a transhipment hub for the Gulf and East Africa."},{"code":"AEJEA","note":"Jebel Ali is the main UAE entry point and key for GCC distribution."},{"code":"SADMM","note":"Dammam is Saudi Arabia's main industrial port, used for manufacturing and commodity exports."},{"code":"SARUH","note":"Riyadh is an inland delivery point, used for D2C and retail exports to Saudi consumers."},{"code":"MACAS","note":"Casablanca is a gateway to North and West Africa. FreightMango lists it under its Middle East corridor."},{"code":"INNSA","note":"Serves Maharashtra and Goa exporters and avoids inland trucking to Mundra."},{"code":"INMUN","note":"FreightMango's main origin for the Gulf (Jebel Ali, Dammam, Riyadh) and one of Intoglo's two US origins."},{"code":"INHZR","note":"Hazira (Surat) is FreightMango's origin for Salalah."},{"code":"INTKD","note":"Intoglo does not run monthly lanes from Tughlakabad."},{"code":"CNSHK","note":"Agraga has no real-time rate from Shekou to Nhava Sheva. It asks for an enquiry instead."},{"code":"USNYC","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USORF","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USCHS","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USSAV","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USHOU","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USOAK","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."},{"code":"USLAX","note":"On Intoglo's monthly sailing plan from Nhava Sheva and Mundra."}]</script>
+<div class="rc" id="rc" data-view="lane">
 <style>
 
 .rc{
@@ -312,103 +313,54 @@ body{min-height:100vh}
 .rc-dtext p{margin:0;font-size:1rem;line-height:1.6;color:var(--rc-ink)}
 
 
-/* ===== live comparison ===== */
-.rc-badge.is-live::before{background:#2f8f83}
-.lv-fieldrow{margin-top:var(--s-6)}
-.lv-h{margin:0;font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
-.lv-hsub{margin:var(--s-1) 0 0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
-.lv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:var(--s-4) var(--s-5);margin-top:var(--s-4)}
+/* ===== live data additions (same look) ===== */
+.rc-table td.c-info::before{content:""}
+.rc-cargo{flex:0 0 17rem}
+.rc-cargo .rc-panel{left:auto;right:0;width:min(34rem,calc(100cqw - 2rem))}
+@container rc (max-width:900px){.rc-cargo{flex:1 1 auto}.rc-cargo .rc-panel{left:0;right:auto}}
+.rc-field.has-err{box-shadow:inset 0 0 0 2px var(--color-bad);border-radius:var(--r-lg)}
+.rc-cta[disabled]{opacity:.6;cursor:progress}
+.lv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:var(--s-4) var(--s-4)}
 .lv-f{display:flex;flex-direction:column;gap:var(--s-2);min-width:0}
 .lv-f>label,.lv-f>.lv-lab{font-size:.85rem;font-weight:600}
-.lv-f input,.lv-f select{
-  width:100%;box-sizing:border-box;min-height:48px;padding:0 var(--s-4);
-  background:var(--rc-card);color:var(--rc-ink);border:1px solid var(--rc-line);border-radius:var(--r-sm);font:inherit;font-weight:500;
-}
+.lv-f input,.lv-f select{width:100%;box-sizing:border-box;min-height:44px;padding:0 var(--s-4);background:var(--rc-card);color:var(--rc-ink);border:1px solid var(--rc-line);border-radius:var(--r-sm);font:inherit;font-weight:500}
 .lv-f input::placeholder{color:var(--rc-mute)}
 .lv-f input:focus,.lv-f select:focus{border-color:var(--rc-primary)}
 .lv-f.has-err input,.lv-f.has-err select{border-color:var(--color-bad)}
 .lv-err{margin:0;font-size:.85rem;font-weight:500;color:var(--color-bad)}
-.lv-dims{grid-column:span 2}
-@container rc (max-width:560px){.lv-dims{grid-column:1/-1}}
+.lv-dims{grid-column:1/-1}
 .lv-dimrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-3)}
-.rc-field.has-err{box-shadow:inset 0 0 0 2px var(--color-bad);border-radius:var(--r-lg)}
-.lv-locerr{margin:var(--s-3) 0 0}
-.rc-cta[disabled]{opacity:.6;cursor:progress}
-
-.lv-live{margin-top:var(--s-7)}
-.lv-banner{display:flex;gap:var(--s-4);align-items:flex-start;margin:0 0 var(--s-5);padding:var(--s-4) var(--s-5);background:#fff3c2;border-radius:var(--r-md);font-weight:600}
-.lv-banner::before{content:"";flex:0 0 10px;height:10px;margin-top:.5rem;border-radius:50%;background:var(--rc-ink)}
-.lv-answer{padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
-@container rc (min-width:700px){.lv-answer{padding:var(--s-7)}}
-.lv-ahead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s-6) var(--s-8)}
-.lv-take{margin:0 0 var(--s-3);font-size:.95rem;font-weight:500;color:var(--rc-mute)}
-.lv-abig{margin:0;font-weight:700;font-size:clamp(2.5rem,10cqw,4.5rem);line-height:1;letter-spacing:-.05em;color:var(--rc-primary);font-variant-numeric:tabular-nums}
-.lv-abig.lv-none{color:var(--rc-mute)}
-.lv-asub{margin:var(--s-3) 0 0;font-size:1.15rem;font-weight:700}
-.lv-alabel{font-weight:500;color:var(--rc-mute)}
-.lv-anote{margin:var(--s-3) 0 0;max-width:32rem;color:var(--rc-mute)}
-.lv-astats{display:flex;flex-wrap:wrap;gap:var(--s-5) var(--s-7);margin:0}
-.lv-astats dt{margin-bottom:var(--s-1);font-size:.9rem;font-weight:500;color:var(--rc-mute)}
-.lv-astats dd{margin:0}
-.lv-snum{font-weight:700;font-size:1.6rem;letter-spacing:-.03em;line-height:1.15;font-variant-numeric:tabular-nums}
-.lv-ssub{font-size:.9rem;color:var(--rc-mute)}
-.lv-cnote{margin:var(--s-5) 0 0;padding-top:var(--s-4);border-top:1px solid var(--rc-line);color:var(--rc-ink);max-width:56rem}
-
-.lv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4) var(--s-6);margin-top:var(--s-6)}
-.lv-bar .rc-tools{margin-left:auto}
-.lv-meta2{margin:0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
-
-.lv-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr));gap:var(--s-4);margin-top:var(--s-5)}
-.lv-card{display:flex;flex-direction:column;gap:var(--s-4);min-width:0;padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
-.lv-card.is-cheapest{box-shadow:var(--rc-soft),inset 0 0 0 3px var(--rc-gold)}
-.lv-chead{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap}
-.lv-pname{margin:0;font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
-.lv-status{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap;background:var(--rc-bg);color:var(--rc-mute)}
-.lv-status.s-ok{background:var(--rc-tint);color:var(--rc-primary)}
-.lv-status.s-pending{background:#fff3c2;color:var(--rc-ink)}
-.lv-tags{display:flex;flex-wrap:wrap;gap:var(--s-2)}
-.lv-tag{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
-.lv-tag.t-cheapest{background:var(--rc-gold);color:var(--rc-ink)}
-.lv-tag.t-fastest{background:var(--rc-primary);color:#fff}
-.lv-quote{display:flex;flex-direction:column;gap:var(--s-3)}
-.lv-quote+.lv-quote{padding-top:var(--s-4);border-top:1px solid var(--rc-line)}
-.lv-service{margin:0;font-weight:600}
-.lv-pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3) var(--s-4)}
-.lv-price{font-weight:700;font-size:2rem;line-height:1.1;letter-spacing:-.04em;color:var(--rc-primary);font-variant-numeric:tabular-nums}
-.lv-sim{padding:var(--s-1) var(--s-4);border-radius:var(--s-3);background:#fff3c2;color:var(--rc-ink);font-size:.8rem;font-weight:700}
-.lv-facts{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);margin:0;color:var(--rc-ink);font-weight:500}
-.lv-notes{margin:0;padding:var(--s-3) var(--s-4);background:var(--rc-bg);border-radius:var(--r-sm);line-height:1.5}
-.lv-src{margin:0;font-size:.8rem;color:var(--rc-mute)}
-.lv-msg{margin:0;line-height:1.55}
-.lv-link{display:inline-flex;align-items:center;align-self:flex-start;min-height:44px;padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border-radius:var(--r-md);font-weight:600;text-decoration:none}
-.lv-link:hover{background:#3b1b73}
-.lv-more{margin:0}
-.lv-more summary{cursor:pointer;min-height:32px;font-weight:600;color:var(--rc-primary)}
-.lv-charges{list-style:none;margin:var(--s-3) 0 0;padding:0}
-.lv-charges li{display:flex;justify-content:space-between;gap:var(--s-4);padding:var(--s-2) 0;border-bottom:1px solid var(--rc-line);font-variant-numeric:tabular-nums}
-.lv-charges li:last-child{border-bottom:0}
-.lv-more h4{margin:var(--s-4) 0 var(--s-1);font-size:.9rem}
-.lv-more p{margin:0;line-height:1.55}
-.lv-foot{margin:auto 0 0;font-size:.8rem;color:var(--rc-mute)}
-
-.lv-idle,.lv-fail{padding:var(--s-7);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
-.lv-idle h2,.lv-fail h2{margin:0 0 var(--s-3);font-size:1.4rem;font-weight:700;letter-spacing:-.03em}
-.lv-idle p,.lv-fail p{margin:0 0 var(--s-5);max-width:40rem;line-height:1.6}
-.lv-btn{min-height:48px;padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border:0;border-radius:var(--r-md);font-weight:600}
+.lv-pfoot{display:flex;justify-content:flex-end;margin-top:var(--s-4)}
+.lv-btn{min-height:44px;padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border:0;border-radius:var(--r-md);font-weight:600}
 .lv-btn:hover{background:#3b1b73}
 .lv-btn.is-ghost{background:var(--rc-tint);color:var(--rc-primary)}
-.lv-load p{margin:0 0 var(--s-3);font-weight:600}
-.lv-skel{height:11rem;border-radius:var(--r-lg);background:#e8e4f9}
-@media (prefers-reduced-motion:no-preference){
-  .lv-skel{animation:lv-pulse 1.4s ease-in-out infinite}
-  @keyframes lv-pulse{50%{opacity:.55}}
-}
+.lv-locerr{margin:var(--s-3) 0 0}
+.lv-simbanner{margin:0 0 var(--s-5);padding:var(--s-4) var(--s-5);background:#fff3c2;border-radius:var(--r-md);font-weight:600}
+.lv-sim{display:inline-block;padding:var(--s-1) var(--s-3);border-radius:var(--s-3);background:#fff3c2;color:var(--rc-ink);font-size:.75rem;font-weight:700;letter-spacing:0;font-family:var(--rc-font);vertical-align:middle}
+.lv-ratenote{display:block;margin-top:var(--s-1);font-family:var(--rc-font);font-size:.8rem;font-weight:500;letter-spacing:0;color:var(--rc-mute);line-height:1.35}
+.lv-rate-sim{display:block;margin-top:var(--s-2)}
+.lv-rowlink{color:var(--rc-primary);font-weight:700;text-decoration:underline;text-underline-offset:.2em}
+.lv-more{margin:var(--s-3) 0 0}
+.lv-more summary{cursor:pointer;font-weight:600;color:var(--rc-primary)}
+.lv-more p{margin:var(--s-2) 0 0;line-height:1.5}
+.lv-amt{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lv-tot .rc-sc-name,.lv-tot .lv-amt{font-weight:800}
+.lv-link{display:inline-flex;align-items:center;min-height:44px;margin-top:var(--s-3);padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border-radius:var(--r-md);font-weight:600;text-decoration:none}
+.lv-link:hover{background:#3b1b73}
+.lv-reqnote{margin:var(--s-2) 0 0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.lv-statebox{display:flex;flex-direction:column;align-items:center;gap:var(--s-4);max-width:42rem;margin:0 auto;padding:var(--s-6);text-align:center}
+.lv-statebox h2{margin:0;font-size:1.3rem;font-weight:700;letter-spacing:-.02em;color:var(--rc-ink)}
+.lv-statebox p{margin:0;line-height:1.6;color:var(--rc-ink)}
+.lv-statebox details{text-align:left;color:var(--rc-ink)}
+.rc-state.is-idle{background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+.rc-state.is-error{background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+.rc-state.is-error::before{content:none}
 </style>
 <div class="rc-wrap">
 <header class="rc-head">
-  <p class="rc-badge is-live">Live comparison</p>
-  <h1 class="rc-title" id="rc-title">Compare freight rates across providers</h1>
-  <p class="rc-lede">Choose where the cargo starts and ends, describe the shipment, then search. Every provider answers side by side.</p>
+  <p class="rc-badge" id="badge">Live data</p>
+  <h1 class="rc-title" id="rc-title">Compare freight rates across platforms</h1>
+  <p class="rc-lede">Choose where the cargo starts and ends. Each platform's rate for that shipment appears side by side. Anything marked simulated is demo data, not a real quote.</p>
 </header>
 
 <div class="rc-toprow">
@@ -419,7 +371,7 @@ body{min-height:100vh}
   </nav>
 </div>
 
-<div class="rc-search" role="group" aria-label="Lane search">
+<div class="rc-search" role="group" aria-label="Shipment search">
   <div class="rc-field rc-pick" data-end="from" id="field-from">
     <span class="rc-flabel" id="lbl-from"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Origin</span>
     <button class="rc-place" data-act="pick" data-v="from" aria-haspopup="listbox" aria-expanded="false" aria-describedby="lbl-from">
@@ -443,74 +395,192 @@ body{min-height:100vh}
       <ul class="rc-list" role="listbox" aria-label="Places"></ul>
     </div>
   </div>
+  <div class="rc-field rc-cargo" id="field-cargo">
+    <span class="rc-flabel" id="lbl-cargo">Cargo details</span>
+    <button class="rc-place" data-act="cargo" id="cargo-btn" aria-haspopup="dialog" aria-expanded="false" aria-describedby="lbl-cargo">
+      <span class="rc-place-name" id="cargo-sum">—</span>
+      <span class="rc-place-meta" id="cargo-sub"></span>
+    </button>
+    <div class="rc-panel" id="cargo-panel" role="dialog" aria-label="Cargo details" hidden>
+      <div class="lv-grid" id="ship">
+        <div class="lv-f" data-f="weight">
+          <label for="f-weight">Total weight (kg)</label>
+          <input id="f-weight" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" aria-describedby="e-weight">
+          <p class="lv-err" id="e-weight" data-err="weight" hidden></p>
+        </div>
+        <div class="lv-f" data-f="ctype" data-group="fcl">
+          <label for="f-ctype">Container type</label>
+          <select id="f-ctype" aria-describedby="e-ctype">
+            <option value="20GP">20 ft</option>
+            <option value="40HC">40 ft HC</option>
+            <option value="20RF">20 ft reefer</option>
+            <option value="40RF">40 ft reefer</option>
+          </select>
+          <p class="lv-err" id="e-ctype" data-err="ctype" hidden></p>
+        </div>
+        <div class="lv-f" data-f="ccount" data-group="fcl">
+          <label for="f-ccount">Containers</label>
+          <input id="f-ccount" type="number" inputmode="numeric" min="1" max="50" step="1" aria-describedby="e-ccount">
+          <p class="lv-err" id="e-ccount" data-err="ccount" hidden></p>
+        </div>
+        <div class="lv-f lv-dims" data-f="dims" data-group="dims">
+          <span class="lv-lab" id="lab-dims">Package size in cm: length, width, height</span>
+          <div class="lv-dimrow" role="group" aria-labelledby="lab-dims">
+            <input id="f-len" type="number" inputmode="decimal" min="0" step="any" placeholder="Length" aria-label="Length in cm" aria-describedby="e-dims">
+            <input id="f-wid" type="number" inputmode="decimal" min="0" step="any" placeholder="Width" aria-label="Width in cm" aria-describedby="e-dims">
+            <input id="f-hei" type="number" inputmode="decimal" min="0" step="any" placeholder="Height" aria-label="Height in cm" aria-describedby="e-dims">
+          </div>
+          <p class="lv-err" id="e-dims" data-err="dims" hidden></p>
+        </div>
+        <div class="lv-f" data-f="pkgs">
+          <label for="f-pkgs">Packages</label>
+          <input id="f-pkgs" type="number" inputmode="numeric" min="1" step="1" aria-describedby="e-pkgs">
+          <p class="lv-err" id="e-pkgs" data-err="pkgs" hidden></p>
+        </div>
+        <div class="lv-f" data-f="cargo">
+          <label for="f-cargo">Cargo type</label>
+          <select id="f-cargo" aria-describedby="e-cargo">
+            <option value="general">General</option>
+            <option value="fragile">Fragile</option>
+            <option value="perishable">Perishable</option>
+            <option value="hazardous">Hazardous</option>
+            <option value="electronics">Electronics</option>
+          </select>
+          <p class="lv-err" id="e-cargo" data-err="cargo" hidden></p>
+        </div>
+        <div class="lv-f" data-f="ready">
+          <label for="f-ready">Cargo ready date</label>
+          <input id="f-ready" type="date" aria-describedby="e-ready">
+          <p class="lv-err" id="e-ready" data-err="ready" hidden></p>
+        </div>
+        <div class="lv-f lv-dims" data-f="goods">
+          <label for="f-goods">Goods description</label>
+          <input id="f-goods" type="text" maxlength="200" placeholder="Optional" autocomplete="off" aria-describedby="e-goods">
+          <p class="lv-err" id="e-goods" data-err="goods" hidden></p>
+        </div>
+      </div>
+      <div class="lv-pfoot"><button class="lv-btn is-ghost" data-act="cargo-done">Done</button></div>
+    </div>
+  </div>
   <button class="rc-cta" data-act="search" id="search-btn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4"/></svg><span>Search rates</span></button>
 </div>
 <p class="lv-err lv-locerr" id="loc-err" role="alert" hidden></p>
+<p class="lv-err lv-locerr" id="gen-err" role="alert" hidden></p>
 
-<section class="lv-fieldrow" aria-label="Shipment details">
-  <h2 class="lv-h">Shipment details</h2>
-  <p class="lv-hsub">Prefilled with an example. Change anything, then search.</p>
-  <div class="lv-grid" id="ship">
-    <div class="lv-f" data-f="weight">
-      <label for="f-weight">Total weight (kg)</label>
-      <input id="f-weight" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" aria-describedby="e-weight">
-      <p class="lv-err" id="e-weight" data-err="weight" hidden></p>
+<div class="rc-state" id="rc-state"></div>
+
+<div id="rc-main" hidden>
+  <section id="lane" aria-label="Rates for this shipment">
+    <div class="rc-read">
+      <p class="lv-simbanner" id="sim-banner" role="status" hidden></p>
+      <p class="rc-take" aria-live="polite"><span class="rc-take-n" id="take-n"></span><span id="take-mid"></span><span class="rc-take-n" id="take-of"></span><span id="take-rest"></span></p>
+      <dl class="rc-figs">
+        <div class="rc-fig"><dt>Cheapest</dt><dd class="rc-big" id="fig-low">—</dd><dd class="rc-sub" id="fig-low-plat"></dd></div>
+        <div class="rc-fig"><dt>Fastest transit</dt><dd class="rc-big"><span id="fig-fast">—</span> <span class="rc-unit" id="fig-fast-unit"></span></dd><dd class="rc-sub" id="fig-fast-plat"></dd></div>
+        <div class="rc-fig"><dt>Providers with a price</dt><dd class="rc-big" id="fig-n">—</dd><dd class="rc-sub" id="fig-n-sub"></dd></div>
+        <div class="rc-fig"><dt>Data</dt><dd class="rc-big" id="fig-data">—</dd><dd class="rc-sub" id="fig-data-sub"></dd></div>
+      </dl>
+      <p class="rc-note" id="cmp-note" hidden></p>
+      <p class="lv-reqnote" id="req-note"></p>
     </div>
-    <div class="lv-f" data-f="ctype" data-group="fcl">
-      <label for="f-ctype">Container type</label>
-      <select id="f-ctype" aria-describedby="e-ctype">
-        <option value="20GP">20 ft general purpose</option>
-        <option value="40HC">40 ft high cube</option>
-        <option value="20RF">20 ft reefer</option>
-        <option value="40RF">40 ft reefer</option>
-      </select>
-      <p class="lv-err" id="e-ctype" data-err="ctype" hidden></p>
-    </div>
-    <div class="lv-f" data-f="ccount" data-group="fcl">
-      <label for="f-ccount">Number of containers</label>
-      <input id="f-ccount" type="number" inputmode="numeric" min="1" max="50" step="1" aria-describedby="e-ccount">
-      <p class="lv-err" id="e-ccount" data-err="ccount" hidden></p>
-    </div>
-    <div class="lv-f lv-dims" data-f="dims" data-group="dims">
-      <span class="lv-lab" id="lab-dims">Package size (cm): length, width, height</span>
-      <div class="lv-dimrow" role="group" aria-labelledby="lab-dims">
-        <input id="f-len" type="number" inputmode="decimal" min="0" step="any" placeholder="Length" aria-label="Length in cm" aria-describedby="e-dims">
-        <input id="f-wid" type="number" inputmode="decimal" min="0" step="any" placeholder="Width" aria-label="Width in cm" aria-describedby="e-dims">
-        <input id="f-hei" type="number" inputmode="decimal" min="0" step="any" placeholder="Height" aria-label="Height in cm" aria-describedby="e-dims">
+
+    <section class="rc-brief" id="brief" aria-label="About this shipment">
+      <h2 class="rc-h2">About this shipment</h2>
+      <div class="rc-bgrid">
+        <div class="rc-bblock">
+          <h3>Who quoted</h3>
+          <p><span class="rc-num" id="b-priced">—</span> with a price, <span class="rc-num" id="b-pending">—</span> on request.</p>
+          <p><span class="rc-num" id="b-nosvc">—</span> cannot serve this shipment, <span class="rc-num" id="b-unavail">—</span> unavailable or not switched on.</p>
+        </div>
+        <div class="rc-bblock">
+          <h3>Timing</h3>
+          <p>Transit across the quotes: <span class="rc-num" id="b-tr">—</span>.</p>
+          <p>Earliest quote to expire: <span class="rc-num" id="b-exp">—</span> <span id="b-expp"></span></p>
+        </div>
+        <div class="rc-bblock">
+          <h3>Data source</h3>
+          <p><span class="rc-num" id="b-simn">—</span> simulated, <span class="rc-num" id="b-realn">—</span> real.</p>
+          <p>Sources: <span class="rc-num" id="b-src">—</span>.</p>
+        </div>
+        <div class="rc-bblock">
+          <h3>How it is charged</h3>
+          <p id="b-charge1"></p>
+          <p id="b-charge2"></p>
+        </div>
       </div>
-      <p class="lv-err" id="e-dims" data-err="dims" hidden></p>
-    </div>
-    <div class="lv-f" data-f="pkgs">
-      <label for="f-pkgs">Number of packages</label>
-      <input id="f-pkgs" type="number" inputmode="numeric" min="1" step="1" aria-describedby="e-pkgs">
-      <p class="lv-err" id="e-pkgs" data-err="pkgs" hidden></p>
-    </div>
-    <div class="lv-f" data-f="cargo">
-      <label for="f-cargo">Cargo type</label>
-      <select id="f-cargo" aria-describedby="e-cargo">
-        <option value="general">General</option>
-        <option value="fragile">Fragile</option>
-        <option value="perishable">Perishable</option>
-        <option value="hazardous">Hazardous</option>
-        <option value="electronics">Electronics</option>
-      </select>
-      <p class="lv-err" id="e-cargo" data-err="cargo" hidden></p>
-    </div>
-    <div class="lv-f" data-f="ready">
-      <label for="f-ready">Cargo ready date</label>
-      <input id="f-ready" type="date" aria-describedby="e-ready">
-      <p class="lv-err" id="e-ready" data-err="ready" hidden></p>
-    </div>
-    <div class="lv-f" data-f="goods">
-      <label for="f-goods">Goods description</label>
-      <input id="f-goods" type="text" maxlength="200" placeholder="Optional" autocomplete="off" aria-describedby="e-goods">
-      <p class="lv-err" id="e-goods" data-err="goods" hidden></p>
-    </div>
-  </div>
-  <p class="lv-err" id="gen-err" role="alert" hidden></p>
-</section>
+      <div class="rc-notes" id="b-notes" hidden>
+        <h3>Notes on this route</h3>
+        <div id="b-notes-list"></div>
+      </div>
+    </section>
 
-<section class="lv-live" id="live" aria-live="polite" aria-busy="false"></section>
+    <div class="rc-results">
+      <div class="rc-bar">
+        <div class="rc-chips" id="chips" role="group" aria-label="Platforms"></div>
+        <div class="rc-tools">
+          <label class="rc-check"><input type="checkbox" id="rated"> <span>Only platforms with a rate</span></label>
+          <div class="rc-sort">
+            <label for="sortby">Sort by</label>
+            <select id="sortby"></select>
+            <button class="rc-dirbtn" data-act="dir" id="dirbtn" aria-label="Reverse sort order">Low to high</button>
+          </div>
+          <button class="rc-textbtn" data-act="reset">Reset filters</button>
+          <button class="rc-textbtn" data-act="csv" id="csvbtn">Download CSV</button>
+        </div>
+      </div>
+      <p class="rc-unitline" id="unitline"></p>
+      <p class="rc-empty" id="empty" hidden></p>
+      <div class="rc-tablewrap" id="tablewrap">
+        <table class="rc-table" id="rc-table" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th role="columnheader" class="c-platform" aria-sort="none"><button data-act="sort" data-v="platform">Platform</button></th>
+              <th role="columnheader" class="c-rate" aria-sort="none"><button data-act="sort" data-v="rate">Rate</button></th>
+              <th role="columnheader" class="c-info">Service</th>
+              <th role="columnheader" class="c-transit" aria-sort="none"><button data-act="sort" data-v="transit">Transit (days)</button></th>
+              <th role="columnheader" class="c-routing">Data</th>
+              <th role="columnheader" class="c-carrier">Source</th>
+              <th role="columnheader" class="c-quote">Status</th>
+              <th role="columnheader" class="c-valid" aria-sort="none"><button data-act="sort" data-v="valid">Valid until</button></th>
+            </tr>
+          </thead>
+          <tbody id="rows" role="rowgroup"></tbody>
+        </table>
+      </div>
+      <p class="rc-legend">Select a row to see everything about that platform below. Prices marked simulated are demo data, not real quotes. The cheapest and fastest results come from the comparison service, which compares currencies and ignores simulated quotes when real ones exist.</p>
+    </div>
+
+    <article class="rc-detail" id="detail" aria-label="Selected platform" hidden>
+      <div class="rc-dhead">
+        <div>
+          <h2 class="rc-dname" id="d-name">—</h2>
+          <p class="rc-dsub" id="d-model"></p>
+        </div>
+        <div class="rc-dprice">
+          <span class="rc-dbig" id="d-rate">—</span>
+          <span class="rc-unit" id="d-unit"></span>
+        </div>
+      </div>
+      <dl class="rc-dgrid">
+        <div><dt>Status</dt><dd id="d-quote">—</dd></div>
+        <div><dt>Valid until</dt><dd id="d-valid">—</dd></div>
+        <div><dt>Searched at</dt><dd id="d-checked">—</dd></div>
+        <div><dt>Transit (days)</dt><dd id="d-transit">—</dd></div>
+        <div><dt>Service</dt><dd id="d-routing">—</dd></div>
+        <div><dt>Source</dt><dd id="d-carrier">—</dd></div>
+      </dl>
+      <div class="rc-dscope">
+        <h3 id="d-scope-title">What is in this price</h3>
+        <ul class="rc-scope" id="d-scope"></ul>
+      </div>
+      <div class="rc-dtext">
+        <div><h3>From the provider</h3><div id="d-from"></div></div>
+        <div><h3>How to check or get this rate</h3><div id="d-access"></div></div>
+        <div><h3>Before you quote</h3><div id="d-watch"></div></div>
+      </div>
+    </article>
+  </section>
+</div>
 </div>
 
 <script>
@@ -527,6 +597,7 @@ body{min-height:100vh}
 
   var PLACES = JSON.parse(document.getElementById('data-places').textContent);
   var NOTES = JSON.parse(document.getElementById('data-notes').textContent);
+  var PNOTES = new Map(JSON.parse(document.getElementById('data-pnotes').textContent).map(function (x) { return [x.code, x.note]; }));
   var pm = new Map(PLACES.map(function (p) { return [p.code, p]; }));
 
   var MODES = {
@@ -539,17 +610,27 @@ body{min-height:100vh}
     lcl: { weight: '1200', len: '120', wid: '100', hei: '110', pkgs: '4' },
     air: { weight: '500', len: '120', wid: '100', hei: '100', pkgs: '5' }
   };
+  var CTYPE_LABEL = { '20GP': '20 ft', '40HC': '40 ft HC', '20RF': '20 ft reefer', '40RF': '40 ft reefer' };
   var REGIONS = ['India', 'Middle East', 'Southeast Asia', 'China', 'Europe', 'North America', 'Africa', 'Other'];
+  var STATUS = { ok: 'Quoted', pending: 'On request', no_quote: 'Cannot serve', not_configured: 'Not switched on', timeout: 'Unavailable', error: 'Unavailable' };
+  var STATUS_LONG = { ok: 'Quoted', pending: 'Quote on request', no_quote: 'Cannot serve this shipment', not_configured: 'Not switched on yet', timeout: 'Unavailable', error: 'Unavailable' };
+  var CHARGE = {
+    '20GP': ['Priced per 20 ft container, whatever is inside it.', 'It holds about 33 CBM. Heavy cargo usually reaches the weight limit before the space runs out.'],
+    '40HC': ['Priced per 40 ft high cube container.', 'It holds about 76 CBM and is about 1 ft taller than a standard 40 ft. Check the tallest piece of cargo against the door height.'],
+    '20RF': ['Priced per 20 ft refrigerated container (reefer).', 'A reefer keeps cargo cold and runs on power, so quotes may include extra charges for power and monitoring.'],
+    '40RF': ['Priced per 40 ft refrigerated container (reefer).', 'A reefer keeps cargo cold and runs on power, so quotes may include extra charges for power and monitoring.'],
+    'lcl': ['Priced per CBM, on whichever is greater: the volume in CBM or the weight in tonnes.', 'The cargo shares a container, so expect a minimum charge and extra handling at both ends.'],
+    'air': ['Priced per chargeable kg: the greater of actual weight and volumetric weight.', 'Volumetric weight is length × width × height in cm, divided by 6,000. Rates usually drop at higher weights.']
+  };
 
   var S = { mode: 'fcl', from: 'INNSA', to: 'USLAX', weight: '18000', ctype: '40HC', ccount: '1',
             len: '', wid: '', hei: '', pkgs: '1', cargo: 'general', ready: '', goods: '' };
-  var LAST = null;          /* last successful response */
-  var F = { hide: new Set(), pricedOnly: false };
-  var inflight = null;      /* AbortController of the running request */
-  var slowTimer = null;
-  var openEnd = null, active = 0, optEls = [];
+  var R = null;                                   /* last successful search: { resp, at, rows, body } */
+  var UI = { sel: '', sort: 'api', dir: 'asc', hide: new Set(), pricedOnly: false };
+  var inflight = null, slowTimer = null, PREV = null;
+  var openEnd = null, cargoOpen = false, active = 0, optEls = [];
 
-  /* ---------- small helpers ---------- */
+  /* ---------- helpers ---------- */
   function h(tag, props) {
     var e = document.createElement(tag);
     if (props) Object.keys(props).forEach(function (k) {
@@ -557,12 +638,10 @@ body{min-height:100vh}
       if (v == null || v === false) return;
       if (k === 'class') e.className = v;
       else if (k === 'text') e.textContent = v;
-      else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
       else e.setAttribute(k, v === true ? '' : v);
     });
     for (var i = 2; i < arguments.length; i++) {
-      var kids = [].concat(arguments[i]);
-      kids.forEach(function (c) {
+      [].concat(arguments[i]).forEach(function (c) {
         if (c == null || c === false) return;
         e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
       });
@@ -573,24 +652,23 @@ body{min-height:100vh}
     try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, maximumFractionDigits: v >= 100 ? 0 : 2 }).format(v); }
     catch (e) { return cur + ' ' + Number(v).toLocaleString('en-US'); }
   }
-  function unit(n) { return n === 1 ? 'day' : 'days'; }
-  function days(a, b) {
+  function num(a, b) {
     if (a == null && b == null) return null;
-    if (a == null) return b + ' ' + unit(b);
-    if (b == null || a === b) return a + ' ' + unit(a);
-    return a + '–' + b + ' days';
+    if (a == null) return String(b);
+    if (b == null || a === b) return String(a);
+    return a + '–' + b;
   }
+  function daysText(a, b) { var n = num(a, b); return n == null ? null : n + ((b != null ? b : a) === 1 && (a == null || a === b) ? ' day' : ' days'); }
   function fmtDate(s) {
     if (!s) return null;
     var d = new Date(s + 'T00:00:00Z');
-    if (isNaN(d.getTime())) return s;
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+    return isNaN(d.getTime()) ? s : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   }
+  function fmtStamp(d) { return d.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }); }
   function same(a, b) {
     return !!(a && b && a.provider === b.provider && a.mode === b.mode && a.service_name === b.service_name &&
       a.total_price === b.total_price && a.transit_days_min === b.transit_days_min && a.transit_days_max === b.transit_days_max);
   }
-  function hasPrice(r) { return r.status === 'ok' && r.quotes && r.quotes.length > 0; }
   function safeUrl(u) {
     try { var x = new URL(u, location.href); return (x.protocol === 'https:' || x.protocol === 'http:') ? x.href : null; }
     catch (e) { return null; }
@@ -600,14 +678,27 @@ body{min-height:100vh}
     for (var i = 0; i < NOTES.length; i++) if (p.indexOf(NOTES[i].platform.toLowerCase()) >= 0) return NOTES[i];
     return null;
   }
-
-  /* ---------- form state ---------- */
-  var FIELD_IDS = { weight: 'f-weight', ctype: 'f-ctype', ccount: 'f-ccount', len: 'f-len', wid: 'f-wid', hei: 'f-hei', pkgs: 'f-pkgs', cargo: 'f-cargo', ready: 'f-ready', goods: 'f-goods' };
-  function pushToForm() {
-    Object.keys(FIELD_IDS).forEach(function (k) { q('#' + FIELD_IDS[k]).value = S[k]; });
+  function setKids(el, kids) {
+    el.replaceChildren();
+    kids.forEach(function (c) { if (c == null || c === false || c === '') return; el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
   }
-  function pullFromForm() {
-    Object.keys(FIELD_IDS).forEach(function (k) { S[k] = q('#' + FIELD_IDS[k]).value; });
+  function smooth() { return (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 'auto' : 'smooth'; }
+  function simChip() { return h('span', { class: 'lv-sim', title: 'This price is generated demo data, not a real quote.', text: 'Simulated demo data' }); }
+
+  /* ---------- form ---------- */
+  var FIELD_IDS = { weight: 'f-weight', ctype: 'f-ctype', ccount: 'f-ccount', len: 'f-len', wid: 'f-wid', hei: 'f-hei', pkgs: 'f-pkgs', cargo: 'f-cargo', ready: 'f-ready', goods: 'f-goods' };
+  function pushToForm() { Object.keys(FIELD_IDS).forEach(function (k) { q('#' + FIELD_IDS[k]).value = S[k]; }); }
+  function pullFromForm() { Object.keys(FIELD_IDS).forEach(function (k) { S[k] = q('#' + FIELD_IDS[k]).value; }); }
+  function paintCargo() {
+    var w = parseFloat(S.weight);
+    var wt = w > 0 ? w.toLocaleString('en-US') + ' kg' : 'Add weight';
+    if (S.mode === 'fcl') {
+      q('#cargo-sum').textContent = wt + ', ' + (CTYPE_LABEL[S.ctype] || S.ctype) + ' × ' + (S.ccount || '1');
+      q('#cargo-sub').textContent = 'Edit cargo details';
+    } else {
+      q('#cargo-sum').textContent = wt + ', ' + (S.pkgs || '1') + (Number(S.pkgs) === 1 ? ' package' : ' packages');
+      q('#cargo-sub').textContent = (S.len && S.wid && S.hei) ? S.len + ' × ' + S.wid + ' × ' + S.hei + ' cm' : 'Add package size';
+    }
   }
   function clearErrors() {
     qa('.lv-f').forEach(function (f) { f.classList.remove('has-err'); });
@@ -618,10 +709,11 @@ body{min-height:100vh}
   }
   function showErrors(errs, general) {
     var order = ['weight', 'ctype', 'ccount', 'dims', 'pkgs', 'cargo', 'ready', 'goods'];
-    var firstBad = null;
+    var firstBad = null, cargoBad = false;
     order.forEach(function (k) {
       if (!errs[k]) return;
-      var f = q('.lv-f[data-f="' + k + '"]'); var e = q('[data-err="' + k + '"]');
+      cargoBad = true;
+      var f = q('.lv-f[data-f="' + k + '"]'), e = q('[data-err="' + k + '"]');
       if (f) f.classList.add('has-err');
       if (e) { e.textContent = errs[k]; e.hidden = false; }
       var inputs = k === 'dims' ? qa('#f-len, #f-wid, #f-hei') : [q('#' + FIELD_IDS[k])];
@@ -633,7 +725,7 @@ body{min-height:100vh}
     if (errs.to) { q('#field-to').classList.add('has-err'); loc.push('Destination: ' + errs.to); }
     if (loc.length) { var le = q('#loc-err'); le.textContent = loc.join(' '); le.hidden = false; }
     if (general && general.length) { var ge = q('#gen-err'); ge.textContent = general.join(' '); ge.hidden = false; }
-    if (firstBad) firstBad.focus();
+    if (cargoBad) { q('#field-cargo').classList.add('has-err'); openCargo(); if (firstBad) firstBad.focus(); }
   }
   function validate() {
     var errs = {};
@@ -667,8 +759,7 @@ body{min-height:100vh}
     return { errs: errs, general: general };
   }
 
-  /* ---------- places ---------- */
-  function placeOf(code) { return pm.get(code); }
+  /* ---------- places and mode ---------- */
   function mapPlace(code, kind) {
     var p = pm.get(code);
     if (p && p.kind === kind) return code;
@@ -683,7 +774,7 @@ body{min-height:100vh}
     var M = MODES[S.mode];
     [['from', S.from], ['to', S.to]].forEach(function (pair) {
       var pick = q('.rc-pick[data-end="' + pair[0] + '"]');
-      var p = placeOf(pair[1]);
+      var p = pm.get(pair[1]);
       q('.rc-place-name', pick).textContent = p.name;
       q('.rc-code', pick).textContent = p.code;
       q('.rc-country', pick).textContent = p.country;
@@ -694,6 +785,7 @@ body{min-height:100vh}
     qa('.rc-mode').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === S.mode)); });
     qa('[data-group="fcl"]').forEach(function (e) { e.hidden = S.mode !== 'fcl'; });
     qa('[data-group="dims"]').forEach(function (e) { e.hidden = S.mode === 'fcl'; });
+    paintCargo();
   }
   function setMode(m) {
     if (m === S.mode) return;
@@ -708,15 +800,14 @@ body{min-height:100vh}
     clearErrors(); pushToForm(); paintMode(); paintPlaces();
   }
 
-  /* ---------- picker ---------- */
+  /* ---------- pickers ---------- */
   function pickEl(end) { return q('.rc-pick[data-end="' + end + '"]'); }
   function looksLikeCode(t) { return /^[a-z]{2}[a-z0-9]{3}$/i.test(t); }
   function renderList() {
     if (!openEnd) return;
     var M = MODES[S.mode];
-    var pick = pickEl(openEnd), panel = q('.rc-panel', pick);
-    var term = q('.rc-find', panel).value.trim();
-    var low = term.toLowerCase();
+    var panel = q('.rc-panel', pickEl(openEnd));
+    var term = q('.rc-find', panel).value.trim(), low = term.toLowerCase();
     var cur = openEnd === 'from' ? S.from : S.to;
     var items = [];
     pm.forEach(function (p) {
@@ -731,10 +822,7 @@ body{min-height:100vh}
         h('span', { class: 'rc-on', text: 'Use code ' + code }), h('span', { class: 'rc-oc', text: 'Country ' + code.slice(0, 2) }));
       ul.appendChild(li0); optEls.push(li0);
     }
-    if (!items.length && !optEls.length) {
-      ul.appendChild(h('li', { class: 'rc-none', text: 'No match. Try a city, a code or a country.' }));
-      return;
-    }
+    if (!items.length && !optEls.length) { ul.appendChild(h('li', { class: 'rc-none', text: 'No match. Try a city, a code or a country.' })); return; }
     var lastRegion = null;
     items.forEach(function (p) {
       if (p.region !== lastRegion) { ul.appendChild(h('li', { class: 'rc-grp', role: 'presentation', text: p.region })); lastRegion = p.region; }
@@ -754,7 +842,7 @@ body{min-height:100vh}
     if (openEnd && o) q('.rc-find', pickEl(openEnd)).setAttribute('aria-activedescendant', o.id);
   }
   function openPicker(end) {
-    closePicker();
+    closePicker(); closeCargo();
     openEnd = end;
     var pick = pickEl(end), panel = q('.rc-panel', pick);
     panel.hidden = false; panel.style.left = '0px';
@@ -781,12 +869,23 @@ body{min-height:100vh}
     if (code === S[other]) S[other] = S[end];
     S[end] = code;
     closePicker(true);
-    clearLocErrors();
-    paintPlaces();
-  }
-  function clearLocErrors() {
     q('#field-from').classList.remove('has-err'); q('#field-to').classList.remove('has-err');
     var le = q('#loc-err'); le.hidden = true; le.textContent = '';
+    paintPlaces();
+  }
+  function openCargo() {
+    closePicker();
+    cargoOpen = true;
+    q('#cargo-panel').hidden = false;
+    q('#cargo-btn').setAttribute('aria-expanded', 'true');
+  }
+  function closeCargo(refocus) {
+    if (!cargoOpen) return;
+    pullFromForm(); paintCargo();
+    cargoOpen = false;
+    q('#cargo-panel').hidden = true;
+    q('#cargo-btn').setAttribute('aria-expanded', 'false');
+    if (refocus) q('#cargo-btn').focus();
   }
 
   /* ---------- request ---------- */
@@ -797,233 +896,354 @@ body{min-height:100vh}
   }
   function buildBody() {
     var M = MODES[S.mode];
-    var body = {
-      origin: locBody(S.from), destination: locBody(S.to), mode: M.api,
-      weight_kg: parseFloat(S.weight), cargo_type: S.cargo, package_count: parseInt(S.pkgs, 10)
-    };
+    var body = { origin: locBody(S.from), destination: locBody(S.to), mode: M.api,
+      weight_kg: parseFloat(S.weight), cargo_type: S.cargo, package_count: parseInt(S.pkgs, 10) };
     if (S.mode === 'fcl') { body.container_type = S.ctype; body.container_count = parseInt(S.ccount, 10); }
     else body.dimensions = { length_cm: parseFloat(S.len), width_cm: parseFloat(S.wid), height_cm: parseFloat(S.hei) };
     if (S.ready) body.ready_date = S.ready;
     if (S.goods.trim()) body.goods_description = S.goods.trim();
     return body;
   }
+  async function diagnose() {
+    var out = { origin: String(window.origin || location.origin || location.protocol), reachable: false, error: '' };
+    var c = new AbortController(), t = setTimeout(function () { c.abort(); }, 10000);
+    try { var r = await fetch(API_BASE + '/health', { signal: c.signal }); out.reachable = r.status > 0; }
+    catch (e) { out.error = String((e && e.message) || e); }
+    clearTimeout(t);
+    return out;
+  }
+  function explain(dx) {
+    if (dx.reachable) return 'The server is up, but it did not accept the search request from this page. This is usually a cross-origin (CORS) rule on the server for POST requests. Ask whoever runs the backend to allow POST and the Content-Type header from any origin.';
+    return 'This page could not reach the server. If you are viewing it inside a preview (for example in a chat app), the preview blocks outside requests: save the file and open it in Chrome, Edge or Safari. Otherwise check your internet connection, VPN or ad blocker, then try again.';
+  }
 
   async function search() {
-    pullFromForm();
+    pullFromForm(); paintCargo();
     clearErrors();
     var errs = validate();
     if (Object.keys(errs).length) { showErrors(errs, []); return; }
+    closeCargo(); closePicker();
     if (inflight) inflight.abort();
     var ctrl = new AbortController(); inflight = ctrl;
     var timedOut = false;
     var timer = setTimeout(function () { timedOut = true; ctrl.abort(); }, TIMEOUT_MS);
-    renderLoading();
+    var body = buildBody(), bodyStr = JSON.stringify(body);
+    console.info('[rates] request sent', body);
+    showLoading();
     var btn = q('#search-btn'); btn.disabled = true;
     try {
       var res = await fetch(API_BASE + '/api/v1/quotes', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(buildBody()), signal: ctrl.signal
-      });
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: bodyStr, signal: ctrl.signal });
       var data = null;
       try { data = await res.json(); } catch (e) { data = null; }
       if (res.status === 422) {
         var m = mapDetail(data && data.detail);
+        showIdle('Check the highlighted fields', 'The comparison service could not use this request. Fix the fields marked above and search again.');
         showErrors(m.errs, m.general);
-        renderIdle('Check the highlighted fields', 'The comparison service could not use this request. Fix the fields marked above and search again.');
         return;
       }
       if (!res.ok || !data || !Array.isArray(data.results)) {
-        renderFail('The comparison service had a problem', 'It answered with an error (HTTP ' + res.status + '). This is usually temporary.');
+        showFail('The comparison service had a problem', 'It answered with an error (HTTP ' + res.status + '). This is usually temporary.');
         return;
       }
-      LAST = { resp: data, at: new Date() };
-      F = { hide: new Set(), pricedOnly: false };
-      renderDone();
+      console.info('[rates] request the service received', data.request);
+      var sig = JSON.stringify(data.results.map(function (r) { return [r.provider, r.status, (r.quotes || []).map(function (x) { return [x.total_price, x.currency, x.transit_days_min, x.transit_days_max, x.service_name]; })]; }));
+      if (PREV && PREV.sig === sig && PREV.body !== bodyStr) console.warn('[rates] The service returned identical prices for a different request. The page did send the new values:', body);
+      if (data.request && (data.request.weight_kg !== body.weight_kg || data.request.mode !== body.mode)) console.warn('[rates] The service echoed a different request than the page sent.', { sent: body, echoed: data.request });
+      PREV = { sig: sig, body: bodyStr };
+      R = { resp: data, at: new Date(), body: body, rows: buildRows(data) };
+      UI = { sel: '', sort: 'api', dir: 'asc', hide: new Set(), pricedOnly: false };
+      paintLane();
     } catch (e) {
-      if (ctrl !== inflight) return;   /* replaced by a newer search */
-      renderFail(timedOut ? 'The search took too long' : 'Could not reach the comparison service',
-        timedOut ? 'No answer came back within ' + Math.round(TIMEOUT_MS / 1000) + ' seconds. The first request after a quiet period can be slow, so trying again often works.'
-                 : 'Check your internet connection and try again.');
+      if (ctrl !== inflight) return;
+      if (timedOut) {
+        showFail('The search took too long', 'No answer came back within ' + Math.round(TIMEOUT_MS / 1000) + ' seconds. The first request after a quiet period can be slow, so trying again often works.');
+      } else {
+        var why = String(e && e.name ? e.name + ': ' + e.message : e);
+        var dx = await diagnose();
+        if (ctrl !== inflight) return;
+        showFail('Could not reach the comparison service', explain(dx), [
+          'Error: ' + why, 'Page origin: ' + dx.origin + ' (' + location.protocol + ')', 'Address: ' + API_BASE + '/api/v1/quotes',
+          'Connection check: ' + (dx.reachable ? 'the server answered a simple request' : 'no answer' + (dx.error ? ' (' + dx.error + ')' : ''))]);
+      }
     } finally {
       clearTimeout(timer); clearTimeout(slowTimer);
       if (ctrl === inflight) { inflight = null; btn.disabled = false; }
     }
   }
 
-  /* ---------- results ---------- */
-  function live() { return q('#live'); }
-  function renderIdle(title, text) {
-    var box = live(); box.setAttribute('aria-busy', 'false');
-    box.replaceChildren(h('div', { class: 'lv-idle' },
-      h('h2', { text: title || 'No search yet' }),
-      h('p', { text: text || 'Fill in the shipment and press Search rates. Prices come from every connected provider and appear here, side by side.' }),
-      h('button', { class: 'lv-btn is-ghost', 'data-act': 'example', text: 'Try the example shipment' })));
+  /* ---------- states ---------- */
+  function setState(cls, kids) {
+    q('#rc-main').hidden = true;
+    var s = q('#rc-state'); s.hidden = false; s.className = 'rc-state ' + cls;
+    s.replaceChildren.apply(s, kids);
   }
-  function renderLoading() {
-    var box = live(); box.setAttribute('aria-busy', 'true');
+  function showIdle(title, text) {
+    setBadge('Search to see rates');
+    setState('is-idle', [h('div', { class: 'lv-statebox' }, h('h2', { text: title || 'No search yet' }),
+      h('p', { text: text || 'Fill in the shipment and press Search rates. Prices from every connected provider appear here, side by side.' }),
+      h('button', { class: 'lv-btn is-ghost', 'data-act': 'example', text: 'Try the example shipment' }))]);
+  }
+  function showLoading() {
     var note = h('p', { text: 'Asking every provider. This can take a few seconds.' });
-    box.replaceChildren(h('div', { class: 'lv-load' }, note,
-      h('div', { class: 'lv-cards' }, h('div', { class: 'lv-skel' }), h('div', { class: 'lv-skel' }), h('div', { class: 'lv-skel' }))));
+    setState('dash-skeleton', [h('div', { class: 'lv-statebox' }, h('h2', { text: 'Searching' }), note)]);
     clearTimeout(slowTimer);
     slowTimer = setTimeout(function () { note.textContent = 'Still working. The first request after a quiet period is slower, and some providers take longer.'; }, 8000);
   }
-  function renderFail(title, text) {
-    var box = live(); box.setAttribute('aria-busy', 'false');
-    box.replaceChildren(h('div', { class: 'lv-fail' }, h('h2', { text: title }), h('p', { text: text }),
-      h('button', { class: 'lv-btn', 'data-act': 'search', text: 'Try again' })));
+  function showFail(title, text, detail) {
+    setBadge('Search failed');
+    var kids = [h('h2', { text: title }), h('p', { text: text })];
+    if (detail && detail.length) kids.push(h('details', { class: 'lv-more' }, h('summary', { text: 'Technical detail' }), detail.map(function (l) { return h('p', { text: l }); })));
+    kids.push(h('button', { class: 'lv-btn', 'data-act': 'search', text: 'Try again' }));
+    setState('is-error', [h('div', { class: 'lv-statebox' }, kids)]);
   }
-  function simChip() { return h('span', { class: 'lv-sim', title: 'This price is generated demo data, not a real quote.', text: 'Simulated demo data' }); }
+  function setBadge(t) { q('#badge').textContent = t; }
 
-  function renderDone() {
-    var r = LAST.resp, box = live();
-    box.setAttribute('aria-busy', 'false');
-    var results = r.results || [];
-    var all = [];
-    results.forEach(function (x) { (x.quotes || []).forEach(function (qq) { all.push(qq); }); });
-    var allSim = all.length > 0 && all.every(function (x) { return x.is_simulated; });
-    var kids = [];
-    if (r.contains_simulated) kids.push(h('div', { class: 'lv-banner', role: 'status',
-      text: allSim ? 'Simulated demo data. Every price below is generated for testing, not a real quote.' : 'Some prices below are simulated demo data, not real quotes. Each one is labelled.' }));
-    kids.push(answerCard(r, results));
-    kids.push(toolbar(results));
-    kids.push(h('div', { class: 'lv-cards', id: 'cards' }));
-    box.replaceChildren.apply(box, kids);
-    renderCards();
-  }
-  function answerCard(r, results) {
-    var priced = results.filter(hasPrice).length;
-    var ch = r.cheapest, fa = r.fastest;
-    var left = h('div', null,
-      h('p', { class: 'lv-take', text: priced + ' of ' + results.length + (results.length === 1 ? ' provider' : ' providers') + ' returned a price' }));
-    if (ch) {
-      left.appendChild(h('p', { class: 'lv-abig', text: money(ch.total_price, ch.currency) }));
-      left.appendChild(h('p', { class: 'lv-asub' }, ch.provider + ' ', h('span', { class: 'lv-alabel', text: 'has the lowest price' })));
-      if (ch.is_simulated) left.appendChild(h('p', { class: 'lv-asub' }, simChip()));
-      if (ch.notes) left.appendChild(h('p', { class: 'lv-anote', text: ch.notes }));
-    } else {
-      left.appendChild(h('p', { class: 'lv-abig lv-none', text: 'No price' }));
-      left.appendChild(h('p', { class: 'lv-asub', text: 'No provider returned a price for this shipment.' }));
-    }
-    var stats = h('dl', { class: 'lv-astats' });
-    var fd = fa ? days(fa.transit_days_min, fa.transit_days_max) : null;
-    stats.appendChild(h('div', null, h('dt', { text: 'Fastest' }),
-      h('dd', { class: 'lv-snum', text: fd || (fa ? 'Not stated' : '—') }),
-      h('dd', { class: 'lv-ssub' }, fa ? fa.provider + ' ' : '', fa && fa.is_simulated ? simChip() : null)));
-    stats.appendChild(h('div', null, h('dt', { text: 'Cheapest service' }),
-      h('dd', { class: 'lv-snum', text: ch && ch.service_name ? ch.service_name : '—' })));
-    var card = h('section', { class: 'lv-answer', 'aria-label': 'Comparison summary' }, h('div', { class: 'lv-ahead' }, left, stats));
-    if (r.comparison_note) card.appendChild(h('p', { class: 'lv-cnote', text: r.comparison_note }));
-    return card;
-  }
-  function toolbar(results) {
-    var chips = h('div', { class: 'rc-chips', role: 'group', 'aria-label': 'Providers' });
-    results.forEach(function (x) {
-      chips.appendChild(h('button', { class: 'rc-chip', 'data-act': 'chip', 'data-v': x.provider, 'aria-pressed': String(!F.hide.has(x.provider)), text: x.provider }));
+  /* ---------- results ---------- */
+  function buildRows(resp) {
+    var rows = [];
+    (resp.results || []).forEach(function (res) {
+      var qs = res.quotes || [];
+      if (qs.length) qs.forEach(function (x, i) { rows.push({ id: res.provider + '#' + i, provider: res.provider, res: res, quote: x }); });
+      else rows.push({ id: res.provider + '#0', provider: res.provider, res: res, quote: null });
     });
-    var only = h('input', { type: 'checkbox', id: 'only-priced' });
-    only.checked = F.pricedOnly;
-    only.addEventListener('change', function () { F.pricedOnly = only.checked; renderCards(); });
-    var at = LAST.at;
-    var bar = h('div', { class: 'lv-bar' }, chips,
-      h('div', { class: 'rc-tools' },
-        h('label', { class: 'rc-check' }, only, h('span', { text: 'Only providers with a price' })),
-        h('button', { class: 'rc-textbtn', 'data-act': 'csv', text: 'Download CSV' }),
-        h('button', { class: 'rc-textbtn', 'data-act': 'search', text: 'Search again' })),
-      h('p', { class: 'lv-meta2', text: 'Searched at ' + at.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) }));
-    return bar;
+    return rows;
   }
-  function renderCards() {
-    var grid = q('#cards'); if (!grid || !LAST) return;
-    var r = LAST.resp;
-    var list = (r.results || []).filter(function (x) {
-      if (F.hide.has(x.provider)) return false;
-      if (F.pricedOnly && !hasPrice(x)) return false;
-      return true;
+  function setText(sel, text) { q(sel).textContent = text == null ? '' : text; }
+
+  function paintLane() {
+    var resp = R.resp, rows = R.rows, M = MODES[S.mode];
+    var results = resp.results || [];
+    var quotes = rows.filter(function (r) { return r.quote; });
+    var pricedProviders = results.filter(function (x) { return x.status === 'ok' && x.quotes && x.quotes.length; });
+    var cur = {}; quotes.forEach(function (r) { cur[r.quote.currency] = true; });
+    var sameCur = Object.keys(cur).length <= 1;
+    var anySim = resp.contains_simulated || quotes.some(function (r) { return r.quote.is_simulated; });
+    var allSim = quotes.length > 0 && quotes.every(function (r) { return r.quote.is_simulated; });
+    var nSim = quotes.filter(function (r) { return r.quote.is_simulated; }).length;
+
+    q('#rc-state').hidden = true; q('#rc-main').hidden = false;
+    setBadge(anySim ? 'Includes simulated demo data' : (quotes.length ? 'Live data' : 'No prices returned'));
+
+    /* simulated banner (always visible when any price is simulated) */
+    var sb = q('#sim-banner');
+    sb.hidden = !anySim;
+    sb.textContent = allSim ? 'Simulated demo data. Every price below is generated for testing, not a real quote.'
+      : 'Some prices below are simulated demo data, not real quotes. Each one is labelled.';
+
+    /* take sentence and figures */
+    setText('#take-n', String(pricedProviders.length)); setText('#take-mid', ' of '); setText('#take-of', String(results.length));
+    setText('#take-rest', results.length === 1 ? ' provider returned a price' : ' providers returned a price');
+    var ch = resp.cheapest, fa = resp.fastest;
+    setText('#fig-low', ch ? money(ch.total_price, ch.currency) : '—');
+    setKids(q('#fig-low-plat'), [ch ? ch.provider + ' ' : '', ch && ch.is_simulated ? simChip() : null]);
+    setText('#fig-fast', fa ? (num(fa.transit_days_min, fa.transit_days_max) || 'Not stated') : '—');
+    setText('#fig-fast-unit', fa && num(fa.transit_days_min, fa.transit_days_max) ? 'days' : '');
+    setKids(q('#fig-fast-plat'), [fa ? fa.provider + ' ' : '', fa && fa.is_simulated ? simChip() : null]);
+    setText('#fig-n', String(pricedProviders.length));
+    var noPrice = results.filter(function (x) { return !(x.status === 'ok' && x.quotes && x.quotes.length); }).map(function (x) { return x.provider; });
+    setText('#fig-n-sub', noPrice.length ? 'No price: ' + noPrice.join(', ') : 'Every provider answered');
+    setText('#fig-data', !quotes.length ? '—' : allSim ? 'Simulated' : (anySim ? 'Mixed' : 'Real'));
+    setText('#fig-data-sub', !quotes.length ? '' : allSim ? 'Demo data, not real quotes' : (anySim ? nSim + ' of ' + quotes.length + ' quotes simulated' : 'No simulated quotes'));
+    var cn = q('#cmp-note'); cn.hidden = !resp.comparison_note; cn.textContent = resp.comparison_note || '';
+    var rq = resp.request || R.body;
+    setText('#req-note', 'Request the service received: ' + [rq.mode, (rq.origin && (rq.origin.port_code || rq.origin.city)) + ' to ' + (rq.destination && (rq.destination.port_code || rq.destination.city)),
+      rq.weight_kg != null ? Number(rq.weight_kg).toLocaleString('en-US') + ' kg' : null,
+      rq.container_type ? rq.container_type + ' × ' + (rq.container_count || 1) : null,
+      rq.dimensions ? rq.dimensions.length_cm + ' × ' + rq.dimensions.width_cm + ' × ' + rq.dimensions.height_cm + ' cm' : null,
+      rq.package_count != null && !rq.container_type ? rq.package_count + ' packages' : null].filter(Boolean).join(', ') + '. Searched at ' + fmtStamp(R.at) + '.');
+
+    paintBrief(results, quotes, M);
+    paintControls(sameCur);
+    paintTable(sameCur);
+  }
+
+  function paintBrief(results, quotes, M) {
+    var cnt = function (st) { return results.filter(function (x) { return x.status === st; }).length; };
+    setText('#b-priced', String(results.filter(function (x) { return x.status === 'ok' && x.quotes && x.quotes.length; }).length));
+    setText('#b-pending', String(cnt('pending')));
+    setText('#b-nosvc', String(cnt('no_quote')));
+    setText('#b-unavail', String(cnt('timeout') + cnt('error') + cnt('not_configured')));
+    var tmin = null, tmax = null, exp = null;
+    quotes.forEach(function (r) {
+      var x = r.quote;
+      if (x.transit_days_min != null && (tmin == null || x.transit_days_min < tmin)) tmin = x.transit_days_min;
+      if (x.transit_days_max != null && (tmax == null || x.transit_days_max > tmax)) tmax = x.transit_days_max;
+      if (tmax == null && x.transit_days_min != null) tmax = x.transit_days_min;
+      if (x.valid_until && (!exp || x.valid_until < exp.valid_until)) exp = x;
     });
-    if (!list.length) { grid.replaceChildren(h('p', { class: 'rc-empty', text: 'No providers match these filters.' })); return; }
-    grid.replaceChildren.apply(grid, list.map(function (x) { return providerCard(x, r.cheapest, r.fastest); }));
+    setText('#b-tr', tmin == null && tmax == null ? 'not stated' : num(tmin, tmax) + ' days');
+    setText('#b-exp', exp ? fmtDate(exp.valid_until) : 'not stated');
+    setText('#b-expp', exp ? '(' + exp.provider + ')' : '');
+    var nSim = quotes.filter(function (r) { return r.quote.is_simulated; }).length;
+    setText('#b-simn', String(nSim)); setText('#b-realn', String(quotes.length - nSim));
+    var src = {}; quotes.forEach(function (r) { var k = r.quote.source || 'unknown'; src[k] = (src[k] || 0) + 1; });
+    setText('#b-src', Object.keys(src).length ? Object.keys(src).map(function (k) { return k + ' (' + src[k] + ')'; }).join(', ') : 'none');
+    var key = S.mode === 'fcl' ? S.ctype : (S.mode === 'lcl' ? 'lcl' : 'air');
+    var chg = CHARGE[key] || ['', ''];
+    setText('#b-charge1', chg[0]); setText('#b-charge2', chg[1]);
+    var codes = [S.from, S.to].filter(function (c, i, a) { return a.indexOf(c) === i && PNOTES.has(c); });
+    q('#b-notes').hidden = !codes.length;
+    q('#b-notes-list').replaceChildren.apply(q('#b-notes-list'), codes.map(function (c) {
+      return h('p', null, h('strong', { text: pm.get(c).name }), ' ' + PNOTES.get(c));
+    }));
   }
-  var STATUS = {
-    ok: 'Quoted', pending: 'Quote on request', no_quote: 'Cannot serve this shipment',
-    not_configured: 'Not switched on yet', timeout: 'Unavailable', error: 'Unavailable'
-  };
-  function providerCard(res, cheapest, fastest) {
-    var quotes = res.quotes || [];
-    var isC = quotes.some(function (x) { return same(x, cheapest); });
-    var isF = quotes.some(function (x) { return same(x, fastest); });
-    var card = h('article', { class: 'lv-card' + (isC ? ' is-cheapest' : '') });
-    card.appendChild(h('div', { class: 'lv-chead' }, h('h3', { class: 'lv-pname', text: res.provider }),
-      h('span', { class: 'lv-status s-' + res.status, text: STATUS[res.status] || 'Unavailable' })));
-    if (isC || isF) card.appendChild(h('div', { class: 'lv-tags' },
-      isC ? h('span', { class: 'lv-tag t-cheapest', text: 'Cheapest' }) : null,
-      isF ? h('span', { class: 'lv-tag t-fastest', text: 'Fastest' }) : null));
 
-    if (res.status === 'ok') {
-      if (!quotes.length) card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider answered without a price.' }));
-      quotes.forEach(function (x) { card.appendChild(quoteBlock(x)); });
-      if (res.message && quotes.length) card.appendChild(h('p', { class: 'lv-msg', text: res.message }));
-    } else if (res.status === 'pending') {
-      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider has no instant price. Ask them for a quote.' }));
-      var url = res.action_url ? safeUrl(res.action_url) : null;
-      if (url) card.appendChild(h('a', { class: 'lv-link', href: url, target: '_blank', rel: 'noopener noreferrer', text: 'Request quote on ' + res.provider }));
-    } else if (res.status === 'no_quote') {
-      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider cannot serve this shipment.' }));
-    } else if (res.status === 'not_configured') {
-      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider is not switched on yet.' }));
-    } else {
-      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider is unavailable right now. Search again in a moment.' }));
-      if (res.error) card.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Technical detail' }), h('p', { text: res.error })));
+  function paintControls(sameCur) {
+    var results = R.resp.results || [];
+    q('#chips').replaceChildren.apply(q('#chips'), results.map(function (x) {
+      return h('button', { class: 'rc-chip', 'data-act': 'chip', 'data-v': x.provider, 'aria-pressed': String(!UI.hide.has(x.provider)), text: x.provider });
+    }));
+    q('#rated').checked = UI.pricedOnly;
+    var opts = [['api', 'As returned'], ['transit', 'Transit time'], ['platform', 'Provider'], ['valid', 'Valid until']];
+    if (sameCur) opts.splice(1, 0, ['rate', 'Rate']);
+    if (UI.sort === 'rate' && !sameCur) UI.sort = 'api';
+    var sel = q('#sortby'); sel.replaceChildren.apply(sel, opts.map(function (o) { return new Option(o[1], o[0]); }));
+    sel.value = UI.sort;
+    var d = q('#dirbtn'); d.hidden = UI.sort === 'api';
+    var asc = UI.dir === 'asc';
+    d.textContent = UI.sort === 'platform' ? (asc ? 'A to Z' : 'Z to A') : UI.sort === 'valid' ? (asc ? 'Soonest first' : 'Latest first') : (asc ? 'Low to high' : 'High to low');
+    qa('#rc-table thead th').forEach(function (th) {
+      var b = q('button[data-act="sort"]', th); if (!b) return;
+      th.setAttribute('aria-sort', b.dataset.v === UI.sort ? (asc ? 'ascending' : 'descending') : 'none');
+    });
+    var cur = null; R.rows.forEach(function (r) { if (r.quote) cur = r.quote.currency; });
+    q('#unitline').textContent = sameCur && cur ? 'Rates in ' + cur + ' for this shipment.' : 'Rates are in each provider\u2019s own currency.';
+  }
+
+  function paintTable(sameCur) {
+    var resp = R.resp;
+    var vis = R.rows.filter(function (r) { return !UI.hide.has(r.provider) && (!UI.pricedOnly || r.quote); });
+    if (UI.sort !== 'api') {
+      var dirn = UI.dir === 'desc' ? -1 : 1;
+      var val = function (r) {
+        if (UI.sort === 'platform') return r.provider;
+        if (!r.quote) return null;
+        if (UI.sort === 'rate') return r.quote.total_price;
+        if (UI.sort === 'transit') return r.quote.transit_days_min;
+        return r.quote.valid_until;
+      };
+      vis = vis.slice().sort(function (a, b) {
+        var x = val(a), y = val(b);
+        if (x == null || y == null) return x == null && y == null ? 0 : (x == null ? 1 : -1);
+        if (typeof x === 'string') return x.localeCompare(y) * dirn;
+        return (x - y) * dirn;
+      });
     }
+    var maxRate = 0;
+    if (sameCur) vis.forEach(function (r) { if (r.quote && r.quote.total_price > maxRate) maxRate = r.quote.total_price; });
 
-    var n = notesFor(res.provider);
-    if (n) card.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Good to know about ' + res.provider }),
-      h('h4', { text: 'How to check or get this rate' }), h('p', { text: n.quote_access }),
-      h('h4', { text: 'Before you quote' }), h('p', { text: n.watch_out })));
-    if (res.elapsed_ms != null) card.appendChild(h('p', { class: 'lv-foot', text: 'Answered in ' + (res.elapsed_ms / 1000).toFixed(1) + ' s' }));
-    return card;
+    var empty = q('#empty'), wrap = q('#tablewrap');
+    if (!vis.length) {
+      wrap.hidden = true; empty.hidden = false;
+      empty.textContent = R.rows.length ? 'No platforms match these filters. Reset the filters to see every platform.' : 'The service returned no providers for this shipment.';
+    } else { wrap.hidden = false; empty.hidden = true; }
+
+    var selId = UI.sel;
+    if (!vis.some(function (r) { return r.id === selId; })) {
+      var c = vis.filter(function (r) { return r.quote && same(r.quote, resp.cheapest); })[0];
+      selId = c ? c.id : (vis[0] ? vis[0].id : '');
+    }
+    var tb = q('#rows');
+    tb.replaceChildren.apply(tb, vis.map(function (r) {
+      var x = r.quote;
+      var tr = h('tr', { 'data-key': r.id, role: 'row', tabindex: '0' });
+      if (x && same(x, resp.cheapest)) tr.classList.add('is-low');
+      if (!x) tr.classList.add('is-none');
+      if (r.id === selId) { tr.classList.add('is-sel'); tr.setAttribute('aria-current', 'true'); }
+      tr.style.setProperty('--w', x && maxRate ? Math.max(x.total_price / maxRate, 0.06).toFixed(3) : '0');
+      var rate;
+      if (x) {
+        rate = h('td', { class: 'c-rate', role: 'cell' }, money(x.total_price, x.currency),
+          x.is_simulated ? h('span', { class: 'lv-rate-sim' }, simChip()) : null,
+          x.notes ? h('span', { class: 'lv-ratenote', text: x.notes }) : null);
+      } else rate = h('td', { class: 'c-rate', role: 'cell', text: STATUS[r.res.status] || 'Unavailable' });
+      var link = null;
+      if (r.res.status === 'pending' && r.res.action_url && safeUrl(r.res.action_url)) {
+        link = h('a', { class: 'lv-rowlink', href: safeUrl(r.res.action_url), target: '_blank', rel: 'noopener noreferrer', text: 'Request quote' });
+      }
+      tr.appendChild(h('td', { class: 'c-platform', role: 'cell', text: r.provider }));
+      tr.appendChild(rate);
+      tr.appendChild(h('td', { class: 'c-info', role: 'cell', text: x && x.service_name ? x.service_name : '—' }));
+      tr.appendChild(h('td', { class: 'c-transit', role: 'cell', text: x && num(x.transit_days_min, x.transit_days_max) ? num(x.transit_days_min, x.transit_days_max) : '—' }));
+      tr.appendChild(h('td', { class: 'c-routing', role: 'cell', text: x ? (x.is_simulated ? 'Simulated' : 'Real') : '—' }));
+      tr.appendChild(h('td', { class: 'c-carrier', role: 'cell', text: x && x.source ? x.source : '—' }));
+      tr.appendChild(h('td', { class: 'c-quote', role: 'cell' }, link || (STATUS[r.res.status] || 'Unavailable')));
+      tr.appendChild(h('td', { class: 'c-valid', role: 'cell', text: x && x.valid_until ? fmtDate(x.valid_until) : '—' }));
+      return tr;
+    }));
+    paintDetail(vis.filter(function (r) { return r.id === selId; })[0] || null);
   }
-  function quoteBlock(x) {
-    var facts = [];
-    var d = days(x.transit_days_min, x.transit_days_max);
-    if (d) facts.push(h('span', { text: d }));
-    var v = fmtDate(x.valid_until);
-    if (v) facts.push(h('span', { text: 'Valid until ' + v }));
-    var charges = x.charges || [];
-    var box = h('div', { class: 'lv-quote' },
-      x.service_name ? h('p', { class: 'lv-service', text: x.service_name }) : null,
-      h('div', { class: 'lv-pricerow' }, h('span', { class: 'lv-price', text: money(x.total_price, x.currency) }), x.is_simulated ? simChip() : null),
-      facts.length ? h('p', { class: 'lv-facts' }, facts) : null,
-      x.notes ? h('p', { class: 'lv-notes', text: x.notes }) : null);
+
+  function paintDetail(r) {
+    var box = q('#detail');
+    if (!r) { box.hidden = true; return; }
+    box.hidden = false;
+    var x = r.quote, res = r.res, n = notesFor(r.provider);
+    setText('#d-name', r.provider);
+    setText('#d-model', n ? n.model : '');
+    setText('#d-rate', x ? money(x.total_price, x.currency) : (STATUS[res.status] || 'Unavailable'));
+    setKids(q('#d-unit'), [x ? (x.currency + ' total ') : (res.status === 'pending' ? 'No public price' : ''), x && x.is_simulated ? simChip() : null]);
+    setText('#d-quote', STATUS_LONG[res.status] || 'Unavailable');
+    setText('#d-valid', x && x.valid_until ? fmtDate(x.valid_until) : '—');
+    setText('#d-checked', fmtStamp(R.at));
+    setText('#d-transit', x && daysText(x.transit_days_min, x.transit_days_max) ? daysText(x.transit_days_min, x.transit_days_max) : '—');
+    setText('#d-routing', x && x.service_name ? x.service_name : '—');
+    setText('#d-carrier', x && x.source ? x.source : '—');
+
+    var charges = x ? (x.charges || []) : [];
+    q('#d-scope-title').textContent = charges.length ? 'What is in this price' : 'Charges';
+    var ul = q('#d-scope'); ul.replaceChildren();
     if (charges.length) {
-      var ul = h('ul', { class: 'lv-charges' });
-      charges.forEach(function (c) { ul.appendChild(h('li', null, h('span', { text: c.name }), h('span', { text: money(c.amount, x.currency) }))); });
-      box.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Charges (' + charges.length + ')' }), ul));
+      charges.forEach(function (c) { ul.appendChild(h('li', { class: 'rc-scope-item' }, h('span', { class: 'rc-sc-name', text: c.name }), h('span', { class: 'lv-amt', text: money(c.amount, x.currency) }))); });
+      ul.appendChild(h('li', { class: 'rc-scope-item lv-tot' }, h('span', { class: 'rc-sc-name', text: 'Total' }), h('span', { class: 'lv-amt', text: money(x.total_price, x.currency) })));
+    } else {
+      ul.appendChild(h('li', { class: 'rc-scope-item' }, h('span', { class: 'rc-sc-name', text: x ? 'This provider did not return a charge breakdown.' : 'No price, so there are no charges to show.' })));
     }
-    if (x.source) box.appendChild(h('p', { class: 'lv-src', text: 'Source: ' + x.source }));
-    return box;
+
+    var from = q('#d-from'); from.replaceChildren();
+    var fromP = [];
+    if (x && x.notes) fromP.push(x.notes);
+    if (res.message) fromP.push(res.message);
+    if (!fromP.length) fromP.push(x ? 'No notes with this quote.' : 'No message from this provider.');
+    fromP.forEach(function (t) { from.appendChild(h('p', { text: t })); });
+    if (res.error) from.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Technical detail' }), h('p', { text: res.error })));
+
+    var acc = q('#d-access'); acc.replaceChildren();
+    acc.appendChild(h('p', { text: n ? n.quote_access : (res.status === 'pending' ? 'This provider has no instant price. Use the link below to request one.' : 'Prices come from the comparison service. Confirm with the provider before quoting a customer.') }));
+    var url = res.action_url ? safeUrl(res.action_url) : null;
+    if (url) acc.appendChild(h('a', { class: 'lv-link', href: url, target: '_blank', rel: 'noopener noreferrer', text: (res.status === 'pending' ? 'Request quote on ' : 'Open ') + r.provider }));
+    var wo = q('#d-watch'); wo.replaceChildren();
+    wo.appendChild(h('p', { text: n ? n.watch_out : 'Check the valid-until date, and whether the price is binding, before you rely on it.' }));
   }
 
+  /* ---------- actions ---------- */
   function exportCsv() {
-    if (!LAST) return;
+    if (!R) return;
     var esc = function (v) { var s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
     var head = ['Provider', 'Status', 'Service', 'Total price', 'Currency', 'Transit days min', 'Transit days max', 'Valid until', 'Simulated', 'Source', 'Charges', 'Notes', 'Message'];
     var lines = [head.join(',')];
-    (LAST.resp.results || []).forEach(function (res) {
-      var qs = res.quotes || [];
-      if (!qs.length) { lines.push([res.provider, res.status, '', '', '', '', '', '', '', '', '', '', res.message || res.error || ''].map(esc).join(',')); return; }
-      qs.forEach(function (x) {
-        lines.push([res.provider, res.status, x.service_name, x.total_price, x.currency, x.transit_days_min, x.transit_days_max, x.valid_until,
-          x.is_simulated ? 'yes' : 'no', x.source, (x.charges || []).map(function (c) { return c.name + ' ' + c.amount; }).join('; '), x.notes, res.message || ''].map(esc).join(','));
-      });
+    R.rows.forEach(function (r) {
+      var x = r.quote;
+      lines.push([r.provider, r.res.status, x && x.service_name, x && x.total_price, x && x.currency, x && x.transit_days_min, x && x.transit_days_max, x && x.valid_until,
+        x ? (x.is_simulated ? 'yes' : 'no') : '', x && x.source, x ? (x.charges || []).map(function (c) { return c.name + ' ' + c.amount; }).join('; ') : '', x && x.notes, r.res.message || r.res.error || ''].map(esc).join(','));
     });
-    var b = LAST.resp.request || {};
-    var name = 'quotes-' + (S.from || 'from') + '-' + (S.to || 'to') + '-' + S.mode + '.csv';
     var blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
-    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'quotes-' + S.from + '-' + S.to + '-' + S.mode + '.csv';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
-
+  function selectRow(id) {
+    UI.sel = id; repaint();
+    var d = q('#detail');
+    if (d) d.scrollIntoView({ behavior: smooth(), block: 'nearest' });
+  }
+  function repaint() {
+    if (!R) return;
+    var c = {}, n = 0; R.rows.forEach(function (r) { if (r.quote && !c[r.quote.currency]) { c[r.quote.currency] = 1; n++; } });
+    var same1 = n <= 1;
+    paintControls(same1); paintTable(same1);
+  }
   function runExample() {
     S.mode = 'fcl'; S.from = 'INNSA'; S.to = 'USLAX'; S.weight = '18000'; S.ctype = '40HC'; S.ccount = '1';
     S.len = ''; S.wid = ''; S.hei = ''; S.pkgs = '1'; S.cargo = 'general'; S.ready = ''; S.goods = '';
@@ -1035,18 +1255,34 @@ body{min-height:100vh}
   root.addEventListener('click', function (e) {
     var o = e.target.closest('li.rc-opt');
     if (o) { choose(o.dataset.code); return; }
+    var row = e.target.closest('#rows tr[data-key]');
+    if (row && !e.target.closest('a')) { selectRow(row.dataset.key); return; }
     var b = e.target.closest('[data-act]');
     if (!b) return;
     var a = b.dataset.act, v = b.dataset.v;
     if (a === 'pick') { if (openEnd === v) closePicker(true); else openPicker(v); }
+    else if (a === 'cargo') { if (cargoOpen) closeCargo(true); else openCargo(); }
+    else if (a === 'cargo-done') closeCargo(true);
     else if (a === 'mode') setMode(v);
-    else if (a === 'swap') { var t = S.from; S.from = S.to; S.to = t; clearLocErrors(); paintPlaces(); }
+    else if (a === 'swap') { var t = S.from; S.from = S.to; S.to = t; paintPlaces(); }
     else if (a === 'search') search();
     else if (a === 'example') runExample();
-    else if (a === 'chip') { if (F.hide.has(v)) F.hide.delete(v); else F.hide.add(v); b.setAttribute('aria-pressed', String(!F.hide.has(v))); renderCards(); }
+    else if (a === 'chip') { if (UI.hide.has(v)) UI.hide.delete(v); else UI.hide.add(v); repaint(); }
+    else if (a === 'sort') { if (UI.sort === v) UI.dir = UI.dir === 'asc' ? 'desc' : 'asc'; else { UI.sort = v; UI.dir = 'asc'; } repaint(); }
+    else if (a === 'dir') { UI.dir = UI.dir === 'asc' ? 'desc' : 'asc'; repaint(); }
+    else if (a === 'reset') { UI.hide = new Set(); UI.pricedOnly = false; UI.sort = 'api'; UI.dir = 'asc'; repaint(); }
     else if (a === 'csv') exportCsv();
   });
-  document.addEventListener('click', function (e) { if (openEnd && !e.target.closest('.rc-pick')) closePicker(); });
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && cargoOpen) { closeCargo(true); return; }
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var row = e.target.closest && e.target.closest('#rows tr[data-key]');
+    if (row && e.target === row) { e.preventDefault(); selectRow(row.dataset.key); }
+  });
+  document.addEventListener('click', function (e) {
+    if (openEnd && !e.target.closest('.rc-pick')) closePicker();
+    if (cargoOpen && !e.target.closest('#field-cargo') && !e.target.closest('[data-act="search"]')) closeCargo();
+  });
   qa('.rc-pick').forEach(function (pick) {
     var inp = q('.rc-find', pick);
     q('.rc-list', pick).addEventListener('mousedown', function (e) { e.preventDefault(); });
@@ -1064,11 +1300,14 @@ body{min-height:100vh}
       var f = el.closest('.lv-f');
       if (f) { f.classList.remove('has-err'); var er = q('[data-err]', f); if (er) { er.hidden = true; er.textContent = ''; } }
       el.removeAttribute('aria-invalid');
+      pullFromForm(); paintCargo();
     });
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && el.tagName === 'INPUT') { e.preventDefault(); search(); } });
   });
+  q('#sortby').addEventListener('change', function (e) { UI.sort = e.target.value; UI.dir = 'asc'; repaint(); });
+  q('#rated').addEventListener('change', function (e) { UI.pricedOnly = e.target.checked; repaint(); });
 
-  pushToForm(); paintMode(); paintPlaces(); renderIdle();
+  pushToForm(); paintMode(); paintPlaces(); showIdle();
 })();
 </script>
 </div>
