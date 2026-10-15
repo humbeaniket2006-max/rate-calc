@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Freight rate check (live)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --cds-font-size-caption:.8125rem;
+  --cds-font-size-body:1rem;
+  --cds-dur-slow:200ms;
+  --cds-ease-out:cubic-bezier(.16,1,.3,1);
+  --color-bad:#b3261e;
+}
+html,body{margin:0;background:#f2f2fe}
+body{min-height:100vh}
+.dash-skeleton{background:#ece8fb;border-radius:24px}
+</style>
+</head>
+<body>
+<script type="application/json" id="data-places">[{"code":"INNSA","name":"Nhava Sheva (JNPT)","country":"India","region":"India","kind":"port","city":"mumbai","iso2":"IN","api_city":null},{"code":"INMUN","name":"Mundra","country":"India","region":"India","kind":"port","city":"ahmedabad","iso2":"IN","api_city":null},{"code":"INHZR","name":"Hazira","country":"India","region":"India","kind":"port","city":"surat","iso2":"IN","api_city":null},{"code":"INTKD","name":"Tughlakabad ICD, Delhi","country":"India","region":"India","kind":"port","city":"delhi","iso2":"IN","api_city":null},{"code":"INMAA","name":"Chennai","country":"India","region":"India","kind":"port","city":"chennai","iso2":"IN","api_city":null},{"code":"INCOK","name":"Cochin","country":"India","region":"India","kind":"port","city":"kochi","iso2":"IN","api_city":null},{"code":"DEL","name":"Delhi","country":"India","region":"India","kind":"airport","city":"delhi","iso2":"IN","api_city":"Delhi"},{"code":"BOM","name":"Mumbai","country":"India","region":"India","kind":"airport","city":"mumbai","iso2":"IN","api_city":"Mumbai"},{"code":"MAA","name":"Chennai","country":"India","region":"India","kind":"airport","city":"chennai","iso2":"IN","api_city":"Chennai"},{"code":"BLR","name":"Bengaluru","country":"India","region":"India","kind":"airport","city":"bengaluru","iso2":"IN","api_city":"Bengaluru"},{"code":"AMD","name":"Ahmedabad","country":"India","region":"India","kind":"airport","city":"ahmedabad","iso2":"IN","api_city":"Ahmedabad"},{"code":"COK","name":"Kochi","country":"India","region":"India","kind":"airport","city":"kochi","iso2":"IN","api_city":"Kochi"},{"code":"AEJEA","name":"Jebel Ali","country":"UAE","region":"Middle East","kind":"port","city":"dubai","iso2":"AE","api_city":null},{"code":"OMSLL","name":"Salalah","country":"Oman","region":"Middle East","kind":"port","city":"salalah","iso2":"OM","api_city":null},{"code":"OMSOH","name":"Sohar","country":"Oman","region":"Middle East","kind":"port","city":"sohar","iso2":"OM","api_city":null},{"code":"SADMM","name":"Dammam","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"dammam","iso2":"SA","api_city":null},{"code":"SAJED","name":"Jeddah","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"jeddah","iso2":"SA","api_city":null},{"code":"SARUH","name":"Riyadh (dry port)","country":"Saudi Arabia","region":"Middle East","kind":"port","city":"riyadh","iso2":"SA","api_city":null},{"code":"QAHMD","name":"Hamad, Doha","country":"Qatar","region":"Middle East","kind":"port","city":"doha","iso2":"QA","api_city":null},{"code":"KWSWK","name":"Shuwaikh, Kuwait","country":"Kuwait","region":"Middle East","kind":"port","city":"kuwait","iso2":"KW","api_city":null},{"code":"DXB","name":"Dubai","country":"UAE","region":"Middle East","kind":"airport","city":"dubai","iso2":"AE","api_city":"Dubai"},{"code":"AUH","name":"Abu Dhabi","country":"UAE","region":"Middle East","kind":"airport","city":"abudhabi","iso2":"AE","api_city":"Abu Dhabi"},{"code":"DOH","name":"Doha","country":"Qatar","region":"Middle East","kind":"airport","city":"doha","iso2":"QA","api_city":"Doha"},{"code":"RUH","name":"Riyadh","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"riyadh","iso2":"SA","api_city":"Riyadh"},{"code":"JED","name":"Jeddah","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"jeddah","iso2":"SA","api_city":"Jeddah"},{"code":"DMM","name":"Dammam","country":"Saudi Arabia","region":"Middle East","kind":"airport","city":"dammam","iso2":"SA","api_city":"Dammam"},{"code":"KWI","name":"Kuwait City","country":"Kuwait","region":"Middle East","kind":"airport","city":"kuwait","iso2":"KW","api_city":"Kuwait City"},{"code":"MCT","name":"Muscat","country":"Oman","region":"Middle East","kind":"airport","city":"muscat","iso2":"OM","api_city":"Muscat"},{"code":"SGSIN","name":"Singapore","country":"Singapore","region":"Southeast Asia","kind":"port","city":"singapore","iso2":"SG","api_city":null},{"code":"MYPKG","name":"Port Klang","country":"Malaysia","region":"Southeast Asia","kind":"port","city":"kualalumpur","iso2":"MY","api_city":null},{"code":"MYTPP","name":"Tanjung Pelepas","country":"Malaysia","region":"Southeast Asia","kind":"port","city":"johor","iso2":"MY","api_city":null},{"code":"THLCH","name":"Laem Chabang","country":"Thailand","region":"Southeast Asia","kind":"port","city":"bangkok","iso2":"TH","api_city":null},{"code":"VNSGN","name":"Ho Chi Minh City","country":"Vietnam","region":"Southeast Asia","kind":"port","city":"hochiminh","iso2":"VN","api_city":null},{"code":"VNHPH","name":"Hai Phong","country":"Vietnam","region":"Southeast Asia","kind":"port","city":"hanoi","iso2":"VN","api_city":null},{"code":"IDJKT","name":"Jakarta","country":"Indonesia","region":"Southeast Asia","kind":"port","city":"jakarta","iso2":"ID","api_city":null},{"code":"PHMNL","name":"Manila","country":"Philippines","region":"Southeast Asia","kind":"port","city":"manila","iso2":"PH","api_city":null},{"code":"SIN","name":"Singapore","country":"Singapore","region":"Southeast Asia","kind":"airport","city":"singapore","iso2":"SG","api_city":"Singapore"},{"code":"KUL","name":"Kuala Lumpur","country":"Malaysia","region":"Southeast Asia","kind":"airport","city":"kualalumpur","iso2":"MY","api_city":"Kuala Lumpur"},{"code":"BKK","name":"Bangkok","country":"Thailand","region":"Southeast Asia","kind":"airport","city":"bangkok","iso2":"TH","api_city":"Bangkok"},{"code":"SGN","name":"Ho Chi Minh City","country":"Vietnam","region":"Southeast Asia","kind":"airport","city":"hochiminh","iso2":"VN","api_city":"Ho Chi Minh City"},{"code":"HAN","name":"Hanoi","country":"Vietnam","region":"Southeast Asia","kind":"airport","city":"hanoi","iso2":"VN","api_city":"Hanoi"},{"code":"CGK","name":"Jakarta","country":"Indonesia","region":"Southeast Asia","kind":"airport","city":"jakarta","iso2":"ID","api_city":"Jakarta"},{"code":"MNL","name":"Manila","country":"Philippines","region":"Southeast Asia","kind":"airport","city":"manila","iso2":"PH","api_city":"Manila"},{"code":"CNSHA","name":"Shanghai","country":"China","region":"China","kind":"port","city":"shanghai","iso2":"CN","api_city":null},{"code":"CNNGB","name":"Ningbo","country":"China","region":"China","kind":"port","city":"ningbo","iso2":"CN","api_city":null},{"code":"CNSHK","name":"Shekou, Shenzhen","country":"China","region":"China","kind":"port","city":"shenzhen","iso2":"CN","api_city":null},{"code":"CNTAO","name":"Qingdao","country":"China","region":"China","kind":"port","city":"qingdao","iso2":"CN","api_city":null},{"code":"CNXMN","name":"Xiamen","country":"China","region":"China","kind":"port","city":"xiamen","iso2":"CN","api_city":null},{"code":"PVG","name":"Shanghai Pudong","country":"China","region":"China","kind":"airport","city":"shanghai","iso2":"CN","api_city":"Shanghai"},{"code":"CAN","name":"Guangzhou","country":"China","region":"China","kind":"airport","city":"guangzhou","iso2":"CN","api_city":"Guangzhou"},{"code":"SZX","name":"Shenzhen","country":"China","region":"China","kind":"airport","city":"shenzhen","iso2":"CN","api_city":"Shenzhen"},{"code":"PEK","name":"Beijing","country":"China","region":"China","kind":"airport","city":"beijing","iso2":"CN","api_city":"Beijing"},{"code":"NLRTM","name":"Rotterdam","country":"Netherlands","region":"Europe","kind":"port","city":"rotterdam","iso2":"NL","api_city":null},{"code":"DEHAM","name":"Hamburg","country":"Germany","region":"Europe","kind":"port","city":"hamburg","iso2":"DE","api_city":null},{"code":"GBFXT","name":"Felixstowe","country":"United Kingdom","region":"Europe","kind":"port","city":"felixstowe","iso2":"GB","api_city":null},{"code":"BEANR","name":"Antwerp","country":"Belgium","region":"Europe","kind":"port","city":"antwerp","iso2":"BE","api_city":null},{"code":"LHR","name":"London Heathrow","country":"United Kingdom","region":"Europe","kind":"airport","city":"london","iso2":"GB","api_city":"London"},{"code":"FRA","name":"Frankfurt","country":"Germany","region":"Europe","kind":"airport","city":"frankfurt","iso2":"DE","api_city":"Frankfurt"},{"code":"AMS","name":"Amsterdam","country":"Netherlands","region":"Europe","kind":"airport","city":"amsterdam","iso2":"NL","api_city":"Amsterdam"},{"code":"CDG","name":"Paris","country":"France","region":"Europe","kind":"airport","city":"paris","iso2":"FR","api_city":"Paris"},{"code":"USNYC","name":"New York / Newark","country":"United States","region":"North America","kind":"port","city":"newyork","iso2":"US","api_city":null},{"code":"USORF","name":"Norfolk","country":"United States","region":"North America","kind":"port","city":"norfolk","iso2":"US","api_city":null},{"code":"USCHS","name":"Charleston","country":"United States","region":"North America","kind":"port","city":"charleston","iso2":"US","api_city":null},{"code":"USSAV","name":"Savannah","country":"United States","region":"North America","kind":"port","city":"savannah","iso2":"US","api_city":null},{"code":"USHOU","name":"Houston","country":"United States","region":"North America","kind":"port","city":"houston","iso2":"US","api_city":null},{"code":"USOAK","name":"Oakland","country":"United States","region":"North America","kind":"port","city":"sanfrancisco","iso2":"US","api_city":null},{"code":"USLAX","name":"Los Angeles / Long Beach","country":"United States","region":"North America","kind":"port","city":"losangeles","iso2":"US","api_city":null},{"code":"JFK","name":"New York JFK","country":"United States","region":"North America","kind":"airport","city":"newyork","iso2":"US","api_city":"New York"},{"code":"ORD","name":"Chicago O'Hare","country":"United States","region":"North America","kind":"airport","city":"chicago","iso2":"US","api_city":"Chicago"},{"code":"IAH","name":"Houston","country":"United States","region":"North America","kind":"airport","city":"houston","iso2":"US","api_city":"Houston"},{"code":"LAX","name":"Los Angeles","country":"United States","region":"North America","kind":"airport","city":"losangeles","iso2":"US","api_city":"Los Angeles"},{"code":"SFO","name":"San Francisco","country":"United States","region":"North America","kind":"airport","city":"sanfrancisco","iso2":"US","api_city":"San Francisco"},{"code":"DFW","name":"Dallas / Fort Worth","country":"United States","region":"North America","kind":"airport","city":"dallas","iso2":"US","api_city":"Dallas"},{"code":"MACAS","name":"Casablanca","country":"Morocco","region":"Africa","kind":"port","city":"casablanca","iso2":"MA","api_city":null},{"code":"KEMBA","name":"Mombasa","country":"Kenya","region":"Africa","kind":"port","city":"mombasa","iso2":"KE","api_city":null},{"code":"ZADUR","name":"Durban","country":"South Africa","region":"Africa","kind":"port","city":"durban","iso2":"ZA","api_city":null},{"code":"TZDAR","name":"Dar es Salaam","country":"Tanzania","region":"Africa","kind":"port","city":"daressalaam","iso2":"TZ","api_city":null},{"code":"CMN","name":"Casablanca","country":"Morocco","region":"Africa","kind":"airport","city":"casablanca","iso2":"MA","api_city":"Casablanca"},{"code":"NBO","name":"Nairobi","country":"Kenya","region":"Africa","kind":"airport","city":"nairobi","iso2":"KE","api_city":"Nairobi"},{"code":"JNB","name":"Johannesburg","country":"South Africa","region":"Africa","kind":"airport","city":"johannesburg","iso2":"ZA","api_city":"Johannesburg"},{"code":"LOS","name":"Lagos","country":"Nigeria","region":"Africa","kind":"airport","city":"lagos","iso2":"NG","api_city":"Lagos"}]</script>
+<script type="application/json" id="data-notes">[{"platform":"Intoglo","model":"Specialist forwarder","booking":"Monthly port plan on fixed lanes","modes":"Ocean FCL only. India to USA from Nhava Sheva and Mundra","quote_access":"Ask the sales team. They check whether your lane is active this month, then quote the confirmed sailing.","includes":"All-in rate for the monthly sailing. The document flags that drayage and customs inclusion is unclear.","includes_short":"Unclear","watch_out":"The lane must be active this month. Cargo has to reach the CFS 3 days before the booking cut-off or it rolls to next month.","contact":"Sales team callback. Support in India and US time zones."},{"platform":"Xhipment","model":"Digital forwarder","booking":"On-demand: request for quote, then quote, then book","modes":"FCL, LCL (own weekly service), air, trucking, drayage, customs, warehousing","quote_access":"Send a request for quote on the platform: mode, Incoterm, container, stuffing, customs flags, cargo ready date.","includes":"All-in pricing shown on the quotations dashboard, with an expiry date.","includes_short":"All-in","watch_out":"The request form is heavier than competitors' for first-time users. LCL booking confirmation can stay pending for a while.","contact":"Named account manager with a WhatsApp direct line. Meetings can be self-scheduled on the platform."},{"platform":"FreightMango","model":"Marketplace","booking":"On-demand, 30-second booking","modes":"FCL, LCL, air, road. 20 ft and 40 ft, with high cube on active lanes","quote_access":"Self-serve. Enter origin, destination and date to compare 5+ carriers in one view.","includes":"All-in rates shown for each carrier.","includes_short":"All-in","watch_out":"Rates stay valid only 24 to 48 hours. Surcharges can show up late, and carrier confirmation can delay the 30-second booking.","contact":"No human touchpoint before booking. Thin operations team after booking."},{"platform":"Agraga","model":"Full-stack platform","booking":"On-demand, with finance built into the booking","modes":"Ocean FCL and LCL, air, rail, road, warehousing. India and about 40 geographies","quote_access":"Register and complete KYC first. Common lanes (India to USA, India to UAE) show real-time rates.","includes":"Freight, plus optional services you toggle on: insurance, customs, stuffing.","includes_short":"Freight + options","watch_out":"On niche or reverse lanes (for example China to India) there is no real-time rate. The customer is asked to submit an enquiry and wait for a call back.","contact":"Sales consultant assigned after registration. Specialists for customs, finance, insurance, warehousing and trade advisory."},{"platform":"Flexport","model":"Licensed forwarder and technology platform","booking":"Demo, then account setup, then on-demand","modes":"Ocean, air, trucking, fulfilment, customs brokerage. USA-centric, global","quote_access":"Book a demo. Pricing is not public, so there is no rate to check without an account.","includes":"Not published.","includes_short":"Not published","watch_out":"Onboarding for multi-lane accounts can take weeks. Fulfilment minimum fees have been rising for small shippers.","contact":"Account executive, positioned as a supply chain advisor, after the demo."},{"platform":"SeaRates","model":"Tools and marketplace","booking":"On-demand, with API booking","modes":"Ocean FCL and LCL, air, road, rail, bulk, dangerous goods. Fully global","quote_access":"Use the online tools, many of which need no login. Pick a carrier quote in the marketplace.","includes":"Carrier quotes. What is covered varies by carrier integration.","includes_short":"Varies by carrier","watch_out":"Rate accuracy varies, and some carrier integrations are less real-time than others.","contact":"Self-serve. API and ERP for forwarders and larger shippers. Support responsiveness is a noted gap."},{"platform":"Freightos","model":"Vendor-neutral marketplace","booking":"Instant quote, then online booking","modes":"Ocean FCL and LCL, air, trucking. Fully global, 79 carriers","quote_access":"Get an instant quote online with no sales call. It is shown next to the FBX index for context.","includes":"Quoted price. Users report that hidden fees are not always in the first quote.","includes_short":"Fees may be extra","watch_out":"Post-booking disputes can be slow, with different people answering each email. Check the final fee list before comparing.","contact":"The forwarder you pick runs the shipment. Freightos does not operate freight."}]</script>
+<div class="rc" id="rc">
+<style>
+
+.rc{
+  /* Brand palette (sampled from the supplied screenshot) */
+  --rc-bg:#f2f2fe;
+  --rc-card:#ffffff;
+  --rc-ink:#26124b;
+  --rc-primary:#4b248f;
+  --rc-mute:#6e5f8e;
+  --rc-gold:#ffd73f;
+  --rc-tint:#ece8fb;
+  --rc-line:#e3def5;
+  --rc-bar:#cfc4ee;
+  /* Cafe spacing scale: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 */
+  --s-1:2px;--s-2:4px;--s-3:8px;--s-4:12px;--s-5:16px;--s-6:24px;--s-7:32px;--s-8:48px;
+  --r-lg:24px;--r-md:16px;--r-sm:12px;
+  --rc-soft:0 8px 24px -12px rgba(75,36,143,.16);
+  --rc-font:"Poppins","Plus Jakarta Sans","Manrope",var(--font-anthropic-sans),system-ui,sans-serif;
+
+  container-name:rc;
+  container-type:inline-size;
+  display:block;
+  max-width:74rem;
+  margin-inline:auto;
+  background:var(--rc-bg);
+  color:var(--rc-ink);
+  color-scheme:light;
+  font-family:var(--rc-font);
+  font-size:var(--cds-font-size-body);
+  line-height:1.5;
+}
+.rc-wrap{padding:var(--s-5) var(--s-5) var(--s-8)}
+@container rc (min-width:700px){.rc-wrap{padding:var(--s-7) var(--s-7) var(--s-8)}}
+@container rc (min-width:1000px){.rc-wrap{padding:var(--s-8) var(--s-8) var(--s-8)}}
+
+.rc [hidden]{display:none!important}
+.rc button{font:inherit;color:inherit;cursor:pointer}
+.rc :focus-visible{outline:2px solid var(--rc-primary);outline-offset:2px}
+
+/* heading block */
+.rc-head{display:block}
+.rc-badge{
+  display:inline-flex;align-items:center;gap:var(--s-3);margin:0 0 var(--s-5);padding:var(--s-3) var(--s-5);
+  background:var(--rc-card);border:1px solid var(--rc-line);border-radius:999px;
+  font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-primary);
+}
+.rc-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rc-primary)}
+.rc-title{margin:0;max-width:20ch;font-weight:700;font-size:clamp(2rem,7cqw,3.75rem);line-height:1.05;letter-spacing:-.035em}
+.rc-lede{margin:var(--s-5) 0 0;max-width:44rem;font-size:1.05rem;line-height:1.6}
+
+/* tabs */
+.rc-toprow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-4) var(--s-6);margin-top:var(--s-7)}
+.rc-modes,.rc-views{display:flex;gap:var(--s-2);padding:var(--s-2);background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-md);box-shadow:var(--rc-soft)}
+.rc-mode,.rc-view{
+  display:inline-flex;align-items:center;gap:var(--s-3);min-height:44px;padding:var(--s-3) var(--s-5);
+  background:none;border:0;border-radius:var(--r-sm);color:var(--rc-mute);font-weight:600;
+}
+.rc-mode{font-size:.9rem;letter-spacing:.06em;text-transform:uppercase}
+.rc-view{font-size:.9rem}
+.rc-mode svg{flex:0 0 auto}
+.rc-mode:hover,.rc-view:hover{color:var(--rc-ink)}
+.rc-mode[aria-pressed="true"],.rc-view[aria-pressed="true"]{background:var(--rc-bg);color:var(--rc-primary)}
+
+/* search bar */
+.rc-search{display:flex;align-items:stretch;margin-top:var(--s-5);background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+.rc-field{position:relative;display:flex;flex-direction:column;justify-content:center;gap:var(--s-3);flex:1 1 0;min-width:0;padding:var(--s-5) var(--s-6)}
+.rc-search>.rc-field+.rc-field{border-left:1px solid var(--rc-line)}
+.rc-flabel{display:flex;align-items:center;gap:var(--s-3);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-ink)}
+.rc-flabel svg{color:var(--rc-primary)}
+.rc-place{display:block;width:100%;padding:0;background:none;border:0;text-align:left}
+.rc-place-name{display:block;font-size:1.1rem;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-place-meta{display:block;margin-top:var(--s-1);font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.rc-code{font-weight:600;color:var(--rc-primary)}
+.rc-place:hover .rc-place-name{color:var(--rc-primary)}
+
+.rc-swap{
+  position:absolute;z-index:5;top:50%;right:-20px;transform:translateY(-50%);
+  display:grid;place-items:center;width:40px;height:40px;padding:0;
+  background:var(--rc-card);color:var(--rc-primary);border:1px solid var(--rc-line);border-radius:50%;box-shadow:var(--rc-soft);
+}
+.rc-swap:hover{background:var(--rc-bg)}
+
+.rc-size{flex:0 0 14rem}
+.rc-size select{
+  width:100%;padding:0 var(--s-6) 0 0;background:transparent;color:var(--rc-ink);border:0;font:inherit;font-size:1.1rem;font-weight:600;
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' fill='none' stroke='%236e5f8e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;background-position:right center;
+}
+.rc-cta{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:var(--s-4);margin:var(--s-4);padding:0 var(--s-7);min-height:56px;
+  background:var(--rc-primary);color:#fff;border:0;border-radius:var(--r-md);font-weight:600;font-size:1.05rem;
+}
+.rc-cta:hover{background:#3b1b73}
+.rc-cta:active{transform:translateY(1px)}
+
+@container rc (max-width:900px){
+  .rc-search{flex-direction:column}
+  .rc-search>.rc-field+.rc-field{border-left:0;border-top:1px solid var(--rc-line)}
+  .rc-size{flex:1 1 auto}
+  .rc-swap{top:auto;bottom:-20px;right:var(--s-6);transform:none}
+  .rc-cta{justify-content:center;margin:var(--s-4)}
+}
+
+/* picker */
+.rc-panel{
+  position:absolute;z-index:30;top:calc(100% + var(--s-3));left:0;width:min(23rem,calc(100cqw - 2rem));
+  background:var(--rc-card);color:var(--rc-ink);border:1px solid var(--rc-line);border-radius:var(--r-md);padding:var(--s-3);
+  box-shadow:0 20px 40px -16px rgba(38,18,75,.3);
+  font-size:var(--cds-font-size-body);font-weight:500;letter-spacing:0;text-transform:none;line-height:1.4;
+}
+.rc-find{width:100%;box-sizing:border-box;padding:var(--s-4) var(--s-5);background:var(--rc-bg);color:var(--rc-ink);border:0;border-radius:var(--r-sm);font:inherit}
+.rc-find::placeholder{color:var(--rc-mute)}
+.rc-list{list-style:none;margin:var(--s-3) 0 0;padding:0;max-height:18rem;overflow:auto}
+.rc-grp{padding:var(--s-4) var(--s-4) var(--s-2);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-mute)}
+.rc-opt{display:flex;justify-content:space-between;gap:var(--s-5);padding:var(--s-4);border-radius:var(--s-3);cursor:pointer}
+.rc-opt:hover{background:var(--rc-bg)}
+.rc-opt[aria-selected="true"]{background:var(--rc-tint)}
+.rc-opt .rc-oc{color:var(--rc-mute);white-space:nowrap;font-weight:600}
+.rc-opt.is-cur .rc-on{font-weight:700;color:var(--rc-primary)}
+.rc-none{padding:var(--s-5) var(--s-4);color:var(--rc-mute)}
+
+/* read-out */
+.rc-read{margin-top:var(--s-7)}
+.rc-take{margin:0 0 var(--s-5);font-size:clamp(1.15rem,3.6cqw,1.5rem);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.rc-take-name{color:var(--rc-primary);font-weight:700}
+.rc-figs{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:1px;margin:0;
+  background:var(--rc-line);border:1px solid var(--rc-line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--rc-soft);
+}
+.rc-fig{background:var(--rc-card);padding:var(--s-6)}
+.rc-fig dt{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-mute)}
+.rc-fig dd{margin:0}
+.rc-big{margin-top:var(--s-3)!important;font-weight:700;font-size:clamp(1.6rem,5cqw,2.25rem);line-height:1.1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.rc-fig:nth-child(1) .rc-big{color:var(--rc-primary)}
+.rc-sub{min-height:1.5em;margin-top:var(--s-2)!important;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.rc-unit{font-size:var(--cds-font-size-caption);font-weight:500;letter-spacing:0;color:var(--rc-mute)}
+
+/* toolbar */
+.rc-results{margin-top:var(--s-8)}
+.rc-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4) var(--s-6)}
+.rc-chips{display:flex;flex-wrap:wrap;gap:var(--s-3)}
+.rc-chip{
+  min-height:44px;padding:var(--s-3) var(--s-5);background:var(--rc-card);color:var(--rc-mute);
+  border:1px solid var(--rc-line);border-radius:var(--r-sm);font-size:var(--cds-font-size-caption);font-weight:600;
+}
+.rc-chip:hover{color:var(--rc-ink)}
+.rc-chip[aria-pressed="true"]{background:var(--rc-tint);color:var(--rc-primary);border-color:var(--rc-primary)}
+.rc-tools{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4) var(--s-6);margin-left:auto}
+.rc-check{display:flex;align-items:center;gap:var(--s-3);font-size:var(--cds-font-size-caption);font-weight:500}
+.rc-check input{width:20px;height:20px;accent-color:var(--rc-primary)}
+.rc-sort{display:flex;align-items:center;gap:var(--s-3);font-size:var(--cds-font-size-caption);font-weight:500;color:var(--rc-mute)}
+.rc-sort select{min-height:44px;padding:var(--s-3) var(--s-4);background:var(--rc-card);color:var(--rc-ink);border:1px solid var(--rc-line);border-radius:var(--r-sm);font:inherit;font-weight:600}
+.rc-dirbtn{min-height:44px;padding:var(--s-3) var(--s-4);background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-sm);font-size:var(--cds-font-size-caption);font-weight:600}
+.rc-dirbtn:hover{border-color:var(--rc-primary)}
+.rc-textbtn{padding:var(--s-3) 0;background:none;border:0;border-bottom:2px solid var(--rc-line);font-size:var(--cds-font-size-caption);font-weight:600;color:var(--rc-primary)}
+.rc-textbtn:hover{border-bottom-color:var(--rc-primary)}
+.rc-unitline{margin:var(--s-6) 0 var(--s-3);font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+
+/* table */
+.rc-tablewrap{min-height:8rem;background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-lg);box-shadow:var(--rc-soft);overflow:hidden}
+.rc-table,.rc-table thead,.rc-table tbody{display:block;width:100%;font-variant-numeric:tabular-nums}
+.rc-table{--cols:minmax(10rem,1.6fr) minmax(6.5rem,1.1fr) minmax(7rem,.9fr) minmax(6rem,.9fr) minmax(5.5rem,1fr) minmax(6.5rem,1fr) minmax(5.5rem,.9fr) minmax(5rem,.8fr)}
+.rc-table tr{display:grid;grid-template-columns:var(--cols);column-gap:var(--s-4);align-items:center}
+.rc-table thead tr{padding:var(--s-4) var(--s-6);border-bottom:1px solid var(--rc-line)}
+.rc-table th{text-align:left;font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-mute);min-width:0;line-height:1.3}
+.rc-table th button{text-align:left;padding:var(--s-2) 0;background:none;border:0;color:inherit;font-weight:inherit;letter-spacing:inherit;text-transform:inherit}
+.rc-table th button:hover{color:var(--rc-ink)}
+.rc-table th[aria-sort="ascending"] button::after{content:" \2191"}
+.rc-table th[aria-sort="descending"] button::after{content:" \2193"}
+.rc-table th[aria-sort="ascending"],.rc-table th[aria-sort="descending"]{color:var(--rc-primary)}
+.rc-table tbody tr{padding:var(--s-5) var(--s-6) var(--s-6);border-bottom:1px solid var(--rc-line)}
+.rc-table tbody tr:last-child{border-bottom:0}
+.rc-table tbody tr:hover{background:#faf9ff}
+.rc-table td{padding:0;min-width:0;font-weight:500}
+.rc-table td.c-platform{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-4);font-weight:700;font-size:1.05rem}
+.rc-table td.c-platform::after{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.rc-table tr.is-low td.c-platform::after{content:"Lowest";background:var(--rc-gold);color:var(--rc-ink)}
+.rc-table tr.is-low{background:#fffbe8}
+.rc-table td.c-rate{position:relative;font-weight:700;font-size:1.4rem;letter-spacing:-.03em;line-height:1.1}
+.rc-table td.c-rate::after{content:"";position:absolute;left:0;bottom:-10px;height:4px;border-radius:999px;width:calc(var(--w,0) * 100%);background:var(--rc-bar)}
+.rc-table tr.is-low td.c-rate::after{background:var(--rc-primary)}
+.rc-table tr.is-none td{color:var(--rc-mute)}
+.rc-table tr.is-none td.c-rate{font-size:var(--cds-font-size-body);font-weight:600;letter-spacing:0}
+.rc-table tr.is-none td.c-rate::after{display:none}
+.rc-legend{margin:var(--s-5) 0 0;max-width:46rem;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.rc-empty{margin:var(--s-6) 0;padding:var(--s-6);max-width:40rem;background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-md);color:var(--rc-mute);font-weight:500}
+
+@container rc (max-width:1100px){
+  .rc-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .rc-table tr{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s-2) var(--s-5)}
+  .rc-table tbody tr{padding:var(--s-5)}
+  .rc-table td{display:block}
+  .rc-table td.c-platform{flex:1 1 50%}
+  .rc-table td.c-rate{flex:0 0 auto;margin-left:auto}
+  .rc-table td.c-rate::after{display:none}
+  .rc-table td.c-info,.rc-table td.c-transit,.rc-table td.c-routing,.rc-table td.c-carrier,
+  .rc-table td.c-quote,.rc-table td.c-valid{font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+  .rc-table td.c-info{order:3}
+  .rc-table td.c-info::before{content:"Includes "}
+  .rc-table td.c-transit::after{content:" days"}
+  .rc-table td.c-valid::before{content:"valid to "}
+  .rc-table tr.is-none td.c-transit::after,.rc-table tr.is-none td.c-valid::before{content:""}
+  .rc-tools{margin-left:0}
+}
+
+/* compare */
+.rc-cmphead{margin:var(--s-8) 0 var(--s-3);font-weight:700;font-size:clamp(1.5rem,5cqw,2.2rem);letter-spacing:-.03em;line-height:1.1}
+.rc-cmpnote{margin:0 0 var(--s-5);max-width:46rem;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.rc-matrixwrap{overflow-x:auto;background:var(--rc-card);border:1px solid var(--rc-line);border-radius:var(--r-lg);box-shadow:var(--rc-soft);padding:var(--s-3) var(--s-5) var(--s-5)}
+.rc-matrix{border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:100%}
+.rc-matrix th,.rc-matrix td{padding:var(--s-4) var(--s-5);text-align:left;white-space:nowrap;border-bottom:1px solid var(--rc-line);font-weight:500}
+.rc-matrix thead th{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-mute)}
+.rc-matrix tbody th[scope="row"]{position:sticky;left:0;min-width:11rem;background:var(--rc-card);font-weight:600}
+.rc-matrix .rc-grprow th{position:static;padding-top:var(--s-6);border-bottom:0;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--rc-primary)}
+.rc-go{padding:0;background:none;border:0;text-align:left;font-weight:600;text-decoration:underline;text-decoration-color:var(--rc-line);text-decoration-thickness:2px;text-underline-offset:.2em}
+.rc-go:hover{color:var(--rc-primary);text-decoration-color:var(--rc-primary)}
+.rc-matrix td.is-low{background:var(--rc-tint);color:var(--rc-primary);font-weight:700}
+.rc-matrix td.is-gap{color:var(--rc-mute)}
+.rc-matrix td.is-ask{color:var(--rc-mute);font-size:var(--cds-font-size-caption)}
+
+/* state */
+.rc-state{min-height:12rem;margin-top:var(--s-7);display:flex;align-items:center;justify-content:center;color:var(--rc-mute);font-size:var(--cds-font-size-caption);font-weight:500}
+.rc-state.is-error::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--color-bad);margin-right:var(--s-3)}
+[data-dash-source-state="refreshing"]{opacity:.5}
+
+@media (prefers-reduced-motion:no-preference){
+  .rc-mode,.rc-view,.rc-chip,.rc-cta,.rc-swap,.rc-table tbody tr{transition:background-color .15s ease,color .15s ease,border-color .15s ease}
+  .rc-panel{animation:rc-in var(--cds-dur-slow) var(--cds-ease-out)}
+  @keyframes rc-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+}
+/* selectable rows */
+.rc-table tbody tr{cursor:pointer}
+.rc-table tbody tr.is-sel{background:var(--rc-tint);box-shadow:inset 3px 0 0 var(--rc-primary)}
+.rc-table tbody tr:focus-visible{outline:2px solid var(--rc-primary);outline-offset:-2px}
+
+.rc-take-n{color:var(--rc-primary);font-weight:700}
+.rc-note{margin:var(--s-4) 0 0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+
+/* about this lane */
+.rc-brief{margin-top:var(--s-7);padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+@container rc (min-width:700px){.rc-brief{padding:var(--s-7)}}
+.rc-h2{margin:0 0 var(--s-5);font-weight:700;font-size:clamp(1.3rem,4cqw,1.75rem);letter-spacing:-.03em;line-height:1.15}
+.rc-bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:var(--s-4)}
+.rc-bblock{min-width:0;padding:var(--s-5) var(--s-6);background:var(--rc-bg);border-radius:var(--r-md)}
+.rc-bblock h3,.rc-notes h3,.rc-dscope h3{margin:0 0 var(--s-3);font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.rc-bblock p{margin:0 0 var(--s-3);font-size:1rem;line-height:1.5}
+.rc-bblock p:last-child{margin-bottom:0}
+.rc-bsub{color:var(--rc-mute)}
+.rc-num{font-weight:700;color:var(--rc-primary)}
+.rc-mini{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.rc-mini th,.rc-mini td{padding:var(--s-3) var(--s-3) var(--s-3) 0;text-align:left;font-weight:500;font-size:.95rem}
+.rc-mini thead th{font-size:.85rem;font-weight:600;color:var(--rc-mute)}
+.rc-mini tbody th{font-weight:600}
+.rc-mini td:nth-child(2){font-weight:700}
+.rc-mini tr.is-cur th,.rc-mini tr.is-cur td{color:var(--rc-primary)}
+.rc-notes{margin-top:var(--s-6);padding-top:var(--s-5)}
+.rc-notes p{margin:0 0 var(--s-3);font-size:1rem;line-height:1.55;max-width:60rem}
+.rc-notes strong{font-weight:700}
+
+/* platform details */
+.rc-detail{margin-top:var(--s-8);padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+@container rc (min-width:700px){.rc-detail{padding:var(--s-7)}}
+.rc-dhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s-4) var(--s-6);padding-bottom:var(--s-6)}
+.rc-dname{margin:0;font-weight:700;font-size:clamp(1.6rem,5.5cqw,2.4rem);letter-spacing:-.03em;line-height:1.1}
+.rc-dsub{margin:var(--s-2) 0 0;color:var(--rc-mute)}
+.rc-dprice{text-align:right}
+.rc-dbig{display:block;font-weight:700;font-size:clamp(2rem,7cqw,3.1rem);letter-spacing:-.04em;line-height:1;color:var(--rc-primary);font-variant-numeric:tabular-nums}
+.rc-dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:var(--s-5) var(--s-7);margin:0}
+.rc-dgrid>div{min-width:0}
+.rc-dgrid dt{margin-bottom:var(--s-2);font-size:.9rem;font-weight:600;color:var(--rc-mute)}
+.rc-dgrid dd{margin:0;font-size:1rem;line-height:1.5;color:var(--rc-ink)}
+.rc-dscope{margin-top:var(--s-7)}
+.rc-scope{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:var(--s-3) var(--s-6)}
+.rc-scope-item{display:grid;grid-template-columns:1fr auto;gap:var(--s-1) var(--s-4);align-items:baseline;padding:var(--s-3) 0}
+.rc-sc-name{font-size:1rem;font-weight:500}
+.rc-sc-status{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.85rem;font-weight:600;white-space:nowrap;background:var(--rc-bg);color:var(--rc-mute)}
+.rc-sc-status.s-included{background:var(--rc-tint);color:var(--rc-primary)}
+.rc-sc-status.s-add-on,.rc-sc-status.s-quoted-separately{background:var(--rc-bg);color:var(--rc-ink)}
+.rc-sc-status.s-may-be-extra,.rc-sc-status.s-unclear,.rc-sc-status.s-varies-by-carrier{background:#fff3c2;color:var(--rc-ink)}
+.rc-sc-note{grid-column:1/-1;margin:0;font-size:.9rem;line-height:1.45;color:var(--rc-mute)}
+.rc-dtext{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:var(--s-4);margin-top:var(--s-7)}
+.rc-dtext>div{padding:var(--s-5) var(--s-6);background:var(--rc-bg);border-radius:var(--r-md)}
+.rc-dtext h3{margin:0 0 var(--s-3);font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.rc-dtext p{margin:0;font-size:1rem;line-height:1.6;color:var(--rc-ink)}
+
+
+/* ===== live comparison ===== */
+.rc-badge.is-live::before{background:#2f8f83}
+.lv-fieldrow{margin-top:var(--s-6)}
+.lv-h{margin:0;font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+.lv-hsub{margin:var(--s-1) 0 0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+.lv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:var(--s-4) var(--s-5);margin-top:var(--s-4)}
+.lv-f{display:flex;flex-direction:column;gap:var(--s-2);min-width:0}
+.lv-f>label,.lv-f>.lv-lab{font-size:.85rem;font-weight:600}
+.lv-f input,.lv-f select{
+  width:100%;box-sizing:border-box;min-height:48px;padding:0 var(--s-4);
+  background:var(--rc-card);color:var(--rc-ink);border:1px solid var(--rc-line);border-radius:var(--r-sm);font:inherit;font-weight:500;
+}
+.lv-f input::placeholder{color:var(--rc-mute)}
+.lv-f input:focus,.lv-f select:focus{border-color:var(--rc-primary)}
+.lv-f.has-err input,.lv-f.has-err select{border-color:var(--color-bad)}
+.lv-err{margin:0;font-size:.85rem;font-weight:500;color:var(--color-bad)}
+.lv-dims{grid-column:span 2}
+@container rc (max-width:560px){.lv-dims{grid-column:1/-1}}
+.lv-dimrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-3)}
+.rc-field.has-err{box-shadow:inset 0 0 0 2px var(--color-bad);border-radius:var(--r-lg)}
+.lv-locerr{margin:var(--s-3) 0 0}
+.rc-cta[disabled]{opacity:.6;cursor:progress}
+
+.lv-live{margin-top:var(--s-7)}
+.lv-banner{display:flex;gap:var(--s-4);align-items:flex-start;margin:0 0 var(--s-5);padding:var(--s-4) var(--s-5);background:#fff3c2;border-radius:var(--r-md);font-weight:600}
+.lv-banner::before{content:"";flex:0 0 10px;height:10px;margin-top:.5rem;border-radius:50%;background:var(--rc-ink)}
+.lv-answer{padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+@container rc (min-width:700px){.lv-answer{padding:var(--s-7)}}
+.lv-ahead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s-6) var(--s-8)}
+.lv-take{margin:0 0 var(--s-3);font-size:.95rem;font-weight:500;color:var(--rc-mute)}
+.lv-abig{margin:0;font-weight:700;font-size:clamp(2.5rem,10cqw,4.5rem);line-height:1;letter-spacing:-.05em;color:var(--rc-primary);font-variant-numeric:tabular-nums}
+.lv-abig.lv-none{color:var(--rc-mute)}
+.lv-asub{margin:var(--s-3) 0 0;font-size:1.15rem;font-weight:700}
+.lv-alabel{font-weight:500;color:var(--rc-mute)}
+.lv-anote{margin:var(--s-3) 0 0;max-width:32rem;color:var(--rc-mute)}
+.lv-astats{display:flex;flex-wrap:wrap;gap:var(--s-5) var(--s-7);margin:0}
+.lv-astats dt{margin-bottom:var(--s-1);font-size:.9rem;font-weight:500;color:var(--rc-mute)}
+.lv-astats dd{margin:0}
+.lv-snum{font-weight:700;font-size:1.6rem;letter-spacing:-.03em;line-height:1.15;font-variant-numeric:tabular-nums}
+.lv-ssub{font-size:.9rem;color:var(--rc-mute)}
+.lv-cnote{margin:var(--s-5) 0 0;padding-top:var(--s-4);border-top:1px solid var(--rc-line);color:var(--rc-ink);max-width:56rem}
+
+.lv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-4) var(--s-6);margin-top:var(--s-6)}
+.lv-bar .rc-tools{margin-left:auto}
+.lv-meta2{margin:0;font-size:var(--cds-font-size-caption);color:var(--rc-mute)}
+
+.lv-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr));gap:var(--s-4);margin-top:var(--s-5)}
+.lv-card{display:flex;flex-direction:column;gap:var(--s-4);min-width:0;padding:var(--s-6);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+.lv-card.is-cheapest{box-shadow:var(--rc-soft),inset 0 0 0 3px var(--rc-gold)}
+.lv-chead{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);flex-wrap:wrap}
+.lv-pname{margin:0;font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
+.lv-status{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap;background:var(--rc-bg);color:var(--rc-mute)}
+.lv-status.s-ok{background:var(--rc-tint);color:var(--rc-primary)}
+.lv-status.s-pending{background:#fff3c2;color:var(--rc-ink)}
+.lv-tags{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.lv-tag{padding:var(--s-1) var(--s-4);border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.lv-tag.t-cheapest{background:var(--rc-gold);color:var(--rc-ink)}
+.lv-tag.t-fastest{background:var(--rc-primary);color:#fff}
+.lv-quote{display:flex;flex-direction:column;gap:var(--s-3)}
+.lv-quote+.lv-quote{padding-top:var(--s-4);border-top:1px solid var(--rc-line)}
+.lv-service{margin:0;font-weight:600}
+.lv-pricerow{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3) var(--s-4)}
+.lv-price{font-weight:700;font-size:2rem;line-height:1.1;letter-spacing:-.04em;color:var(--rc-primary);font-variant-numeric:tabular-nums}
+.lv-sim{padding:var(--s-1) var(--s-4);border-radius:var(--s-3);background:#fff3c2;color:var(--rc-ink);font-size:.8rem;font-weight:700}
+.lv-facts{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);margin:0;color:var(--rc-ink);font-weight:500}
+.lv-notes{margin:0;padding:var(--s-3) var(--s-4);background:var(--rc-bg);border-radius:var(--r-sm);line-height:1.5}
+.lv-src{margin:0;font-size:.8rem;color:var(--rc-mute)}
+.lv-msg{margin:0;line-height:1.55}
+.lv-link{display:inline-flex;align-items:center;align-self:flex-start;min-height:44px;padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border-radius:var(--r-md);font-weight:600;text-decoration:none}
+.lv-link:hover{background:#3b1b73}
+.lv-more{margin:0}
+.lv-more summary{cursor:pointer;min-height:32px;font-weight:600;color:var(--rc-primary)}
+.lv-charges{list-style:none;margin:var(--s-3) 0 0;padding:0}
+.lv-charges li{display:flex;justify-content:space-between;gap:var(--s-4);padding:var(--s-2) 0;border-bottom:1px solid var(--rc-line);font-variant-numeric:tabular-nums}
+.lv-charges li:last-child{border-bottom:0}
+.lv-more h4{margin:var(--s-4) 0 var(--s-1);font-size:.9rem}
+.lv-more p{margin:0;line-height:1.55}
+.lv-foot{margin:auto 0 0;font-size:.8rem;color:var(--rc-mute)}
+
+.lv-idle,.lv-fail{padding:var(--s-7);background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
+.lv-idle h2,.lv-fail h2{margin:0 0 var(--s-3);font-size:1.4rem;font-weight:700;letter-spacing:-.03em}
+.lv-idle p,.lv-fail p{margin:0 0 var(--s-5);max-width:40rem;line-height:1.6}
+.lv-btn{min-height:48px;padding:0 var(--s-6);background:var(--rc-primary);color:#fff;border:0;border-radius:var(--r-md);font-weight:600}
+.lv-btn:hover{background:#3b1b73}
+.lv-btn.is-ghost{background:var(--rc-tint);color:var(--rc-primary)}
+.lv-load p{margin:0 0 var(--s-3);font-weight:600}
+.lv-skel{height:11rem;border-radius:var(--r-lg);background:#e8e4f9}
+@media (prefers-reduced-motion:no-preference){
+  .lv-skel{animation:lv-pulse 1.4s ease-in-out infinite}
+  @keyframes lv-pulse{50%{opacity:.55}}
+}
+</style>
+<div class="rc-wrap">
+<header class="rc-head">
+  <p class="rc-badge is-live">Live comparison</p>
+  <h1 class="rc-title" id="rc-title">Compare freight rates across providers</h1>
+  <p class="rc-lede">Choose where the cargo starts and ends, describe the shipment, then search. Every provider answers side by side.</p>
+</header>
+
+<div class="rc-toprow">
+  <nav class="rc-modes" aria-label="Mode">
+    <button class="rc-mode" data-act="mode" data-v="air" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><span>Air</span></button>
+    <button class="rc-mode" data-act="mode" data-v="fcl" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M11 2h2v4h5l1 6-7-2-7 2 1-6h5V2zM2 17l10-3 10 3-2.2 3.2c-.2.3-.5.4-.8.4H5c-.3 0-.6-.1-.8-.4L2 17z"/></svg><span>Sea · FCL</span></button>
+    <button class="rc-mode" data-act="mode" data-v="lcl" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2 3 6.5v11L12 22l9-4.5v-11L12 2zm0 2.2 5.9 2.9L12 10 6.1 7.1 12 4.2zM5 8.7l6 3v8.1l-6-3V8.7zm14 0v8.1l-6 3v-8.1l6-3z"/></svg><span>Sea · LCL</span></button>
+  </nav>
+</div>
+
+<div class="rc-search" role="group" aria-label="Lane search">
+  <div class="rc-field rc-pick" data-end="from" id="field-from">
+    <span class="rc-flabel" id="lbl-from"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Origin</span>
+    <button class="rc-place" data-act="pick" data-v="from" aria-haspopup="listbox" aria-expanded="false" aria-describedby="lbl-from">
+      <span class="rc-place-name">—</span>
+      <span class="rc-place-meta"><span class="rc-code">—</span> <span class="rc-country"></span></span>
+    </button>
+    <div class="rc-panel" hidden>
+      <input type="search" class="rc-find" placeholder="Search" aria-label="Search places" autocomplete="off">
+      <ul class="rc-list" role="listbox" aria-label="Places"></ul>
+    </div>
+    <button class="rc-swap" data-act="swap" aria-label="Swap origin and destination"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 8h14m-4-4 4 4-4 4M20 16H6m4-4-4 4 4 4"/></svg></button>
+  </div>
+  <div class="rc-field rc-pick" data-end="to" id="field-to">
+    <span class="rc-flabel" id="lbl-to"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>Destination</span>
+    <button class="rc-place" data-act="pick" data-v="to" aria-haspopup="listbox" aria-expanded="false" aria-describedby="lbl-to">
+      <span class="rc-place-name">—</span>
+      <span class="rc-place-meta"><span class="rc-code">—</span> <span class="rc-country"></span></span>
+    </button>
+    <div class="rc-panel" hidden>
+      <input type="search" class="rc-find" placeholder="Search" aria-label="Search places" autocomplete="off">
+      <ul class="rc-list" role="listbox" aria-label="Places"></ul>
+    </div>
+  </div>
+  <button class="rc-cta" data-act="search" id="search-btn"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zm9 16-4-4"/></svg><span>Search rates</span></button>
+</div>
+<p class="lv-err lv-locerr" id="loc-err" role="alert" hidden></p>
+
+<section class="lv-fieldrow" aria-label="Shipment details">
+  <h2 class="lv-h">Shipment details</h2>
+  <p class="lv-hsub">Prefilled with an example. Change anything, then search.</p>
+  <div class="lv-grid" id="ship">
+    <div class="lv-f" data-f="weight">
+      <label for="f-weight">Total weight (kg)</label>
+      <input id="f-weight" type="number" inputmode="decimal" min="0" step="any" autocomplete="off" aria-describedby="e-weight">
+      <p class="lv-err" id="e-weight" data-err="weight" hidden></p>
+    </div>
+    <div class="lv-f" data-f="ctype" data-group="fcl">
+      <label for="f-ctype">Container type</label>
+      <select id="f-ctype" aria-describedby="e-ctype">
+        <option value="20GP">20 ft general purpose</option>
+        <option value="40HC">40 ft high cube</option>
+        <option value="20RF">20 ft reefer</option>
+        <option value="40RF">40 ft reefer</option>
+      </select>
+      <p class="lv-err" id="e-ctype" data-err="ctype" hidden></p>
+    </div>
+    <div class="lv-f" data-f="ccount" data-group="fcl">
+      <label for="f-ccount">Number of containers</label>
+      <input id="f-ccount" type="number" inputmode="numeric" min="1" max="50" step="1" aria-describedby="e-ccount">
+      <p class="lv-err" id="e-ccount" data-err="ccount" hidden></p>
+    </div>
+    <div class="lv-f lv-dims" data-f="dims" data-group="dims">
+      <span class="lv-lab" id="lab-dims">Package size (cm): length, width, height</span>
+      <div class="lv-dimrow" role="group" aria-labelledby="lab-dims">
+        <input id="f-len" type="number" inputmode="decimal" min="0" step="any" placeholder="Length" aria-label="Length in cm" aria-describedby="e-dims">
+        <input id="f-wid" type="number" inputmode="decimal" min="0" step="any" placeholder="Width" aria-label="Width in cm" aria-describedby="e-dims">
+        <input id="f-hei" type="number" inputmode="decimal" min="0" step="any" placeholder="Height" aria-label="Height in cm" aria-describedby="e-dims">
+      </div>
+      <p class="lv-err" id="e-dims" data-err="dims" hidden></p>
+    </div>
+    <div class="lv-f" data-f="pkgs">
+      <label for="f-pkgs">Number of packages</label>
+      <input id="f-pkgs" type="number" inputmode="numeric" min="1" step="1" aria-describedby="e-pkgs">
+      <p class="lv-err" id="e-pkgs" data-err="pkgs" hidden></p>
+    </div>
+    <div class="lv-f" data-f="cargo">
+      <label for="f-cargo">Cargo type</label>
+      <select id="f-cargo" aria-describedby="e-cargo">
+        <option value="general">General</option>
+        <option value="fragile">Fragile</option>
+        <option value="perishable">Perishable</option>
+        <option value="hazardous">Hazardous</option>
+        <option value="electronics">Electronics</option>
+      </select>
+      <p class="lv-err" id="e-cargo" data-err="cargo" hidden></p>
+    </div>
+    <div class="lv-f" data-f="ready">
+      <label for="f-ready">Cargo ready date</label>
+      <input id="f-ready" type="date" aria-describedby="e-ready">
+      <p class="lv-err" id="e-ready" data-err="ready" hidden></p>
+    </div>
+    <div class="lv-f" data-f="goods">
+      <label for="f-goods">Goods description</label>
+      <input id="f-goods" type="text" maxlength="200" placeholder="Optional" autocomplete="off" aria-describedby="e-goods">
+      <p class="lv-err" id="e-goods" data-err="goods" hidden></p>
+    </div>
+  </div>
+  <p class="lv-err" id="gen-err" role="alert" hidden></p>
+</section>
+
+<section class="lv-live" id="live" aria-live="polite" aria-busy="false"></section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---- backend: change this one line to point at another environment ---- */
+  var API_BASE = 'https://shipment-comparator-backend.vercel.app';
+  var TIMEOUT_MS = 30000;   /* the handoff asks for at least 15 seconds */
+
+  var root = document.getElementById('rc');
+  var q = function (s, el) { return (el || root).querySelector(s); };
+  var qa = function (s, el) { return Array.prototype.slice.call((el || root).querySelectorAll(s)); };
+
+  var PLACES = JSON.parse(document.getElementById('data-places').textContent);
+  var NOTES = JSON.parse(document.getElementById('data-notes').textContent);
+  var pm = new Map(PLACES.map(function (p) { return [p.code, p]; }));
+
+  var MODES = {
+    air: { api: 'air', kind: 'airport', find: 'Search airports or enter a 5-letter code', dflt: ['DEL', 'DXB'] },
+    fcl: { api: 'sea_fcl', kind: 'port', find: 'Search ports or enter a 5-letter code', dflt: ['INNSA', 'USLAX'] },
+    lcl: { api: 'sea_lcl', kind: 'port', find: 'Search ports or enter a 5-letter code', dflt: ['INNSA', 'USLAX'] }
+  };
+  var MODE_VALUES = {
+    fcl: { weight: '18000', len: '', wid: '', hei: '', pkgs: '1' },
+    lcl: { weight: '1200', len: '120', wid: '100', hei: '110', pkgs: '4' },
+    air: { weight: '500', len: '120', wid: '100', hei: '100', pkgs: '5' }
+  };
+  var REGIONS = ['India', 'Middle East', 'Southeast Asia', 'China', 'Europe', 'North America', 'Africa', 'Other'];
+
+  var S = { mode: 'fcl', from: 'INNSA', to: 'USLAX', weight: '18000', ctype: '40HC', ccount: '1',
+            len: '', wid: '', hei: '', pkgs: '1', cargo: 'general', ready: '', goods: '' };
+  var LAST = null;          /* last successful response */
+  var F = { hide: new Set(), pricedOnly: false };
+  var inflight = null;      /* AbortController of the running request */
+  var slowTimer = null;
+  var openEnd = null, active = 0, optEls = [];
+
+  /* ---------- small helpers ---------- */
+  function h(tag, props) {
+    var e = document.createElement(tag);
+    if (props) Object.keys(props).forEach(function (k) {
+      var v = props[k];
+      if (v == null || v === false) return;
+      if (k === 'class') e.className = v;
+      else if (k === 'text') e.textContent = v;
+      else if (k.indexOf('on') === 0) e.addEventListener(k.slice(2), v);
+      else e.setAttribute(k, v === true ? '' : v);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      var kids = [].concat(arguments[i]);
+      kids.forEach(function (c) {
+        if (c == null || c === false) return;
+        e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+      });
+    }
+    return e;
+  }
+  function money(v, cur) {
+    try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, maximumFractionDigits: v >= 100 ? 0 : 2 }).format(v); }
+    catch (e) { return cur + ' ' + Number(v).toLocaleString('en-US'); }
+  }
+  function unit(n) { return n === 1 ? 'day' : 'days'; }
+  function days(a, b) {
+    if (a == null && b == null) return null;
+    if (a == null) return b + ' ' + unit(b);
+    if (b == null || a === b) return a + ' ' + unit(a);
+    return a + '–' + b + ' days';
+  }
+  function fmtDate(s) {
+    if (!s) return null;
+    var d = new Date(s + 'T00:00:00Z');
+    if (isNaN(d.getTime())) return s;
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+  function same(a, b) {
+    return !!(a && b && a.provider === b.provider && a.mode === b.mode && a.service_name === b.service_name &&
+      a.total_price === b.total_price && a.transit_days_min === b.transit_days_min && a.transit_days_max === b.transit_days_max);
+  }
+  function hasPrice(r) { return r.status === 'ok' && r.quotes && r.quotes.length > 0; }
+  function safeUrl(u) {
+    try { var x = new URL(u, location.href); return (x.protocol === 'https:' || x.protocol === 'http:') ? x.href : null; }
+    catch (e) { return null; }
+  }
+  function notesFor(provider) {
+    var p = String(provider || '').toLowerCase();
+    for (var i = 0; i < NOTES.length; i++) if (p.indexOf(NOTES[i].platform.toLowerCase()) >= 0) return NOTES[i];
+    return null;
+  }
+
+  /* ---------- form state ---------- */
+  var FIELD_IDS = { weight: 'f-weight', ctype: 'f-ctype', ccount: 'f-ccount', len: 'f-len', wid: 'f-wid', hei: 'f-hei', pkgs: 'f-pkgs', cargo: 'f-cargo', ready: 'f-ready', goods: 'f-goods' };
+  function pushToForm() {
+    Object.keys(FIELD_IDS).forEach(function (k) { q('#' + FIELD_IDS[k]).value = S[k]; });
+  }
+  function pullFromForm() {
+    Object.keys(FIELD_IDS).forEach(function (k) { S[k] = q('#' + FIELD_IDS[k]).value; });
+  }
+  function clearErrors() {
+    qa('.lv-f').forEach(function (f) { f.classList.remove('has-err'); });
+    qa('[data-err]').forEach(function (e) { e.hidden = true; e.textContent = ''; });
+    qa('.rc-field').forEach(function (f) { f.classList.remove('has-err'); });
+    ['loc-err', 'gen-err'].forEach(function (id) { var e = q('#' + id); e.hidden = true; e.textContent = ''; });
+    qa('#ship input, #ship select').forEach(function (i) { i.removeAttribute('aria-invalid'); });
+  }
+  function showErrors(errs, general) {
+    var order = ['weight', 'ctype', 'ccount', 'dims', 'pkgs', 'cargo', 'ready', 'goods'];
+    var firstBad = null;
+    order.forEach(function (k) {
+      if (!errs[k]) return;
+      var f = q('.lv-f[data-f="' + k + '"]'); var e = q('[data-err="' + k + '"]');
+      if (f) f.classList.add('has-err');
+      if (e) { e.textContent = errs[k]; e.hidden = false; }
+      var inputs = k === 'dims' ? qa('#f-len, #f-wid, #f-hei') : [q('#' + FIELD_IDS[k])];
+      inputs.forEach(function (i) { if (i) i.setAttribute('aria-invalid', 'true'); });
+      if (!firstBad && inputs[0]) firstBad = inputs[0];
+    });
+    var loc = [];
+    if (errs.from) { q('#field-from').classList.add('has-err'); loc.push('Origin: ' + errs.from); }
+    if (errs.to) { q('#field-to').classList.add('has-err'); loc.push('Destination: ' + errs.to); }
+    if (loc.length) { var le = q('#loc-err'); le.textContent = loc.join(' '); le.hidden = false; }
+    if (general && general.length) { var ge = q('#gen-err'); ge.textContent = general.join(' '); ge.hidden = false; }
+    if (firstBad) firstBad.focus();
+  }
+  function validate() {
+    var errs = {};
+    var w = parseFloat(S.weight);
+    if (!(w > 0)) errs.weight = 'Enter a weight above 0.';
+    else if (w > 1000000) errs.weight = 'The weight must be 1,000,000 kg or less.';
+    if (S.mode === 'fcl') {
+      var c = Number(S.ccount);
+      if (!(Number.isInteger(c) && c >= 1 && c <= 50)) errs.ccount = 'Enter a whole number from 1 to 50.';
+    } else if (!(parseFloat(S.len) > 0 && parseFloat(S.wid) > 0 && parseFloat(S.hei) > 0)) {
+      errs.dims = 'Enter the length, width and height, each above 0.';
+    }
+    var p = Number(S.pkgs);
+    if (!(Number.isInteger(p) && p >= 1)) errs.pkgs = 'Enter a whole number of 1 or more.';
+    if (S.from === S.to) errs.to = 'Choose a different destination.';
+    return errs;
+  }
+  var LOCMAP = { weight_kg: 'weight', length_cm: 'dims', width_cm: 'dims', height_cm: 'dims', dimensions: 'dims',
+    package_count: 'pkgs', container_count: 'ccount', container_type: 'ctype', cargo_type: 'cargo', ready_date: 'ready', goods_description: 'goods' };
+  function mapDetail(detail) {
+    var errs = {}, general = [];
+    (Array.isArray(detail) ? detail : []).forEach(function (d) {
+      var loc = (d.loc || []).filter(function (x) { return x !== 'body'; });
+      var key = null;
+      if (loc[0] === 'origin') key = 'from';
+      else if (loc[0] === 'destination') key = 'to';
+      else key = LOCMAP[loc[loc.length - 1]] || LOCMAP[loc[0]] || null;
+      var msg = d.msg || 'This value is not valid.';
+      if (key) errs[key] = errs[key] ? errs[key] + ' ' + msg : msg; else general.push(msg);
+    });
+    return { errs: errs, general: general };
+  }
+
+  /* ---------- places ---------- */
+  function placeOf(code) { return pm.get(code); }
+  function mapPlace(code, kind) {
+    var p = pm.get(code);
+    if (p && p.kind === kind) return code;
+    if (p && p.city) {
+      var found = null;
+      pm.forEach(function (x) { if (!found && x.kind === kind && x.city === p.city) found = x.code; });
+      if (found) return found;
+    }
+    return null;
+  }
+  function paintPlaces() {
+    var M = MODES[S.mode];
+    [['from', S.from], ['to', S.to]].forEach(function (pair) {
+      var pick = q('.rc-pick[data-end="' + pair[0] + '"]');
+      var p = placeOf(pair[1]);
+      q('.rc-place-name', pick).textContent = p.name;
+      q('.rc-code', pick).textContent = p.code;
+      q('.rc-country', pick).textContent = p.country;
+      q('.rc-find', pick).placeholder = M.find;
+    });
+  }
+  function paintMode() {
+    qa('.rc-mode').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === S.mode)); });
+    qa('[data-group="fcl"]').forEach(function (e) { e.hidden = S.mode !== 'fcl'; });
+    qa('[data-group="dims"]').forEach(function (e) { e.hidden = S.mode === 'fcl'; });
+  }
+  function setMode(m) {
+    if (m === S.mode) return;
+    pullFromForm();
+    var prev = MODE_VALUES[S.mode], next = MODE_VALUES[m], M = MODES[m];
+    ['weight', 'len', 'wid', 'hei', 'pkgs'].forEach(function (k) { if (S[k] === '' || S[k] === prev[k]) S[k] = next[k]; });
+    var f = mapPlace(S.from, M.kind), t = mapPlace(S.to, M.kind);
+    if (!f) f = M.dflt[0];
+    if (!t) t = M.dflt[1];
+    if (f === t) { f = M.dflt[0]; t = M.dflt[1]; }
+    S.mode = m; S.from = f; S.to = t;
+    clearErrors(); pushToForm(); paintMode(); paintPlaces();
+  }
+
+  /* ---------- picker ---------- */
+  function pickEl(end) { return q('.rc-pick[data-end="' + end + '"]'); }
+  function looksLikeCode(t) { return /^[a-z]{2}[a-z0-9]{3}$/i.test(t); }
+  function renderList() {
+    if (!openEnd) return;
+    var M = MODES[S.mode];
+    var pick = pickEl(openEnd), panel = q('.rc-panel', pick);
+    var term = q('.rc-find', panel).value.trim();
+    var low = term.toLowerCase();
+    var cur = openEnd === 'from' ? S.from : S.to;
+    var items = [];
+    pm.forEach(function (p) {
+      if (p.kind !== M.kind) return;
+      if (!low || (p.name + ' ' + p.code + ' ' + p.country + ' ' + p.region).toLowerCase().indexOf(low) >= 0) items.push(p);
+    });
+    items.sort(function (a, b) { return REGIONS.indexOf(a.region) - REGIONS.indexOf(b.region) || a.name.localeCompare(b.name); });
+    var ul = q('.rc-list', panel); ul.replaceChildren(); optEls = [];
+    if (looksLikeCode(term) && !pm.has(term.toUpperCase())) {
+      var code = term.toUpperCase();
+      var li0 = h('li', { class: 'rc-opt', role: 'option', id: 'rc-opt-custom', 'data-code': code },
+        h('span', { class: 'rc-on', text: 'Use code ' + code }), h('span', { class: 'rc-oc', text: 'Country ' + code.slice(0, 2) }));
+      ul.appendChild(li0); optEls.push(li0);
+    }
+    if (!items.length && !optEls.length) {
+      ul.appendChild(h('li', { class: 'rc-none', text: 'No match. Try a city, a code or a country.' }));
+      return;
+    }
+    var lastRegion = null;
+    items.forEach(function (p) {
+      if (p.region !== lastRegion) { ul.appendChild(h('li', { class: 'rc-grp', role: 'presentation', text: p.region })); lastRegion = p.region; }
+      var li = h('li', { class: 'rc-opt' + (p.code === cur ? ' is-cur' : ''), role: 'option', id: 'rc-opt-' + p.code, 'data-code': p.code },
+        h('span', { class: 'rc-on', text: p.name }), h('span', { class: 'rc-oc', text: p.code }));
+      ul.appendChild(li); optEls.push(li);
+    });
+    var ci = -1;
+    optEls.forEach(function (o, i) { if (ci < 0 && o.dataset.code === cur) ci = i; });
+    active = (!term && ci >= 0) ? ci : 0;
+    highlight(true);
+  }
+  function highlight(scroll) {
+    optEls.forEach(function (o, i) { o.setAttribute('aria-selected', String(i === active)); });
+    var o = optEls[active];
+    if (o && scroll !== false) o.scrollIntoView({ block: 'nearest' });
+    if (openEnd && o) q('.rc-find', pickEl(openEnd)).setAttribute('aria-activedescendant', o.id);
+  }
+  function openPicker(end) {
+    closePicker();
+    openEnd = end;
+    var pick = pickEl(end), panel = q('.rc-panel', pick);
+    panel.hidden = false; panel.style.left = '0px';
+    q('.rc-place', pick).setAttribute('aria-expanded', 'true');
+    var inp = q('.rc-find', panel); inp.value = '';
+    renderList(); inp.focus();
+    var r = panel.getBoundingClientRect(), rr = root.getBoundingClientRect();
+    if (r.right > rr.right) panel.style.left = (rr.right - r.right) + 'px';
+  }
+  function closePicker(refocus) {
+    if (!openEnd) return;
+    var pick = pickEl(openEnd);
+    q('.rc-panel', pick).hidden = true;
+    var b = q('.rc-place', pick); b.setAttribute('aria-expanded', 'false');
+    openEnd = null;
+    if (refocus) b.focus();
+  }
+  function choose(code) {
+    if (!openEnd) return;
+    if (!pm.has(code)) {   /* a UN/LOCODE typed by hand */
+      pm.set(code, { code: code, name: code, country: code.slice(0, 2), iso2: code.slice(0, 2), region: 'Other', kind: MODES[S.mode].kind, city: '', api_city: null });
+    }
+    var end = openEnd, other = end === 'from' ? 'to' : 'from';
+    if (code === S[other]) S[other] = S[end];
+    S[end] = code;
+    closePicker(true);
+    clearLocErrors();
+    paintPlaces();
+  }
+  function clearLocErrors() {
+    q('#field-from').classList.remove('has-err'); q('#field-to').classList.remove('has-err');
+    var le = q('#loc-err'); le.hidden = true; le.textContent = '';
+  }
+
+  /* ---------- request ---------- */
+  function locBody(code) {
+    var p = pm.get(code);
+    if (p.kind === 'airport' && p.api_city) return { country: p.iso2, city: p.api_city };
+    return { country: p.iso2, port_code: p.code };
+  }
+  function buildBody() {
+    var M = MODES[S.mode];
+    var body = {
+      origin: locBody(S.from), destination: locBody(S.to), mode: M.api,
+      weight_kg: parseFloat(S.weight), cargo_type: S.cargo, package_count: parseInt(S.pkgs, 10)
+    };
+    if (S.mode === 'fcl') { body.container_type = S.ctype; body.container_count = parseInt(S.ccount, 10); }
+    else body.dimensions = { length_cm: parseFloat(S.len), width_cm: parseFloat(S.wid), height_cm: parseFloat(S.hei) };
+    if (S.ready) body.ready_date = S.ready;
+    if (S.goods.trim()) body.goods_description = S.goods.trim();
+    return body;
+  }
+
+  async function search() {
+    pullFromForm();
+    clearErrors();
+    var errs = validate();
+    if (Object.keys(errs).length) { showErrors(errs, []); return; }
+    if (inflight) inflight.abort();
+    var ctrl = new AbortController(); inflight = ctrl;
+    var timedOut = false;
+    var timer = setTimeout(function () { timedOut = true; ctrl.abort(); }, TIMEOUT_MS);
+    renderLoading();
+    var btn = q('#search-btn'); btn.disabled = true;
+    try {
+      var res = await fetch(API_BASE + '/api/v1/quotes', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(buildBody()), signal: ctrl.signal
+      });
+      var data = null;
+      try { data = await res.json(); } catch (e) { data = null; }
+      if (res.status === 422) {
+        var m = mapDetail(data && data.detail);
+        showErrors(m.errs, m.general);
+        renderIdle('Check the highlighted fields', 'The comparison service could not use this request. Fix the fields marked above and search again.');
+        return;
+      }
+      if (!res.ok || !data || !Array.isArray(data.results)) {
+        renderFail('The comparison service had a problem', 'It answered with an error (HTTP ' + res.status + '). This is usually temporary.');
+        return;
+      }
+      LAST = { resp: data, at: new Date() };
+      F = { hide: new Set(), pricedOnly: false };
+      renderDone();
+    } catch (e) {
+      if (ctrl !== inflight) return;   /* replaced by a newer search */
+      renderFail(timedOut ? 'The search took too long' : 'Could not reach the comparison service',
+        timedOut ? 'No answer came back within ' + Math.round(TIMEOUT_MS / 1000) + ' seconds. The first request after a quiet period can be slow, so trying again often works.'
+                 : 'Check your internet connection and try again.');
+    } finally {
+      clearTimeout(timer); clearTimeout(slowTimer);
+      if (ctrl === inflight) { inflight = null; btn.disabled = false; }
+    }
+  }
+
+  /* ---------- results ---------- */
+  function live() { return q('#live'); }
+  function renderIdle(title, text) {
+    var box = live(); box.setAttribute('aria-busy', 'false');
+    box.replaceChildren(h('div', { class: 'lv-idle' },
+      h('h2', { text: title || 'No search yet' }),
+      h('p', { text: text || 'Fill in the shipment and press Search rates. Prices come from every connected provider and appear here, side by side.' }),
+      h('button', { class: 'lv-btn is-ghost', 'data-act': 'example', text: 'Try the example shipment' })));
+  }
+  function renderLoading() {
+    var box = live(); box.setAttribute('aria-busy', 'true');
+    var note = h('p', { text: 'Asking every provider. This can take a few seconds.' });
+    box.replaceChildren(h('div', { class: 'lv-load' }, note,
+      h('div', { class: 'lv-cards' }, h('div', { class: 'lv-skel' }), h('div', { class: 'lv-skel' }), h('div', { class: 'lv-skel' }))));
+    clearTimeout(slowTimer);
+    slowTimer = setTimeout(function () { note.textContent = 'Still working. The first request after a quiet period is slower, and some providers take longer.'; }, 8000);
+  }
+  function renderFail(title, text) {
+    var box = live(); box.setAttribute('aria-busy', 'false');
+    box.replaceChildren(h('div', { class: 'lv-fail' }, h('h2', { text: title }), h('p', { text: text }),
+      h('button', { class: 'lv-btn', 'data-act': 'search', text: 'Try again' })));
+  }
+  function simChip() { return h('span', { class: 'lv-sim', title: 'This price is generated demo data, not a real quote.', text: 'Simulated demo data' }); }
+
+  function renderDone() {
+    var r = LAST.resp, box = live();
+    box.setAttribute('aria-busy', 'false');
+    var results = r.results || [];
+    var all = [];
+    results.forEach(function (x) { (x.quotes || []).forEach(function (qq) { all.push(qq); }); });
+    var allSim = all.length > 0 && all.every(function (x) { return x.is_simulated; });
+    var kids = [];
+    if (r.contains_simulated) kids.push(h('div', { class: 'lv-banner', role: 'status',
+      text: allSim ? 'Simulated demo data. Every price below is generated for testing, not a real quote.' : 'Some prices below are simulated demo data, not real quotes. Each one is labelled.' }));
+    kids.push(answerCard(r, results));
+    kids.push(toolbar(results));
+    kids.push(h('div', { class: 'lv-cards', id: 'cards' }));
+    box.replaceChildren.apply(box, kids);
+    renderCards();
+  }
+  function answerCard(r, results) {
+    var priced = results.filter(hasPrice).length;
+    var ch = r.cheapest, fa = r.fastest;
+    var left = h('div', null,
+      h('p', { class: 'lv-take', text: priced + ' of ' + results.length + (results.length === 1 ? ' provider' : ' providers') + ' returned a price' }));
+    if (ch) {
+      left.appendChild(h('p', { class: 'lv-abig', text: money(ch.total_price, ch.currency) }));
+      left.appendChild(h('p', { class: 'lv-asub' }, ch.provider + ' ', h('span', { class: 'lv-alabel', text: 'has the lowest price' })));
+      if (ch.is_simulated) left.appendChild(h('p', { class: 'lv-asub' }, simChip()));
+      if (ch.notes) left.appendChild(h('p', { class: 'lv-anote', text: ch.notes }));
+    } else {
+      left.appendChild(h('p', { class: 'lv-abig lv-none', text: 'No price' }));
+      left.appendChild(h('p', { class: 'lv-asub', text: 'No provider returned a price for this shipment.' }));
+    }
+    var stats = h('dl', { class: 'lv-astats' });
+    var fd = fa ? days(fa.transit_days_min, fa.transit_days_max) : null;
+    stats.appendChild(h('div', null, h('dt', { text: 'Fastest' }),
+      h('dd', { class: 'lv-snum', text: fd || (fa ? 'Not stated' : '—') }),
+      h('dd', { class: 'lv-ssub' }, fa ? fa.provider + ' ' : '', fa && fa.is_simulated ? simChip() : null)));
+    stats.appendChild(h('div', null, h('dt', { text: 'Cheapest service' }),
+      h('dd', { class: 'lv-snum', text: ch && ch.service_name ? ch.service_name : '—' })));
+    var card = h('section', { class: 'lv-answer', 'aria-label': 'Comparison summary' }, h('div', { class: 'lv-ahead' }, left, stats));
+    if (r.comparison_note) card.appendChild(h('p', { class: 'lv-cnote', text: r.comparison_note }));
+    return card;
+  }
+  function toolbar(results) {
+    var chips = h('div', { class: 'rc-chips', role: 'group', 'aria-label': 'Providers' });
+    results.forEach(function (x) {
+      chips.appendChild(h('button', { class: 'rc-chip', 'data-act': 'chip', 'data-v': x.provider, 'aria-pressed': String(!F.hide.has(x.provider)), text: x.provider }));
+    });
+    var only = h('input', { type: 'checkbox', id: 'only-priced' });
+    only.checked = F.pricedOnly;
+    only.addEventListener('change', function () { F.pricedOnly = only.checked; renderCards(); });
+    var at = LAST.at;
+    var bar = h('div', { class: 'lv-bar' }, chips,
+      h('div', { class: 'rc-tools' },
+        h('label', { class: 'rc-check' }, only, h('span', { text: 'Only providers with a price' })),
+        h('button', { class: 'rc-textbtn', 'data-act': 'csv', text: 'Download CSV' }),
+        h('button', { class: 'rc-textbtn', 'data-act': 'search', text: 'Search again' })),
+      h('p', { class: 'lv-meta2', text: 'Searched at ' + at.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) }));
+    return bar;
+  }
+  function renderCards() {
+    var grid = q('#cards'); if (!grid || !LAST) return;
+    var r = LAST.resp;
+    var list = (r.results || []).filter(function (x) {
+      if (F.hide.has(x.provider)) return false;
+      if (F.pricedOnly && !hasPrice(x)) return false;
+      return true;
+    });
+    if (!list.length) { grid.replaceChildren(h('p', { class: 'rc-empty', text: 'No providers match these filters.' })); return; }
+    grid.replaceChildren.apply(grid, list.map(function (x) { return providerCard(x, r.cheapest, r.fastest); }));
+  }
+  var STATUS = {
+    ok: 'Quoted', pending: 'Quote on request', no_quote: 'Cannot serve this shipment',
+    not_configured: 'Not switched on yet', timeout: 'Unavailable', error: 'Unavailable'
+  };
+  function providerCard(res, cheapest, fastest) {
+    var quotes = res.quotes || [];
+    var isC = quotes.some(function (x) { return same(x, cheapest); });
+    var isF = quotes.some(function (x) { return same(x, fastest); });
+    var card = h('article', { class: 'lv-card' + (isC ? ' is-cheapest' : '') });
+    card.appendChild(h('div', { class: 'lv-chead' }, h('h3', { class: 'lv-pname', text: res.provider }),
+      h('span', { class: 'lv-status s-' + res.status, text: STATUS[res.status] || 'Unavailable' })));
+    if (isC || isF) card.appendChild(h('div', { class: 'lv-tags' },
+      isC ? h('span', { class: 'lv-tag t-cheapest', text: 'Cheapest' }) : null,
+      isF ? h('span', { class: 'lv-tag t-fastest', text: 'Fastest' }) : null));
+
+    if (res.status === 'ok') {
+      if (!quotes.length) card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider answered without a price.' }));
+      quotes.forEach(function (x) { card.appendChild(quoteBlock(x)); });
+      if (res.message && quotes.length) card.appendChild(h('p', { class: 'lv-msg', text: res.message }));
+    } else if (res.status === 'pending') {
+      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider has no instant price. Ask them for a quote.' }));
+      var url = res.action_url ? safeUrl(res.action_url) : null;
+      if (url) card.appendChild(h('a', { class: 'lv-link', href: url, target: '_blank', rel: 'noopener noreferrer', text: 'Request quote on ' + res.provider }));
+    } else if (res.status === 'no_quote') {
+      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider cannot serve this shipment.' }));
+    } else if (res.status === 'not_configured') {
+      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider is not switched on yet.' }));
+    } else {
+      card.appendChild(h('p', { class: 'lv-msg', text: res.message || 'This provider is unavailable right now. Search again in a moment.' }));
+      if (res.error) card.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Technical detail' }), h('p', { text: res.error })));
+    }
+
+    var n = notesFor(res.provider);
+    if (n) card.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Good to know about ' + res.provider }),
+      h('h4', { text: 'How to check or get this rate' }), h('p', { text: n.quote_access }),
+      h('h4', { text: 'Before you quote' }), h('p', { text: n.watch_out })));
+    if (res.elapsed_ms != null) card.appendChild(h('p', { class: 'lv-foot', text: 'Answered in ' + (res.elapsed_ms / 1000).toFixed(1) + ' s' }));
+    return card;
+  }
+  function quoteBlock(x) {
+    var facts = [];
+    var d = days(x.transit_days_min, x.transit_days_max);
+    if (d) facts.push(h('span', { text: d }));
+    var v = fmtDate(x.valid_until);
+    if (v) facts.push(h('span', { text: 'Valid until ' + v }));
+    var charges = x.charges || [];
+    var box = h('div', { class: 'lv-quote' },
+      x.service_name ? h('p', { class: 'lv-service', text: x.service_name }) : null,
+      h('div', { class: 'lv-pricerow' }, h('span', { class: 'lv-price', text: money(x.total_price, x.currency) }), x.is_simulated ? simChip() : null),
+      facts.length ? h('p', { class: 'lv-facts' }, facts) : null,
+      x.notes ? h('p', { class: 'lv-notes', text: x.notes }) : null);
+    if (charges.length) {
+      var ul = h('ul', { class: 'lv-charges' });
+      charges.forEach(function (c) { ul.appendChild(h('li', null, h('span', { text: c.name }), h('span', { text: money(c.amount, x.currency) }))); });
+      box.appendChild(h('details', { class: 'lv-more' }, h('summary', { text: 'Charges (' + charges.length + ')' }), ul));
+    }
+    if (x.source) box.appendChild(h('p', { class: 'lv-src', text: 'Source: ' + x.source }));
+    return box;
+  }
+
+  function exportCsv() {
+    if (!LAST) return;
+    var esc = function (v) { var s = v == null ? '' : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    var head = ['Provider', 'Status', 'Service', 'Total price', 'Currency', 'Transit days min', 'Transit days max', 'Valid until', 'Simulated', 'Source', 'Charges', 'Notes', 'Message'];
+    var lines = [head.join(',')];
+    (LAST.resp.results || []).forEach(function (res) {
+      var qs = res.quotes || [];
+      if (!qs.length) { lines.push([res.provider, res.status, '', '', '', '', '', '', '', '', '', '', res.message || res.error || ''].map(esc).join(',')); return; }
+      qs.forEach(function (x) {
+        lines.push([res.provider, res.status, x.service_name, x.total_price, x.currency, x.transit_days_min, x.transit_days_max, x.valid_until,
+          x.is_simulated ? 'yes' : 'no', x.source, (x.charges || []).map(function (c) { return c.name + ' ' + c.amount; }).join('; '), x.notes, res.message || ''].map(esc).join(','));
+      });
+    });
+    var b = LAST.resp.request || {};
+    var name = 'quotes-' + (S.from || 'from') + '-' + (S.to || 'to') + '-' + S.mode + '.csv';
+    var blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+
+  function runExample() {
+    S.mode = 'fcl'; S.from = 'INNSA'; S.to = 'USLAX'; S.weight = '18000'; S.ctype = '40HC'; S.ccount = '1';
+    S.len = ''; S.wid = ''; S.hei = ''; S.pkgs = '1'; S.cargo = 'general'; S.ready = ''; S.goods = '';
+    clearErrors(); pushToForm(); paintMode(); paintPlaces();
+    search();
+  }
+
+  /* ---------- wiring ---------- */
+  root.addEventListener('click', function (e) {
+    var o = e.target.closest('li.rc-opt');
+    if (o) { choose(o.dataset.code); return; }
+    var b = e.target.closest('[data-act]');
+    if (!b) return;
+    var a = b.dataset.act, v = b.dataset.v;
+    if (a === 'pick') { if (openEnd === v) closePicker(true); else openPicker(v); }
+    else if (a === 'mode') setMode(v);
+    else if (a === 'swap') { var t = S.from; S.from = S.to; S.to = t; clearLocErrors(); paintPlaces(); }
+    else if (a === 'search') search();
+    else if (a === 'example') runExample();
+    else if (a === 'chip') { if (F.hide.has(v)) F.hide.delete(v); else F.hide.add(v); b.setAttribute('aria-pressed', String(!F.hide.has(v))); renderCards(); }
+    else if (a === 'csv') exportCsv();
+  });
+  document.addEventListener('click', function (e) { if (openEnd && !e.target.closest('.rc-pick')) closePicker(); });
+  qa('.rc-pick').forEach(function (pick) {
+    var inp = q('.rc-find', pick);
+    q('.rc-list', pick).addEventListener('mousedown', function (e) { e.preventDefault(); });
+    inp.addEventListener('input', renderList);
+    inp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); if (optEls.length) { active = (active + 1) % optEls.length; highlight(); } }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (optEls.length) { active = (active - 1 + optEls.length) % optEls.length; highlight(); } }
+      else if (e.key === 'Enter') { e.preventDefault(); if (optEls[active]) choose(optEls[active].dataset.code); }
+      else if (e.key === 'Escape') { e.preventDefault(); closePicker(true); }
+    });
+    pick.addEventListener('focusout', function (e) { if (openEnd && !pick.contains(e.relatedTarget)) closePicker(); });
+  });
+  qa('#ship input, #ship select').forEach(function (el) {
+    el.addEventListener('input', function () {
+      var f = el.closest('.lv-f');
+      if (f) { f.classList.remove('has-err'); var er = q('[data-err]', f); if (er) { er.hidden = true; er.textContent = ''; } }
+      el.removeAttribute('aria-invalid');
+    });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && el.tagName === 'INPUT') { e.preventDefault(); search(); } });
+  });
+
+  pushToForm(); paintMode(); paintPlaces(); renderIdle();
+})();
+</script>
+</div>
+
+</body>
+</html>
