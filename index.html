@@ -355,6 +355,15 @@ body{min-height:100vh}
 .rc-state.is-idle{background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
 .rc-state.is-error{background:var(--rc-card);border-radius:var(--r-lg);box-shadow:var(--rc-soft)}
 .rc-state.is-error::before{content:none}
+.rc[data-view="compare"] #field-to,.rc[data-view="compare"] .rc-swap{display:none}
+.lv-simmini{display:block;margin-top:2px;font-size:.7rem;font-weight:700;color:var(--rc-mute)}
+.rc-matrix td.is-low .lv-simmini{color:var(--rc-primary)}
+.lv-cmpfail{color:var(--rc-mute)}
+.lv-cmpfail button{margin-left:var(--s-3);padding:0;background:none;border:0;font-weight:700;color:var(--rc-primary);text-decoration:underline;text-underline-offset:.2em}
+.lv-btn[disabled]{opacity:.6;cursor:progress}
+#b-alt-body .lv-btn{margin-top:var(--s-3)}
+.lv-smallnote{margin:var(--s-3) 0 0;font-size:.85rem;color:var(--rc-mute);line-height:1.45}
+#cmp-prog{margin:var(--s-4) 0 var(--s-5)}
 </style>
 <div class="rc-wrap">
 <header class="rc-head">
@@ -368,6 +377,10 @@ body{min-height:100vh}
     <button class="rc-mode" data-act="mode" data-v="air" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg><span>Air</span></button>
     <button class="rc-mode" data-act="mode" data-v="fcl" aria-pressed="true"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M11 2h2v4h5l1 6-7-2-7 2 1-6h5V2zM2 17l10-3 10 3-2.2 3.2c-.2.3-.5.4-.8.4H5c-.3 0-.6-.1-.8-.4L2 17z"/></svg><span>Sea · FCL</span></button>
     <button class="rc-mode" data-act="mode" data-v="lcl" aria-pressed="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2 3 6.5v11L12 22l9-4.5v-11L12 2zm0 2.2 5.9 2.9L12 10 6.1 7.1 12 4.2zM5 8.7l6 3v8.1l-6-3V8.7zm14 0v8.1l-6 3v-8.1l6-3z"/></svg><span>Sea · LCL</span></button>
+  </nav>
+  <nav class="rc-views" aria-label="View">
+    <button class="rc-view" data-act="view" data-v="lane" aria-pressed="true">This lane</button>
+    <button class="rc-view" data-act="view" data-v="compare" aria-pressed="false">Compare destinations</button>
   </nav>
 </div>
 
@@ -502,6 +515,11 @@ body{min-height:100vh}
           <p><span class="rc-num" id="b-simn">—</span> simulated, <span class="rc-num" id="b-realn">—</span> real.</p>
           <p>Sources: <span class="rc-num" id="b-src">—</span>.</p>
         </div>
+        <div class="rc-bblock" id="b-alt-wrap" hidden>
+          <h3 id="b-alt-title">Other Indian ports</h3>
+          <p class="rc-bsub" id="b-alt-sub"></p>
+          <div id="b-alt-body"></div>
+        </div>
         <div class="rc-bblock">
           <h3>How it is charged</h3>
           <p id="b-charge1"></p>
@@ -580,6 +598,21 @@ body{min-height:100vh}
       </div>
     </article>
   </section>
+
+  <section id="compare" aria-label="Compare destinations" hidden>
+    <h2 class="rc-cmphead">All destinations from <span id="cmp-from">—</span></h2>
+    <p class="rc-cmpnote">Each destination is a separate search of every provider, using the cargo details above. The lowest price in each row comes from the comparison service. Prices marked Simulated are demo data, not real quotes.</p>
+    <div class="rc-bar">
+      <div class="rc-chips" id="cmp-regions" role="group" aria-label="Regions to compare"></div>
+      <div class="rc-tools">
+        <button class="lv-btn" data-act="cmp-run" id="cmp-run">Compare destinations</button>
+        <button class="rc-textbtn" data-act="cmp-stop" id="cmp-stop" hidden>Stop</button>
+      </div>
+    </div>
+    <p class="lv-reqnote" id="cmp-prog" aria-live="polite"></p>
+    <div class="rc-matrixwrap" id="cmp-wrap" hidden><table class="rc-matrix" id="rc-matrix"></table></div>
+    <p class="rc-empty" id="cmp-empty" hidden>Choose at least one region to compare.</p>
+  </section>
 </div>
 </div>
 
@@ -629,6 +662,10 @@ body{min-height:100vh}
   var UI = { sel: '', sort: 'api', dir: 'asc', hide: new Set(), pricedOnly: false };
   var inflight = null, slowTimer = null, PREV = null;
   var openEnd = null, cargoOpen = false, active = 0, optEls = [];
+  var VIEW = 'lane', STATE = 'idle';
+  var CACHE = new Map();                       /* request body -> { resp, at, body } */
+  var CMP = { ctx: '', regions: new Set(), items: new Map(), token: null };
+  var ALT = { ctx: '', items: new Map(), token: null };
 
   /* ---------- helpers ---------- */
   function h(tag, props) {
@@ -797,7 +834,7 @@ body{min-height:100vh}
     if (!t) t = M.dflt[1];
     if (f === t) { f = M.dflt[0]; t = M.dflt[1]; }
     S.mode = m; S.from = f; S.to = t;
-    clearErrors(); pushToForm(); paintMode(); paintPlaces();
+    clearErrors(); pushToForm(); paintMode(); paintPlaces(); refreshCompare();
   }
 
   /* ---------- pickers ---------- */
@@ -871,7 +908,7 @@ body{min-height:100vh}
     closePicker(true);
     q('#field-from').classList.remove('has-err'); q('#field-to').classList.remove('has-err');
     var le = q('#loc-err'); le.hidden = true; le.textContent = '';
-    paintPlaces();
+    paintPlaces(); refreshCompare();
   }
   function openCargo() {
     closePicker();
@@ -882,7 +919,7 @@ body{min-height:100vh}
   function closeCargo(refocus) {
     if (!cargoOpen) return;
     pullFromForm(); paintCargo();
-    cargoOpen = false;
+    cargoOpen = false; refreshCompare();
     q('#cargo-panel').hidden = true;
     q('#cargo-btn').setAttribute('aria-expanded', 'false');
     if (refocus) q('#cargo-btn').focus();
@@ -894,9 +931,9 @@ body{min-height:100vh}
     if (p.kind === 'airport' && p.api_city) return { country: p.iso2, city: p.api_city };
     return { country: p.iso2, port_code: p.code };
   }
-  function buildBody() {
+  function buildBody(fromCode, toCode) {
     var M = MODES[S.mode];
-    var body = { origin: locBody(S.from), destination: locBody(S.to), mode: M.api,
+    var body = { origin: locBody(fromCode || S.from), destination: locBody(toCode || S.to), mode: M.api,
       weight_kg: parseFloat(S.weight), cargo_type: S.cargo, package_count: parseInt(S.pkgs, 10) };
     if (S.mode === 'fcl') { body.container_type = S.ctype; body.container_count = parseInt(S.ccount, 10); }
     else body.dimensions = { length_cm: parseFloat(S.len), width_cm: parseFloat(S.wid), height_cm: parseFloat(S.hei) };
@@ -923,6 +960,7 @@ body{min-height:100vh}
     var errs = validate();
     if (Object.keys(errs).length) { showErrors(errs, []); return; }
     closeCargo(); closePicker();
+    VIEW = 'lane';
     if (inflight) inflight.abort();
     var ctrl = new AbortController(); inflight = ctrl;
     var timedOut = false;
@@ -953,7 +991,8 @@ body{min-height:100vh}
       PREV = { sig: sig, body: bodyStr };
       R = { resp: data, at: new Date(), body: body, rows: buildRows(data) };
       UI = { sel: '', sort: 'api', dir: 'asc', hide: new Set(), pricedOnly: false };
-      paintLane();
+      CACHE.set(bodyStr, { resp: data, at: R.at, body: body });
+      STATE = 'done'; render();
     } catch (e) {
       if (ctrl !== inflight) return;
       if (timedOut) {
@@ -973,20 +1012,21 @@ body{min-height:100vh}
   }
 
   /* ---------- states ---------- */
-  function setState(cls, kids) {
-    q('#rc-main').hidden = true;
-    var s = q('#rc-state'); s.hidden = false; s.className = 'rc-state ' + cls;
-    s.replaceChildren.apply(s, kids);
+  function setState(cls, kids, name) {
+    STATE = name;
+    var st = q('#rc-state'); st.className = 'rc-state ' + cls;
+    st.replaceChildren.apply(st, kids);
+    render();
   }
   function showIdle(title, text) {
     setBadge('Search to see rates');
     setState('is-idle', [h('div', { class: 'lv-statebox' }, h('h2', { text: title || 'No search yet' }),
       h('p', { text: text || 'Fill in the shipment and press Search rates. Prices from every connected provider appear here, side by side.' }),
-      h('button', { class: 'lv-btn is-ghost', 'data-act': 'example', text: 'Try the example shipment' }))]);
+      h('button', { class: 'lv-btn is-ghost', 'data-act': 'example', text: 'Try the example shipment' }))], 'idle');
   }
   function showLoading() {
     var note = h('p', { text: 'Asking every provider. This can take a few seconds.' });
-    setState('dash-skeleton', [h('div', { class: 'lv-statebox' }, h('h2', { text: 'Searching' }), note)]);
+    setState('dash-skeleton', [h('div', { class: 'lv-statebox' }, h('h2', { text: 'Searching' }), note)], 'loading');
     clearTimeout(slowTimer);
     slowTimer = setTimeout(function () { note.textContent = 'Still working. The first request after a quiet period is slower, and some providers take longer.'; }, 8000);
   }
@@ -995,9 +1035,271 @@ body{min-height:100vh}
     var kids = [h('h2', { text: title }), h('p', { text: text })];
     if (detail && detail.length) kids.push(h('details', { class: 'lv-more' }, h('summary', { text: 'Technical detail' }), detail.map(function (l) { return h('p', { text: l }); })));
     kids.push(h('button', { class: 'lv-btn', 'data-act': 'search', text: 'Try again' }));
-    setState('is-error', [h('div', { class: 'lv-statebox' }, kids)]);
+    setState('is-error', [h('div', { class: 'lv-statebox' }, kids)], 'fail');
   }
   function setBadge(t) { q('#badge').textContent = t; }
+
+  /* ---------- views ---------- */
+  function render() {
+    qa('.rc-view').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === VIEW)); });
+    root.dataset.view = VIEW;
+    var main = q('#rc-main'), st = q('#rc-state');
+    if (VIEW === 'compare') {
+      st.hidden = true; main.hidden = false;
+      q('#lane').hidden = true; q('#compare').hidden = false;
+      paintCompare();
+      return;
+    }
+    q('#compare').hidden = true;
+    if (STATE === 'done') { st.hidden = true; main.hidden = false; q('#lane').hidden = false; paintLane(); }
+    else { main.hidden = true; st.hidden = false; }
+  }
+  function setView(v) { VIEW = v; render(); }
+  function refreshCompare() { if (VIEW === 'compare') render(); }
+
+  /* ---------- several searches at once (compare destinations, other ports) ---------- */
+  function makeToken() {
+    return { cancelled: false, ctrls: new Set(), cancel: function () { this.cancelled = true; this.ctrls.forEach(function (c) { c.abort(); }); } };
+  }
+  async function fetchQuotes(body, token) {
+    var ctrl = new AbortController(); token.ctrls.add(ctrl);
+    var timer = setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS);
+    try {
+      var res = await fetch(API_BASE + '/api/v1/quotes', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body), signal: ctrl.signal });
+      var data = null;
+      try { data = await res.json(); } catch (e) { data = null; }
+      return { status: res.status, data: data };
+    } finally { clearTimeout(timer); token.ctrls.delete(ctrl); }
+  }
+  async function runPool(list, limit, worker, token) {
+    var i = 0;
+    async function lane() { while (i < list.length && !token.cancelled) { var item = list[i++]; await worker(item); } }
+    var lanes = [];
+    for (var k = 0; k < Math.min(limit, list.length); k++) lanes.push(lane());
+    await Promise.all(lanes);
+  }
+  function cachedFor(from, to) {
+    try { return CACHE.get(JSON.stringify(buildBody(from, to))) || null; } catch (e) { return null; }
+  }
+  /* one lane: use the stored answer when there is one, otherwise search */
+  function openLane() {
+    var hit = cachedFor(S.from, S.to);
+    VIEW = 'lane';
+    if (hit) {
+      R = { resp: hit.resp, at: hit.at, body: hit.body, rows: buildRows(hit.resp) };
+      UI = { sel: '', sort: 'api', dir: 'asc', hide: new Set(), pricedOnly: false };
+      STATE = 'done'; render();
+    } else search();
+  }
+  function ctxKey() { return JSON.stringify([S.from, S.mode, S.weight, S.ctype, S.ccount, S.len, S.wid, S.hei, S.pkgs, S.cargo, S.ready, S.goods]); }
+  function cargoErrors(skipTo) {
+    pullFromForm(); paintCargo(); clearErrors();
+    var errs = validate();
+    if (skipTo) delete errs.to;
+    if (Object.keys(errs).length) { showErrors(errs, []); return false; }
+    return true;
+  }
+  function sortedPlaces(list) { return list.sort(function (a, b) { return REGIONS.indexOf(a.region) - REGIONS.indexOf(b.region) || a.name.localeCompare(b.name); }); }
+
+  /* ---------- compare destinations ---------- */
+  function ensureCmp() {
+    var k = ctxKey();
+    if (CMP.ctx === k) return;
+    if (CMP.token) CMP.token.cancel();
+    CMP.ctx = k; CMP.items = new Map(); CMP.token = null;
+    var p = pm.get(S.to);
+    CMP.regions = new Set([p && p.region !== 'Other' && p.kind === MODES[S.mode].kind ? p.region : 'Middle East']);
+  }
+  function destList() {
+    var M = MODES[S.mode], out = [];
+    pm.forEach(function (p) { if (p.kind === M.kind && p.code !== S.from && CMP.regions.has(p.region)) out.push(p); });
+    return sortedPlaces(out);
+  }
+  function itemOf(code) {
+    var it = CMP.items.get(code);
+    if (it) return it;
+    var hit = cachedFor(S.from, code);
+    return hit ? { state: 'ok', resp: hit.resp } : null;
+  }
+  async function runCompare(only) {
+    if (!cargoErrors(true)) return;
+    ensureCmp();
+    var list = (only ? [pm.get(only)] : destList()).filter(function (p) { var it = itemOf(p.code); return !(it && it.state === 'ok'); });
+    if (!list.length) { render(); return; }
+    if (CMP.token) CMP.token.cancel();
+    var token = makeToken(); CMP.token = token;
+    list.forEach(function (p) { CMP.items.set(p.code, { state: 'queued' }); });
+    paintCompare();
+    await runPool(list, 3, async function (p) {
+      var body = buildBody(S.from, p.code), key = JSON.stringify(body);
+      var hit = CACHE.get(key);
+      if (hit) { CMP.items.set(p.code, { state: 'ok', resp: hit.resp }); paintCompare(); return; }
+      CMP.items.set(p.code, { state: 'loading' }); paintCompare();
+      try {
+        var out = await fetchQuotes(body, token);
+        if (out.status === 200 && out.data && Array.isArray(out.data.results)) {
+          CACHE.set(key, { resp: out.data, at: new Date(), body: body });
+          CMP.items.set(p.code, { state: 'ok', resp: out.data });
+        } else CMP.items.set(p.code, { state: 'fail' });
+      } catch (e) { CMP.items.set(p.code, { state: token.cancelled ? 'idle' : 'fail' }); }
+      paintCompare();
+    }, token);
+    if (CMP.token === token) CMP.token = null;
+    list.forEach(function (p) { var it = CMP.items.get(p.code); if (it && (it.state === 'queued' || it.state === 'loading')) CMP.items.set(p.code, { state: 'idle' }); });
+    paintCompare();
+  }
+  function cmpCell(res, resp) {
+    var td = document.createElement('td');
+    if (!res) { td.className = 'is-gap'; td.textContent = '–'; return td; }
+    var qs = res.quotes || [];
+    if (res.status === 'ok' && qs.length) {
+      var x = qs.filter(function (z) { return same(z, resp.cheapest); })[0] || qs[0];
+      td.appendChild(document.createTextNode(money(x.total_price, x.currency)));
+      if (x.is_simulated) td.appendChild(h('span', { class: 'lv-simmini', text: 'Simulated' }));
+      if (same(x, resp.cheapest)) td.className = 'is-low';
+      return td;
+    }
+    td.className = 'is-ask'; td.textContent = STATUS[res.status] || 'Unavailable';
+    return td;
+  }
+  function paintCompare() {
+    ensureCmp();
+    var M = MODES[S.mode];
+    q('#cmp-from').textContent = pm.get(S.from).name;
+    var regs = [];
+    pm.forEach(function (p) { if (p.kind === M.kind && p.code !== S.from && regs.indexOf(p.region) < 0) regs.push(p.region); });
+    regs.sort(function (a, b) { return REGIONS.indexOf(a) - REGIONS.indexOf(b); });
+    var chips = q('#cmp-regions');
+    chips.replaceChildren.apply(chips, regs.map(function (r) { return h('button', { class: 'rc-chip', 'data-act': 'cmp-region', 'data-v': r, 'aria-pressed': String(CMP.regions.has(r)), text: r }); }));
+    var list = destList(), running = !!CMP.token;
+    q('#cmp-run').disabled = running || !list.length;
+    q('#cmp-stop').hidden = !running;
+    var rows = list.map(function (p) { return { p: p, it: itemOf(p.code) }; });
+    var any = rows.some(function (r) { return r.it; });
+    var okN = rows.filter(function (r) { return r.it && r.it.state === 'ok'; }).length;
+    q('#cmp-prog').textContent = !list.length ? '' : (any ? okN + ' of ' + list.length + ' destinations loaded.' : 'Choose the regions, then press Compare destinations. More regions mean more searches, so they take longer.');
+    q('#cmp-empty').hidden = list.length > 0;
+    var wrap = q('#cmp-wrap'); wrap.hidden = !any;
+    if (!any) return;
+
+    var cols = [];
+    rows.forEach(function (r) { if (r.it && r.it.state === 'ok') r.it.resp.results.forEach(function (x) { if (cols.indexOf(x.provider) < 0) cols.push(x.provider); }); });
+    var head = document.createElement('thead'), hr = document.createElement('tr');
+    hr.appendChild(h('th', { text: 'Destination' }));
+    (cols.length ? cols : ['Providers']).forEach(function (c) { hr.appendChild(h('th', { text: c })); });
+    head.appendChild(hr);
+    var body = document.createElement('tbody'), lastRegion = null, span = cols.length || 1;
+    rows.forEach(function (r) {
+      var p = r.p;
+      if (p.region !== lastRegion) {
+        var g = document.createElement('tr'); g.className = 'rc-grprow';
+        g.appendChild(h('th', { colspan: String(span + 1), text: p.region }));
+        body.appendChild(g); lastRegion = p.region;
+      }
+      var tr = document.createElement('tr');
+      tr.appendChild(h('th', { scope: 'row' }, h('button', { class: 'rc-go', 'data-act': 'cmp-go', 'data-v': p.code, text: p.name })));
+      var it = r.it;
+      if (it && it.state === 'ok') {
+        cols.forEach(function (c) {
+          var res = it.resp.results.filter(function (x) { return x.provider === c; })[0];
+          tr.appendChild(cmpCell(res, it.resp));
+        });
+      } else {
+        var txt = !it ? 'Not loaded' : it.state === 'queued' ? 'Waiting' : it.state === 'loading' ? 'Searching' : it.state === 'fail' ? 'Could not load' : 'Not loaded';
+        var td = h('td', { class: 'lv-cmpfail', colspan: String(span) }, txt);
+        if (it && it.state === 'fail') td.appendChild(h('button', { 'data-act': 'cmp-retry', 'data-v': p.code, text: 'Retry' }));
+        tr.appendChild(td);
+      }
+      body.appendChild(tr);
+    });
+    var tbl = q('#rc-matrix'); tbl.replaceChildren(head, body);
+  }
+
+  /* ---------- other Indian ports or airports for the same trade ---------- */
+  function altInfo() {
+    var M = MODES[S.mode];
+    var fromIndia = pm.get(S.from).region === 'India', toIndia = pm.get(S.to).region === 'India';
+    if (!fromIndia && !toIndia) return null;
+    var list = [];
+    pm.forEach(function (p) { if (p.region === 'India' && p.kind === M.kind) list.push(p); });
+    return { vary: fromIndia ? 'from' : 'to', list: list };
+  }
+  function altBodyFor(info, code) { return info.vary === 'from' ? buildBody(code, S.to) : buildBody(S.from, code); }
+  function altCtx() { return JSON.stringify([S.from, S.to, S.mode, S.weight, S.ctype, S.ccount, S.len, S.wid, S.hei, S.pkgs, S.cargo, S.ready, S.goods]); }
+  function paintAlt() {
+    var wrap = q('#b-alt-wrap'), info = altInfo();
+    if (!info || !R) { wrap.hidden = true; return; }
+    wrap.hidden = false;
+    var M = MODES[S.mode], word = M.kind === 'port' ? 'port' : 'airport';
+    var k = altCtx();
+    if (ALT.ctx !== k) { if (ALT.token) ALT.token.cancel(); ALT.ctx = k; ALT.items = new Map(); ALT.token = null; }
+    q('#b-alt-title').textContent = 'Other Indian ' + word + 's';
+    q('#b-alt-sub').textContent = info.vary === 'from' ? 'Cheapest price to the same destination.' : 'Cheapest price from the same origin.';
+    var cur = S[info.vary];
+    var rows = info.list.map(function (p) {
+      var resp = null;
+      if (p.code === cur) resp = R.resp;
+      else { var hit = CACHE.get(JSON.stringify(altBodyFor(info, p.code))); if (hit) resp = hit.resp; }
+      return { p: p, resp: resp, cur: p.code === cur, st: ALT.items.get(p.code) };
+    });
+    var missing = rows.filter(function (r) { return !r.resp; });
+    var running = !!ALT.token;
+    /* rank rows only when the prices can honestly be compared */
+    var qs = rows.filter(function (r) { return r.resp && r.resp.cheapest; }).map(function (r) { return r.resp.cheapest; });
+    var comparable = qs.length > 1 && qs.every(function (x) { return x.currency === qs[0].currency && !!x.is_simulated === !!qs[0].is_simulated; });
+    var shown = rows.slice();
+    if (comparable) shown.sort(function (a, b) {
+      if (!a.resp || !a.resp.cheapest) return 1;
+      if (!b.resp || !b.resp.cheapest) return -1;
+      return a.resp.cheapest.total_price - b.resp.cheapest.total_price;
+    });
+    var tbody = h('tbody');
+    shown.forEach(function (r) {
+      var tr = h('tr', { class: r.cur ? 'is-cur' : null });
+      tr.appendChild(h('th', { scope: 'row' }, h('button', { class: 'rc-go', 'data-act': 'alt-go', 'data-v': r.p.code, text: r.p.name })));
+      if (r.resp) {
+        var ch = r.resp.cheapest;
+        if (ch) {
+          var a = h('td', null, money(ch.total_price, ch.currency), ch.is_simulated ? h('span', { class: 'lv-simmini', text: 'Simulated' }) : null);
+          tr.appendChild(a); tr.appendChild(h('td', { text: ch.provider }));
+        } else { tr.appendChild(h('td', { text: 'No price' })); tr.appendChild(h('td', { text: '' })); }
+      } else {
+        var s = r.st && r.st.state;
+        tr.appendChild(h('td', { colspan: '2', class: 'lv-cmpfail' }, s === 'loading' ? 'Searching' : s === 'queued' ? 'Waiting' : s === 'fail' ? 'Could not load' : 'Not checked'));
+      }
+      tbody.appendChild(tr);
+    });
+    var kids = [h('table', { class: 'rc-mini' }, h('thead', null, h('tr', null, h('th', { text: word === 'port' ? 'Port' : 'Airport' }), h('th', { text: 'Cheapest' }), h('th', { text: 'Platform' }))), tbody)];
+    if (qs.length > 1 && !comparable) kids.push(h('p', { class: 'lv-smallnote', text: 'Not ranked: these prices use different currencies or mix simulated and real data.' }));
+    if (running) kids.push(h('p', { class: 'lv-smallnote', text: 'Checking the other ' + word + 's.' }), h('button', { class: 'rc-textbtn', 'data-act': 'alt-stop', text: 'Stop' }));
+    else if (missing.length) kids.push(h('button', { class: 'lv-btn is-ghost', 'data-act': 'alt-load', text: 'Check ' + (missing.length === 1 ? 'the other ' + word : 'the other ' + missing.length + ' ' + word + 's') }),
+      h('p', { class: 'lv-smallnote', text: 'This runs ' + missing.length + ' extra search' + (missing.length === 1 ? '' : 'es') + ' with the same cargo.' }));
+    var box = q('#b-alt-body'); box.replaceChildren.apply(box, kids);
+  }
+  async function runAlt() {
+    var info = altInfo(); if (!info || !R) return;
+    var cur = S[info.vary];
+    var list = info.list.filter(function (p) { return p.code !== cur && !CACHE.get(JSON.stringify(altBodyFor(info, p.code))); });
+    if (!list.length) { paintAlt(); return; }
+    if (ALT.token) ALT.token.cancel();
+    var token = makeToken(); ALT.token = token;
+    list.forEach(function (p) { ALT.items.set(p.code, { state: 'queued' }); });
+    paintAlt();
+    await runPool(list, 3, async function (p) {
+      var body = altBodyFor(info, p.code), key = JSON.stringify(body);
+      ALT.items.set(p.code, { state: 'loading' }); paintAlt();
+      try {
+        var out = await fetchQuotes(body, token);
+        if (out.status === 200 && out.data && Array.isArray(out.data.results)) {
+          CACHE.set(key, { resp: out.data, at: new Date(), body: body });
+          ALT.items.delete(p.code);
+        } else ALT.items.set(p.code, { state: 'fail' });
+      } catch (e) { ALT.items.set(p.code, { state: token.cancelled ? 'idle' : 'fail' }); }
+      paintAlt();
+    }, token);
+    if (ALT.token === token) ALT.token = null;
+    paintAlt();
+  }
 
   /* ---------- results ---------- */
   function buildRows(resp) {
@@ -1022,7 +1324,6 @@ body{min-height:100vh}
     var allSim = quotes.length > 0 && quotes.every(function (r) { return r.quote.is_simulated; });
     var nSim = quotes.filter(function (r) { return r.quote.is_simulated; }).length;
 
-    q('#rc-state').hidden = true; q('#rc-main').hidden = false;
     setBadge(anySim ? 'Includes simulated demo data' : (quotes.length ? 'Live data' : 'No prices returned'));
 
     /* simulated banner (always visible when any price is simulated) */
@@ -1087,6 +1388,7 @@ body{min-height:100vh}
     q('#b-notes-list').replaceChildren.apply(q('#b-notes-list'), codes.map(function (c) {
       return h('p', null, h('strong', { text: pm.get(c).name }), ' ' + PNOTES.get(c));
     }));
+    paintAlt();
   }
 
   function paintControls(sameCur) {
@@ -1264,7 +1566,7 @@ body{min-height:100vh}
     else if (a === 'cargo') { if (cargoOpen) closeCargo(true); else openCargo(); }
     else if (a === 'cargo-done') closeCargo(true);
     else if (a === 'mode') setMode(v);
-    else if (a === 'swap') { var t = S.from; S.from = S.to; S.to = t; paintPlaces(); }
+    else if (a === 'swap') { var t = S.from; S.from = S.to; S.to = t; paintPlaces(); refreshCompare(); }
     else if (a === 'search') search();
     else if (a === 'example') runExample();
     else if (a === 'chip') { if (UI.hide.has(v)) UI.hide.delete(v); else UI.hide.add(v); repaint(); }
@@ -1272,6 +1574,15 @@ body{min-height:100vh}
     else if (a === 'dir') { UI.dir = UI.dir === 'asc' ? 'desc' : 'asc'; repaint(); }
     else if (a === 'reset') { UI.hide = new Set(); UI.pricedOnly = false; UI.sort = 'api'; UI.dir = 'asc'; repaint(); }
     else if (a === 'csv') exportCsv();
+    else if (a === 'view') setView(v);
+    else if (a === 'cmp-run') runCompare();
+    else if (a === 'cmp-retry') runCompare(v);
+    else if (a === 'cmp-stop') { if (CMP.token) CMP.token.cancel(); }
+    else if (a === 'cmp-region') { if (CMP.regions.has(v)) CMP.regions.delete(v); else CMP.regions.add(v); paintCompare(); }
+    else if (a === 'cmp-go') { S.to = v; paintPlaces(); openLane(); }
+    else if (a === 'alt-load') runAlt();
+    else if (a === 'alt-stop') { if (ALT.token) ALT.token.cancel(); }
+    else if (a === 'alt-go') { var inf = altInfo(); if (inf) { S[inf.vary] = v; if (S.from === S.to) return; paintPlaces(); openLane(); } }
   });
   root.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && cargoOpen) { closeCargo(true); return; }
